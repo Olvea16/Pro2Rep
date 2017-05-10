@@ -1,18 +1,18 @@
 <ASSEMBLER_INFO>
  <VERSION>2.2.6</VERSION>
  <DEVICE>"ATmega32A"</DEVICE>
- <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\Debug</WORKING_DIR>
+ <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\Debug</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\Debug\DebugProjektKUNDEBUG.obj</FILE>
+  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\Debug\DebugProjektKUNDEBUG.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
   <FILE>DebugProjektKUNDEBUG.hex</FILE>
@@ -22,40 +22,52 @@
   <FILE>DebugProjektKUNDEBUG.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <Setup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>36</LINE></Setup>
-  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>342</LINE></ADCDone>
-  <Main><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>77</LINE></Main>
-  <AccBehandling><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>78</LINE></AccBehandling>
-  <AccP><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>91</LINE></AccP>
-  <AccN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>99</LINE></AccN>
-  <EndAccBehandling><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>107</LINE></EndAccBehandling>
-  <StartOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>109</LINE></StartOfProto>
-  <EndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>198</LINE></EndOfProto>
-  <TypeCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>115</LINE></TypeCheck>
-  <CmdCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>121</LINE></CmdCheck>
-  <IsType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>278</LINE></IsType>
-  <DataCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>158</LINE></DataCheck>
-  <IsCmd><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>295</LINE></IsCmd>
-  <IsGet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>144</LINE></IsGet>
-  <StopCar><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>203</LINE></StopCar>
-  <CleanupEndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>196</LINE></CleanupEndOfProto>
-  <IsFreq><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>154</LINE></IsFreq>
-  <Error><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>192</LINE></Error>
-  <SendSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>214</LINE></SendSpeed>
-  <SendPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>226</LINE></SendPrescaler>
-  <GetWithData><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>176</LINE></GetWithData>
-  <SetFrequency><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>182</LINE></SetFrequency>
-  <SetAcceleration><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>188</LINE></SetAcceleration>
-  <SetSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>221</LINE></SetSpeed>
-  <SendAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>261</LINE></SendAccRef>
-  <SetPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>235</LINE></SetPrescaler>
-  <SetAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>243</LINE></SetAccRef>
-  <Cleanup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>314</LINE></Cleanup>
-  <Send><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>208</LINE></Send>
-  <CalcOCR2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>323</LINE></CalcOCR2>
-  <SetAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>253</LINE></SetAccRefN>
-  <SendAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>271</LINE></SendAccRefN>
-  <wasType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>291</LINE></wasType>
-  <wasCommand><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>310</LINE></wasCommand>
+  <Setup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>91</LINE></Setup>
+  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>516</LINE></ADCDone>
+  <Timer1CompereA><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>523</LINE></Timer1CompereA>
+  <LoadFromEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>458</LINE></LoadFromEEPROM>
+  <Main><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>157</LINE></Main>
+  <AccBehandling><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>158</LINE></AccBehandling>
+  <AccP><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>167</LINE></AccP>
+  <AccN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>172</LINE></AccN>
+  <LEDSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>467</LINE></LEDSet>
+  <EndAccBehandling><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>176</LINE></EndAccBehandling>
+  <StartOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>178</LINE></StartOfProto>
+  <EndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>283</LINE></EndOfProto>
+  <TypeCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>184</LINE></TypeCheck>
+  <CmdCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>191</LINE></CmdCheck>
+  <IsType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>373</LINE></IsType>
+  <DataCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>239</LINE></DataCheck>
+  <IsCmd><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>392</LINE></IsCmd>
+  <IsGet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>219</LINE></IsGet>
+  <EndOfProtoInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>235</LINE></EndOfProtoInter>
+  <StopCar><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>288</LINE></StopCar>
+  <LED1SekSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>482</LINE></LED1SekSet>
+  <CleanupEndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>281</LINE></CleanupEndOfProto>
+  <IsFreq><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>230</LINE></IsFreq>
+  <Error><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>277</LINE></Error>
+  <SendSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>299</LINE></SendSpeed>
+  <SendPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>311</LINE></SendPrescaler>
+  <SkipEndOfProtoInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>237</LINE></SkipEndOfProtoInter>
+  <GetWithData><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>258</LINE></GetWithData>
+  <SetFrequency><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>265</LINE></SetFrequency>
+  <SetAcceleration><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>273</LINE></SetAcceleration>
+  <SetSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>306</LINE></SetSpeed>
+  <SendAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>357</LINE></SendAccRef>
+  <SetPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>320</LINE></SetPrescaler>
+  <SetAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>328</LINE></SetAccRef>
+  <Cleanup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>412</LINE></Cleanup>
+  <Send><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>293</LINE></Send>
+  <CalcOCR2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>428</LINE></CalcOCR2>
+  <SetAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>344</LINE></SetAccRefN>
+  <SaveInEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>445</LINE></SaveInEEPROM>
+  <SendAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>366</LINE></SendAccRefN>
+  <wasType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>387</LINE></wasType>
+  <wasCommand><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>408</LINE></wasCommand>
+  <EndOfLEDSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>479</LINE></EndOfLEDSet>
+  <ERROREndOfLEDSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>478</LINE></ERROREndOfLEDSet>
+  <ClearLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>502</LINE></ClearLED>
+  <ErrorLED1SekSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>499</LINE></ErrorLED1SekSet>
+  <GetLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\DebugProjektKUNDEBUG\DebugProjektKUNDEBUG\main.asm</FILE><LINE>508</LINE></GetLED>
  </LABELS>
 </ASSEMBLER_INFO>
