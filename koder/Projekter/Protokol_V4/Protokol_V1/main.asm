@@ -86,7 +86,7 @@ JMP ADCDone
 JMP Timer1CompereA	
 
 
-.ORG 50			;Sætter adressen for denne linje til 30, da dette ville være lige efter 28+2.
+.ORG 50			;Sætter adressen for denne linje til over 30, da dette ville være lige efter 28+2.
 
 Setup:
 
@@ -277,6 +277,7 @@ DataCheck:
 Error:
 	CALL Cleanup
 	;Indsæt hvad der ellers skal ske i Error her 
+	JMP EndOfProto
 
 CleanupEndOfProto:
 	CALL Cleanup
