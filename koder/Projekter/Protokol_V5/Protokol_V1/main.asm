@@ -48,6 +48,12 @@
 .EQU State1 = 7
 ;---------------------------
 
+;
+.EQU Straight = 0
+.EQU Sving1 = 1
+.EQU Sving2 = 2
+;
+
 ;Protokol 
 .EQU Proto_SET = 0x55
 .EQU Proto_GET = 0xAA
@@ -62,9 +68,9 @@
 ;---------------------------
 
 ;LED
-.EQU Acc0_LED = 0b111111
-.EQU AccN_LED = 0b000011
-.EQU AccP_LED = 0b011000
+.EQU LED_Straight = 0b111111
+.EQU LED_Sving1 = 0b000011
+.EQU LED_Sving2 = 0b011000
 
 .EQU CmdIn_RGBLEDTest_LED = 3
 .EQU CmdIn_AccRefP_LED = 4
@@ -74,11 +80,7 @@
 .EQU CmdIn_PWMPrescaler_LED = 8
 ;---------------------------
 
-;
-.EQU Lige = 0
-.EQU Sving1 = 1
-.EQU Sving2 = 2
-;
+
 
 ;---------/\/\/\Navngivning/\/\/\---------------------------\/\/\/Kode\/\/\/---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -92,7 +94,7 @@ JMP ADCDone
 JMP Timer1CompereA	
 
 
-.ORG 50			;Sætter adressen for denne linje til over 30, da dette ville være lige efter 28+2.
+.ORG 50			;Sætter adressen for denne linje til over 30, da dette ville være Straight efter 28+2.
 
 Setup:
 
@@ -169,10 +171,59 @@ CP AccData, AccRefP
 BRSH AccP ;Hopper hvis AccData er det samme eller højre end AccRefP
 CP AccData, AccRefN
 BRLO AccN ;Hopper hvis AccData er laver end AccRefN
-	Lige:	
+	;Straight
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b11000000
+		CPI Temp1, Straight
+		BREQ StateMachineEnd
+
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b00110000
+		CPI Temp1, (Straight<<State0)
+		BRNE NewStateStraight
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b00000111
+		CPI Temp1, 7
+		BREQ ChangeStateStraight
+		INC SREG2
+		RJMP StateMachineEnd
+			
+		NewStateStraight:
+			LDI Temp1, (Straight<<LastState0)
+			ANDI SREG2,0b11001000			;Ligger sving1 ind som last state og renser statecount 
+			OR SREG2, Temp1
+			RJMP StateMachineEnd
+
+		ChangeStateStraight:
+			CALL ChangeState 
+			RJMP StateMachineEnd	
 
 	AccP:
-		
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b11000000
+		CPI Temp1, Sving2
+		BREQ StateMachineEnd
+
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b00110000
+		CPI Temp1, (Sving2<<State0)
+		BRNE NewStateSving2
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b00000111
+		CPI Temp1, 7
+		BREQ ChangeStateSving2
+		INC SREG2
+		RJMP StateMachineEnd
+			
+		NewStateSving2:
+			LDI Temp1, (Sving2<<LastState0)
+			ANDI SREG2,0b11001000			;Ligger sving1 ind som last state og renser statecount 
+			OR SREG2, Temp1
+			RJMP StateMachineEnd
+
+		ChangeStateSving2:
+			CALL ChangeState 
+			RJMP StateMachineEnd
 
 	AccN:
 		MOV Temp1, SREG2
@@ -182,17 +233,25 @@ BRLO AccN ;Hopper hvis AccData er laver end AccRefN
 
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00110000
-		LSL Temp1
-		LSL Temp1
 		CPI Temp1, (Sving1<<State0)
 		BRNE NewStateSving1
-
-		
-
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b00000111
+		CPI Temp1, 7
+		BREQ ChangeStateSving1
+		INC SREG2
+		RJMP StateMachineEnd
+			
 		NewStateSving1:
 			LDI Temp1, (Sving1<<LastState0)
 			ANDI SREG2,0b11001000			;Ligger sving1 ind som last state og renser statecount 
 			OR SREG2, Temp1
+			RJMP StateMachineEnd
+
+		ChangeStateSving1:
+			CALL ChangeState 
+			RJMP StateMachineEnd
+
 StateMachineEnd:
 JMP Auto
 
@@ -489,19 +548,19 @@ LoadFromEEPROM:
 	IN Ret1, EEDR		;Henter hvad der er i EEPROM ned i Ret1
 RET
 
-LEDSet:
+SetLED:
 	SBRC SREG2, LEDTimeOn
-	RJMP EndOfLEDSet
+	RJMP EndOfSetLED
 	CPI Arg,64
-	BRSH ERROREndOfLEDSet	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
+	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
 	CALL ClearLED
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
 	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
 	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
 	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
-	ERROREndOfLEDSet:
-	EndOfLEDSet:
+	ERROREndOfSetLED:
+	EndOfSetLED:
 RET
 
 LED1SekSet:
@@ -536,6 +595,48 @@ GetLED:
 	LSR Ret1				;Rykker Ret1 en til højre så det passer med at LED verdi er mellem 0 og 63 
 RET
 
+ChangeState:
+	CALL StoreTrack
+	MOV Temp1, SREG2
+	ANDI Temp1, 0b00110000
+	LSL Temp1
+	LSL Temp1
+	ANDI SREG2, 0b00111111
+	OR SREG2, Temp1
+	;Midertidigt
+	CALL StateLED
+	;
+RET
+
+StateLED:
+	MOV Temp1, SREG2
+	ANDI Temp1, 0b11000000
+	CPI Temp1, (Sving1<<State0)
+	BREQ Sving1StateLED
+	CPI Temp1, (Sving2<<State0)
+	BREQ Sving2StateLED
+	StraightStateLED:
+	LDI Arg, LED_Straight
+	CALL SetLED
+	RET
+	Sving1StateLED:
+	LDI Arg, LED_Sving1
+	CALL SetLED
+	RET
+	Sving2StateLED:
+	LDI Arg, LED_Sving2
+	CALL SetLED
+	RET
+
+StoreTrack:
+	MOV Temp1, SREG2
+	ANDI Temp1,0b11000000
+	OR DistH, Temp1
+	ST Z+, DistH
+	ST Z+, DistL
+	LDI DistH,0
+	LDI DistL,0
+RET
 ;Intarups -----------------------------------------------------------------
 
 ADCDone:				
