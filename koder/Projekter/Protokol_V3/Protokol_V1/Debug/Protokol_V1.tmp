@@ -1,0 +1,73 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\Debug\Protokol_V1.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Protokol_V1.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Protokol_V1.map</FILE>
+  <FILE>Protokol_V1.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Setup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>84</LINE></Setup>
+  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>489</LINE></ADCDone>
+  <Timer1CompereA><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>496</LINE></Timer1CompereA>
+  <LoadFromEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>431</LINE></LoadFromEEPROM>
+  <Main><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>147</LINE></Main>
+  <AccBehandling><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>148</LINE></AccBehandling>
+  <AccP><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>157</LINE></AccP>
+  <AccN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>161</LINE></AccN>
+  <LEDSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>440</LINE></LEDSet>
+  <EndAccBehandling><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>165</LINE></EndAccBehandling>
+  <StartOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>167</LINE></StartOfProto>
+  <EndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>266</LINE></EndOfProto>
+  <TypeCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>173</LINE></TypeCheck>
+  <CmdCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>179</LINE></CmdCheck>
+  <IsType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>356</LINE></IsType>
+  <DataCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>223</LINE></DataCheck>
+  <IsCmd><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>373</LINE></IsCmd>
+  <IsGet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>204</LINE></IsGet>
+  <EndOfProtoInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>219</LINE></EndOfProtoInter>
+  <StopCar><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>271</LINE></StopCar>
+  <LED1SekSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>455</LINE></LED1SekSet>
+  <CleanupEndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>264</LINE></CleanupEndOfProto>
+  <IsFreq><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>214</LINE></IsFreq>
+  <Error><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>260</LINE></Error>
+  <SendSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>282</LINE></SendSpeed>
+  <SendPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>294</LINE></SendPrescaler>
+  <SkipEndOfProtoInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>221</LINE></SkipEndOfProtoInter>
+  <GetWithData><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>242</LINE></GetWithData>
+  <SetFrequency><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>248</LINE></SetFrequency>
+  <SetAcceleration><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>256</LINE></SetAcceleration>
+  <SetSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>289</LINE></SetSpeed>
+  <SendAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>340</LINE></SendAccRef>
+  <SetPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>303</LINE></SetPrescaler>
+  <SetAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>311</LINE></SetAccRef>
+  <Cleanup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>392</LINE></Cleanup>
+  <Send><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>276</LINE></Send>
+  <CalcOCR2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>401</LINE></CalcOCR2>
+  <SetAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>327</LINE></SetAccRefN>
+  <SaveInEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>418</LINE></SaveInEEPROM>
+  <SendAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>349</LINE></SendAccRefN>
+  <wasType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>369</LINE></wasType>
+  <wasCommand><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>388</LINE></wasCommand>
+  <EndOfLEDSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>452</LINE></EndOfLEDSet>
+  <ERROREndOfLEDSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>451</LINE></ERROREndOfLEDSet>
+  <ClearLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>475</LINE></ClearLED>
+  <ErrorLED1SekSet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>472</LINE></ErrorLED1SekSet>
+  <GetLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\Koder\Projekter\Protokol_V3\Protokol_V1\main.asm</FILE><LINE>481</LINE></GetLED>
+ </LABELS>
+</ASSEMBLER_INFO>

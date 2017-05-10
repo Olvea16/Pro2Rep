@@ -1,0 +1,30 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\Debug\TestMedIntaSendOgModtag.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>TestMedIntaSendOgModtag.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>TestMedIntaSendOgModtag.map</FILE>
+  <FILE>TestMedIntaSendOgModtag.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Setop><FILE>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\main.asm</FILE><LINE>8</LINE></Setop>
+  <DataIndR17><FILE>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\main.asm</FILE><LINE>55</LINE></DataIndR17>
+  <MainProgram><FILE>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\main.asm</FILE><LINE>27</LINE></MainProgram>
+  <SendR17><FILE>C:\Users\simon\Documents\Atmel Studio\7.0\TestMedIntaSendOgModtag\TestMedIntaSendOgModtag\main.asm</FILE><LINE>47</LINE></SendR17>
+ </LABELS>
+</ASSEMBLER_INFO>

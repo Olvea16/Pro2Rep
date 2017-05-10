@@ -1,0 +1,46 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\Debug\TestAfAccolemeter.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>TestAfAccolemeter.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>TestAfAccolemeter.map</FILE>
+  <FILE>TestAfAccolemeter.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Setup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>25</LINE></Setup>
+  <DataIndR17><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>110</LINE></DataIndR17>
+  <ADCErFerdig><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>184</LINE></ADCErFerdig>
+  <Main><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>61</LINE></Main>
+  <FindOCR2R17><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>69</LINE></FindOCR2R17>
+  <Overflowikkesat><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>82</LINE></Overflowikkesat>
+  <SendR18><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>86</LINE></SendR18>
+  <SetNyHastR20><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>92</LINE></SetNyHastR20>
+  <SendHastighReplyR23><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>96</LINE></SendHastighReplyR23>
+  <neste1w><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>125</LINE></neste1w>
+  <neste1q><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>137</LINE></neste1q>
+  <neste1wUdata><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>148</LINE></neste1wUdata>
+  <neste1qUdata><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>156</LINE></neste1qUdata>
+  <Hast><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>164</LINE></Hast>
+  <UdDataIndR17><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>180</LINE></UdDataIndR17>
+  <StopACC><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>193</LINE></StopACC>
+  <isType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>199</LINE></isType>
+  <wasType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>211</LINE></wasType>
+  <isCommand><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>217</LINE></isCommand>
+  <wasCommand><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\SemesterPro1FraGruppe\SharePoint\Oliver Vea\Pro2\koder\Projekter\TestAfAccolemeterV2.3\TestAfAccolemeter\main.asm</FILE><LINE>227</LINE></wasCommand>
+ </LABELS>
+</ASSEMBLER_INFO>
