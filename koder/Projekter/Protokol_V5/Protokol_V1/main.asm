@@ -42,8 +42,8 @@
 .EQU StateCount1 = 1
 .EQU StateCount2 = 2
 .EQU LEDTimeON = 3
-.EQU LarstState0 = 4 
-.EQU LarstState1 = 5 
+.EQU LastState0 = 4 
+.EQU LastState1 = 5 
 .EQU State0 = 6
 .EQU State1 = 7
 ;---------------------------
@@ -73,6 +73,12 @@
 .EQU CmdIn_Stop_LED = 7
 .EQU CmdIn_PWMPrescaler_LED = 8
 ;---------------------------
+
+;
+.EQU Lige = 0
+.EQU Sving1 = 1
+.EQU Sving2 = 2
+;
 
 ;---------/\/\/\Navngivning/\/\/\---------------------------\/\/\/Kode\/\/\/---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -153,27 +159,45 @@ MOV AccRefN, Ret1
 SEI	;Enabler interrupts. 
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
 
-;Main---------------------------------------
-Main:
-AccBehandling:
-	CP AccData, AccRefP
-	BRSH AccP
-	CP AccData, AccRefN
-	BRLO AccN
-		LDI Arg, Acc0_LED
-		CALL LEDSet
-		JMP EndAccBehandling
+;---------------------------------------
+Auto:
+SBIC UCSRA,RXC	
+RJMP UAuto
+
+StateMachine:
+CP AccData, AccRefP
+BRSH AccP ;Hopper hvis AccData er det samme eller højre end AccRefP
+CP AccData, AccRefN
+BRLO AccN ;Hopper hvis AccData er laver end AccRefN
+	Lige:	
 
 	AccP:
-		LDI Arg, AccP_LED
-		CALL LEDSet
-		JMP EndAccBehandling
+		
 
 	AccN:
-		LDI Arg, AccN_LED
-		CALL LEDSet
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b11000000
+		CPI Temp1, Sving1
+		BREQ StateMachineEnd
 
-EndAccBehandling:
+		MOV Temp1, SREG2
+		ANDI Temp1, 0b00110000
+		LSL Temp1
+		LSL Temp1
+		CPI Temp1, (Sving1<<State0)
+		BRNE NewStateSving1
+
+		
+
+		NewStateSving1:
+			LDI Temp1, (Sving1<<LastState0)
+			ANDI SREG2,0b11001000			;Ligger sving1 ind som last state og renser statecount 
+			OR SREG2, Temp1
+StateMachineEnd:
+JMP Auto
+
+UAuto:
+
 
 StartOfProto:
 
@@ -283,7 +307,7 @@ CleanupEndOfProto:
 	CALL Cleanup
 EndOfProto:
 
-JMP Main	;Hopper til starten af main
+JMP UAuto	;Hopper til starten af main
 
 ;Subroutines---------------------------------------
 StopCar:
