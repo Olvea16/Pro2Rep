@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\Debug\EEPROMTest.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>EEPROMTest.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>EEPROMTest.map</FILE>
+  <FILE>EEPROMTest.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Setup><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>29</LINE></Setup>
+  <Timer1CompereA><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>167</LINE></Timer1CompereA>
+  <LoadFromEEPROM><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>115</LINE></LoadFromEEPROM>
+  <Main><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>76</LINE></Main>
+  <StartMiniPorto><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>79</LINE></StartMiniPorto>
+  <EndOfMiniProto><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>97</LINE></EndOfMiniProto>
+  <TimerLED><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>92</LINE></TimerLED>
+  <SaveInEEPROM><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>102</LINE></SaveInEEPROM>
+  <LEDSet><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>124</LINE></LEDSet>
+  <LED1SekSet><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>139</LINE></LED1SekSet>
+  <EndOfLEDSet><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>136</LINE></EndOfLEDSet>
+  <ERROREndOfLEDSet><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>135</LINE></ERROREndOfLEDSet>
+  <ClearLED><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>159</LINE></ClearLED>
+  <ErrorLED1SekSet><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Projekter\TestAfEEPROM\EEPROMTest\main.asm</FILE><LINE>156</LINE></ErrorLED1SekSet>
+ </LABELS>
+</ASSEMBLER_INFO>

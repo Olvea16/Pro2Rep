@@ -1,0 +1,13 @@
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Release\SeriTerm.exe.config
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Release\SeriTerm.exe.manifest
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Release\SeriTerm.application
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Release\SeriTerm.exe
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Release\SeriTerm.pdb
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SerialTerminalApplication.Form1.resources
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SerialTerminalApplication.Form2.resources
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SerialTerminalApplication.Properties.Resources.resources
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SerialTerminalApplication.csproj.GenerateResource.Cache
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SeriTerm.exe.manifest
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SeriTerm.application
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SeriTerm.exe
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Release\SeriTerm.pdb

@@ -1,0 +1,139 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3698,        131]
+NotebookOptionsPosition[      3064,        104]
+NotebookOutlinePosition[      3405,        119]
+CellTagsIndexPosition[      3362,        116]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Hz", "=", 
+   RowBox[{"16", "*", 
+    RowBox[{"10", "^", "6"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.698243991501994*^9, 3.6982439957280064`*^9}, {
+  3.698244039244162*^9, 3.698244054390922*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BaudRate", "=", "9600"}], ";"}]], "Input",
+ CellChangeTimes->{{3.698244002550346*^9, 3.6982440181593227`*^9}, 
+   3.698244056530915*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Res", "=", 
+  RowBox[{"Round", "[", 
+   RowBox[{"N", "[", 
+    RowBox[{"x", "/.", 
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"BaudRate", "\[Equal]", 
+        RowBox[{"Hz", "/", 
+         RowBox[{"(", 
+          RowBox[{"16", "*", 
+           RowBox[{"(", 
+            RowBox[{"x", "+", "1"}], ")"}]}], ")"}]}]}], ",", "x"}], "]"}]}], 
+    "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.698239322401148*^9, 3.6982394004929676`*^9}, {
+   3.698243831693474*^9, 3.6982438703250093`*^9}, {3.698243908584876*^9, 
+   3.6982439129358892`*^9}, {3.698243980845298*^9, 3.6982439812923946`*^9}, 
+   3.698244023163102*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", "103", "}"}]], "Output",
+ CellChangeTimes->{{3.698243833596266*^9, 3.698243870905484*^9}, 
+   3.698243913573761*^9, {3.698244025832039*^9, 3.6982440636689754`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BaseForm", "[", 
+  RowBox[{"Res", ",", "16"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6982436288323774`*^9, 3.698243646145483*^9}, {
+  3.6982438616988773`*^9, 3.698243862283374*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   InterpretationBox[
+    SubscriptBox["\<\"67\"\>", "\<\"16\"\>"],
+    103,
+    Editable->False], "}"}],
+  BaseForm[#, 16]& ]], "Output",
+ CellChangeTimes->{{3.698243629288366*^9, 3.698243647129459*^9}, {
+   3.698243862752633*^9, 3.6982438726772084`*^9}, 3.698243915206351*^9, {
+   3.69824403202147*^9, 3.6982440636846066`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BaseForm", "[", 
+  RowBox[{"Res", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6982439239804525`*^9, 3.6982439586391015`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   InterpretationBox[
+    SubscriptBox["\<\"1100111\"\>", "\<\"2\"\>"],
+    103,
+    Editable->False], "}"}],
+  BaseForm[#, 2]& ]], "Output",
+ CellChangeTimes->{{3.6982439242966433`*^9, 3.698243959355446*^9}, {
+  3.6982440320371027`*^9, 3.6982440637168646`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6982436895132694`*^9, 3.6982436908848624`*^9}}]
+},
+WindowSize->{766, 772},
+WindowMargins->{{Automatic, -7}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 236, 6, 30, "Input"],
+Cell[797, 28, 171, 4, 30, "Input"],
+Cell[CellGroupData[{
+Cell[993, 36, 650, 17, 30, "Input"],
+Cell[1646, 55, 192, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1875, 63, 206, 4, 30, "Input"],
+Cell[2084, 69, 368, 10, 44, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2489, 84, 156, 3, 30, "Input"],
+Cell[2648, 89, 301, 9, 44, "Output"]
+}, Open  ]],
+Cell[2964, 101, 96, 1, 63, "Input"]
+}
+]
+*)
+

@@ -1,0 +1,4 @@
+IN Temp1,TCRR2
+AND Temp1,0b11111000
+OR Temp1,InData
+OUT TCRR2,Temp1

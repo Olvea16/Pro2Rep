@@ -1,0 +1,3 @@
+IN Temp1,TCCR2
+AND Tem1,0b00000111
+MOV SendReg,Temp1

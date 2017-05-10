@@ -1,0 +1,57 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\Debug\Protokol_V1.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Protokol_V1.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Protokol_V1.map</FILE>
+  <FILE>Protokol_V1.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Setup><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>34</LINE></Setup>
+  <ADCDone><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>285</LINE></ADCDone>
+  <Main><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>59</LINE></Main>
+  <StartOfProto><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>60</LINE></StartOfProto>
+  <EndOfProto><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>148</LINE></EndOfProto>
+  <TypeCheck><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>66</LINE></TypeCheck>
+  <CmdCheck><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>72</LINE></CmdCheck>
+  <IsType><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>226</LINE></IsType>
+  <DataCheck><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>109</LINE></DataCheck>
+  <IsCom><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>243</LINE></IsCom>
+  <IsGet><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>95</LINE></IsGet>
+  <StopCar><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>153</LINE></StopCar>
+  <CleanupEndOfProto><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>146</LINE></CleanupEndOfProto>
+  <IsFreq><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>105</LINE></IsFreq>
+  <Error><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>142</LINE></Error>
+  <SendSpeed><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>164</LINE></SendSpeed>
+  <SendPrescaler><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>176</LINE></SendPrescaler>
+  <GetWithData><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>126</LINE></GetWithData>
+  <SetFrequency><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>132</LINE></SetFrequency>
+  <SetAcceleration><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>138</LINE></SetAcceleration>
+  <SetSpeed><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>171</LINE></SetSpeed>
+  <SendAccRef><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>210</LINE></SendAccRef>
+  <SetPrescaler><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>185</LINE></SetPrescaler>
+  <SetAccRef><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>193</LINE></SetAccRef>
+  <Cleanup><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>260</LINE></Cleanup>
+  <Send><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>158</LINE></Send>
+  <CalcOCR2><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>269</LINE></CalcOCR2>
+  <SetAccRefN><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>202</LINE></SetAccRefN>
+  <SendAccRefN><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>219</LINE></SendAccRefN>
+  <wasType><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>239</LINE></wasType>
+  <wasCommand><FILE>C:\Users\Oliver\OneDrive for Business\Pro2\koder\Protokol_V2.1\Protokol_V1\main.asm</FILE><LINE>256</LINE></wasCommand>
+ </LABELS>
+</ASSEMBLER_INFO>

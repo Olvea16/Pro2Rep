@@ -1,0 +1,124 @@
+----------
+5:34:22 PM
+Unauthorized access. Couldn't connect.Access to the port 'COM4' is denied.
+
+----------
+9:04:37 AM
+aCONNECT,74DFBF947EE6,0
+0x55, 0x10, 0x3C, 0x55, 0x10, 0x64, 
+
+----------
+10:56:59 AM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+10:57:07 AM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+10:57:12 AM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+10:57:17 AM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+10:57:22 AM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+10:57:28 AM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+10:57:33 AM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+10:57:38 AM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+11:00:49 AM
+Couldn't connect.The device is not connected.
+
+
+----------
+11:01:43 AM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+11:25:06 AM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+11:32:43 AM
+Couldn't connect.The device is not connected.
+
+
+----------
+11:43:35 AM
+Couldn't connect.The device is not connected.
+
+
+----------
+11:44:18 AM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+11:48:11 AM
+Couldn't connect.The device is not connected.
+
+
+----------
+11:53:00 AM
+Couldn't connect. Retrying.The device is not connected.
+
+
+----------
+11:54:19 AM
+Couldn't connect.The device is not connected.
+
+
+----------
+11:54:49 AM
+Couldn't connect.The device is not connected.
+
+
+----------
+11:56:26 AM
+Couldn't connect.Element not found.
+
+
+----------
+11:56:27 AM
+Couldn't connect.Element not found.
+
+
+----------
+5:54:49 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+6:32:23 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+6:32:32 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+

@@ -1,0 +1,5 @@
+- ascii = standard
+
+
+(-prøv at sende)
+(-bemærk om mc er disconnected)
