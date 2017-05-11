@@ -185,12 +185,12 @@ BRLO AccN ;Hopper hvis AccData er laver end AccRefN
 	;Straight
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b11000000
-		CPI Temp1, Straight
+		CPI Temp1, (Straight<<State0)
 		BREQ StateMachineEnd
 
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00110000
-		CPI Temp1, (Straight<<State0)
+		CPI Temp1, (Straight<<LastState0)
 		BRNE NewStateStraight
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00000111
@@ -212,12 +212,12 @@ BRLO AccN ;Hopper hvis AccData er laver end AccRefN
 	AccP:
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b11000000
-		CPI Temp1, Sving2
+		CPI Temp1, (Sving2<<State0)
 		BREQ StateMachineEnd
 
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00110000
-		CPI Temp1, (Sving2<<State0)
+		CPI Temp1, (Sving2<<LastState0)
 		BRNE NewStateSving2
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00000111
@@ -239,12 +239,12 @@ BRLO AccN ;Hopper hvis AccData er laver end AccRefN
 	AccN:
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b11000000
-		CPI Temp1, Sving1
+		CPI Temp1, (Sving1<<State0)
 		BREQ StateMachineEnd
 
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00110000
-		CPI Temp1, (Sving1<<State0)
+		CPI Temp1, (Sving1<<LastState0)
 		BRNE NewStateSving1
 		MOV Temp1, SREG2
 		ANDI Temp1, 0b00000111
@@ -466,7 +466,7 @@ SetAccRef:
 		LDI Temp1, HIGH(EEPROM_AccRefP)
 		LDI Temp2, LOW(EEPROM_AccRefP)
 		CALL SaveInEEPROM
-		LDI Ret1, CmdIn_AccRefP_LED	
+		LDI Arg, CmdIn_AccRefP_LED	
 		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefP
 	RET
 
@@ -479,7 +479,7 @@ SetAccRef:
 		LDI Temp1, HIGH(EEPROM_AccRefN)
 		LDI Temp2, LOW(EEPROM_AccRefN)
 		CALL SaveInEEPROM
-		LDI Ret1, CmdIn_AccRefN_LED	
+		LDI Arg, CmdIn_AccRefN_LED	
 		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefN
 	RET
 

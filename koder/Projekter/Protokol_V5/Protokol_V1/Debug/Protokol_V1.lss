@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Thu May 11 12:02:13 2017
+AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Thu May 11 16:07:20 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
 C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.asm(23): warning: Register r26 already defined by the .DEF directive
@@ -1007,12 +1007,12 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.as
 00006d 2f06                      	;Straight
 00006e 7c00                      		MOV Temp1, SREG2
 00006f 3000                      		ANDI Temp1, 0b11000000
-000070 f1d9                      		CPI Temp1, Straight
+000070 f1d9                      		CPI Temp1, (Straight<<State0)
                                  		BREQ StateMachineEnd
 000071 2f06                      
 000072 7300                      		MOV Temp1, SREG2
 000073 3000                      		ANDI Temp1, 0b00110000
-000074 f431                      		CPI Temp1, (Straight<<State0)
+000074 f431                      		CPI Temp1, (Straight<<LastState0)
 000075 2f06                      		BRNE NewStateStraight
 000076 7007                      		MOV Temp1, SREG2
 000077 3007                      		ANDI Temp1, 0b00000111
@@ -1033,13 +1033,13 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.as
                                  
 000082 2f06                      	AccP:
 000083 7c00                      		MOV Temp1, SREG2
-000084 3002                      		ANDI Temp1, 0b11000000
-000085 f131                      		CPI Temp1, Sving2
+000084 3800                      		ANDI Temp1, 0b11000000
+000085 f131                      		CPI Temp1, (Sving2<<State0)
                                  		BREQ StateMachineEnd
 000086 2f06                      
 000087 7300                      		MOV Temp1, SREG2
-000088 3800                      		ANDI Temp1, 0b00110000
-000089 f431                      		CPI Temp1, (Sving2<<State0)
+000088 3200                      		ANDI Temp1, 0b00110000
+000089 f431                      		CPI Temp1, (Sving2<<LastState0)
 00008a 2f06                      		BRNE NewStateSving2
 00008b 7007                      		MOV Temp1, SREG2
 00008c 3007                      		ANDI Temp1, 0b00000111
@@ -1060,13 +1060,13 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.as
                                  
 000097 2f06                      	AccN:
 000098 7c00                      		MOV Temp1, SREG2
-000099 3001                      		ANDI Temp1, 0b11000000
-00009a f089                      		CPI Temp1, Sving1
+000099 3400                      		ANDI Temp1, 0b11000000
+00009a f089                      		CPI Temp1, (Sving1<<State0)
                                  		BREQ StateMachineEnd
 00009b 2f06                      
 00009c 7300                      		MOV Temp1, SREG2
-00009d 3400                      		ANDI Temp1, 0b00110000
-00009e f431                      		CPI Temp1, (Sving1<<State0)
+00009d 3100                      		ANDI Temp1, 0b00110000
+00009e f431                      		CPI Temp1, (Sving1<<LastState0)
 00009f 2f06                      		BRNE NewStateSving1
 0000a0 7007                      		MOV Temp1, SREG2
 0000a1 3007                      		ANDI Temp1, 0b00000111
@@ -1287,8 +1287,8 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.as
 000164 e000                      		MOV Arg, AccRefP
 000165 e010                      		LDI Temp1, HIGH(EEPROM_AccRefP)
 000166 940e 01c3                 		LDI Temp2, LOW(EEPROM_AccRefP)
-000168 e034                      		CALL SaveInEEPROM
-000169 940e 01e0                 		LDI Ret1, CmdIn_AccRefP_LED	
+000168 e024                      		CALL SaveInEEPROM
+000169 940e 01e0                 		LDI Arg, CmdIn_AccRefP_LED	
 00016b 9508                      		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefP
                                  	RET
                                  
@@ -1300,8 +1300,8 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\Protokol_V5\Protokol_V1\main.as
 000171 e000                      		MOV Arg, AccRefN
 000172 e011                      		LDI Temp1, HIGH(EEPROM_AccRefN)
 000173 940e 01c3                 		LDI Temp2, LOW(EEPROM_AccRefN)
-000175 e035                      		CALL SaveInEEPROM
-000176 940e 01e0                 		LDI Ret1, CmdIn_AccRefN_LED	
+000175 e025                      		CALL SaveInEEPROM
+000176 940e 01e0                 		LDI Arg, CmdIn_AccRefN_LED	
 000178 9508                      		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefN
                                  	RET
                                  
@@ -1596,7 +1596,7 @@ counted separately from r26..r31 here.
 "ATmega32A" register use summary:
 x  :   0 y  :   0 z  :   3 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16: 128 r17:  20 r18:  36 r19:  45 r20:  25 
+r13:   0 r14:   0 r15:   0 r16: 128 r17:  20 r18:  38 r19:  43 r20:  25 
 r21:   4 r22:  27 r23:   4 r24:   3 r25:   5 r26:   5 r27:   0 r28:   0 
 r29:   0 r30:   3 r31:   3 
 Registers used: 14 out of 35 (40.0%)
