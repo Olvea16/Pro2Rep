@@ -87,6 +87,9 @@
 .ORG 0			;Vektoradresse for Reset.
 RJMP Setup      ;Springer til setup. 
 
+.ORG INT0addr
+JMP InteDist
+
 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
 JMP ADCDone
 
@@ -105,6 +108,14 @@ LDI SREG2,0
 	OUT SPH,Temp1					;Gemmer i stack pointer 
 	LDI Temp1, LOW(RAMEND)			;Loader højeste hukommelsesadresse (D0 til D7)(The last on-chip RAM address)
 	OUT SPL,Temp1					;Gemmer i stack pointer 
+
+;Opsætning af hardware inteerupt 
+	LDI Temp1, (1<<INT0);|(1<<INT1)		;Tænder for INT0 og INT1
+	OUT GICR, Temp1
+	LDI Temp1, (1<<ISC01);|(1<<ISC11)	;Sætter INT0 og INT1 til at trigge på faldende signal 
+	OUT MCUCR, Temp1
+	SBI PORTD, 2 ;pull-up activated INT0
+	;SBI PORTD, 3 ;pull-up activated INT1
 
 ;Indhætning af verdier fra EEPROM
 LDI Temp1, HIGH(EEPROM_AccRefP)
@@ -637,6 +648,28 @@ StoreTrack:
 	LDI DistH,0
 	LDI DistL,0
 RET
+
+SendTrack:
+	CALL StopCar
+	LDI Arg, Proto_REPLY
+	CALL Send
+	CLI
+	MOV Temp1, ZH
+	MOV Temp2, ZL
+	LDI ZH, HIGH(ZStart)
+	LDI ZL, LOW(ZStart)
+	ZTjek:
+		CP Temp1, ZH
+		BREQ FirstZTjek
+	ZTjek2B:
+		LD Arg, Z+
+		CALL Send
+		JMP ZTjek
+	ZTjek2:
+		CP Temp2, ZL
+		BRNE ZTjek2B
+		SEI
+RET
 ;Intarups -----------------------------------------------------------------
 
 ADCDone:				
@@ -657,6 +690,14 @@ Timer1CompereA:
 	POP Temp1
 RETI
 
+InteDist:
+	PUSH Temp1
+	LDI Temp1, 1
+	ADD DistL, Temp1
+	LDI Temp1, 0
+	ADC DistH, Temp1
+	POP Temp1
+RETI
 
 
 

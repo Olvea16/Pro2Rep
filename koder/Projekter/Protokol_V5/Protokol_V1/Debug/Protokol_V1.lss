@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Wed May 10 17:15:38 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Thu May 11 09:33:46 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
 C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm(23): warning: Register r26 already defined by the .DEF directive
@@ -909,10 +909,10 @@ C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\
 000000 c031                      .ORG 0			;Vektoradresse for Reset.
                                  RJMP Setup      ;Springer til setup. 
                                  
-000020 940c 01ed                 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
+000020 940c 01f0                 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
                                  JMP ADCDone
                                  
-00000e 940c 01f1                 .ORG OC1Aaddr	;Timer 1 compereA servisrutine
+00000e 940c 01f4                 .ORG OC1Aaddr	;Timer 1 compereA servisrutine
                                  JMP Timer1CompereA	
                                  
                                  
@@ -1459,24 +1459,28 @@ C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\
 0001eb e080                      	LDI DistH,0
 0001ec 9508                      	LDI DistL,0
                                  RET
+                                 
+0001ed 940e 0114                 SendTrack:
+0001ef 9508                      	CALL StopCar
+                                 RET
                                  ;Intarups -----------------------------------------------------------------
                                  
                                  ADCDone:				
-0001ed b154                      	;Når en ADC er færdig hopper den hertil
-0001ee b155                      	IN	AccData, ADCL		;Indlæser den lave del af ADC
-0001ef 9a36                      	IN  AccData, ADCH		;Indlæser den høje del af ADC
-0001f0 9518                      	SBI ADCSRA, ADSC	;Starter conversion igen 
+0001f0 b154                      	;Når en ADC er færdig hopper den hertil
+0001f1 b155                      	IN	AccData, ADCL		;Indlæser den lave del af ADC
+0001f2 9a36                      	IN  AccData, ADCH		;Indlæser den høje del af ADC
+0001f3 9518                      	SBI ADCSRA, ADSC	;Starter conversion igen 
                                  RETI
                                  
-0001f1 930f                      Timer1CompereA:
+0001f4 930f                      Timer1CompereA:
                                  	PUSH Temp1
-0001f2 940e 01c0                 	;Slukker LED'er
+0001f5 940e 01c0                 	;Slukker LED'er
                                  	CALL ClearLED
-0001f4 e000                      	;Stopper timer
-0001f5 bd0e                      	LDI Temp1, 0			;Timer fra
-0001f6 7f6c                      	OUT TCCR1B, Temp1		
-0001f7 910f                      	CBR SREG2, LEDTimeOn
-0001f8 9518                      	POP Temp1
+0001f7 e000                      	;Stopper timer
+0001f8 bd0e                      	LDI Temp1, 0			;Timer fra
+0001f9 7f6c                      	OUT TCCR1B, Temp1		
+0001fa 910f                      	CBR SREG2, LEDTimeOn
+0001fb 9518                      	POP Temp1
                                  RETI
                                  
                                  
@@ -1526,7 +1530,7 @@ andi  :  22 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0
 brcc  :   0 brcs  :   0 break :   0 breq  :  25 brge  :   1 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
 brne  :   9 brpl  :   0 brsh  :   3 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :  39 cbi   :   0 cbr   :   1 
+brvs  :   0 bset  :   0 bst   :   0 call  :  40 cbi   :   0 cbr   :   1 
 clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
 cpi   :  37 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
@@ -1534,7 +1538,7 @@ fmulsu:   0 icall :   0 ijmp  :   0 in    :  11 inc   :   3 jmp   :  17
 ld    :   0 ldd   :   0 ldi   :  53 lds   :   8 lpm   :   0 lsl   :   4 
 lsr   :   9 mov   :  23 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   8 ori   :   0 out   :  30 pop   :   1 
-push  :   1 rcall :   0 ret   :  27 reti  :   2 rjmp  :  15 rol   :   0 
+push  :   1 rcall :   0 ret   :  28 reti  :   2 rjmp  :  15 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :  12 sbic  :   3 sbis  :   2 
 sbiw  :   0 sbr   :   1 sbrc  :   2 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   2 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
@@ -1545,7 +1549,7 @@ Instructions used: 36 out of 113 (31.9%)
 "ATmega32A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0003f2    920      0    920   32768   2.8%
+[.cseg] 0x000000 0x0003f8    926      0    926   32768   2.8%
 [.dseg] 0x000060 0x000060      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

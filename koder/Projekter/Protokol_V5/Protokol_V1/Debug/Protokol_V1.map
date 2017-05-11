@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Wed May 10 17:15:38 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Thu May 11 09:33:46 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -614,8 +614,8 @@ EQU  CmdIn_Start_LED 00000006
 EQU  CmdIn_Stop_LED 00000007
 EQU  CmdIn_PWMPrescaler_LED 00000008
 CSEG Setup        00000032
-CSEG ADCDone      000001ed
-CSEG Timer1CompereA 000001f1
+CSEG ADCDone      000001f0
+CSEG Timer1CompereA 000001f4
 CSEG LoadFromEEPROM 0000019f
 CSEG Auto         00000062
 CSEG UAuto        000000a9
@@ -673,3 +673,4 @@ CSEG StateLED     000001d3
 CSEG Sving1StateLED 000001dd
 CSEG Sving2StateLED 000001e1
 CSEG StraightStateLED 000001d9
+CSEG SendTrack    000001ed

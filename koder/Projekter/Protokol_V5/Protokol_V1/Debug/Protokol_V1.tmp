@@ -23,8 +23,8 @@
  </OUTPUT_FILES>
  <LABELS>
   <Setup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>99</LINE></Setup>
-  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>642</LINE></ADCDone>
-  <Timer1CompereA><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>649</LINE></Timer1CompereA>
+  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>646</LINE></ADCDone>
+  <Timer1CompereA><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>653</LINE></Timer1CompereA>
   <LoadFromEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>542</LINE></LoadFromEEPROM>
   <Auto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>165</LINE></Auto>
   <UAuto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>258</LINE></UAuto>
@@ -82,5 +82,6 @@
   <Sving1StateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>622</LINE></Sving1StateLED>
   <Sving2StateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>626</LINE></Sving2StateLED>
   <StraightStateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>618</LINE></StraightStateLED>
+  <SendTrack><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm</FILE><LINE>641</LINE></SendTrack>
  </LABELS>
 </ASSEMBLER_INFO>
