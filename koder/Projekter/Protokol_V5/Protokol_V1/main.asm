@@ -35,7 +35,7 @@
 .EQU Intype_DatSpac = 0x00
 .EQU InCmd_DatSpac = 0x01
 .EQU InBesked_DatSpac = 0x02
-;.EQU ZStart = "Indsæt den sidste af dem for oven her +1
+.EQU ZStart = 0x04
 
 ;SREG2 Navngivning
 .EQU StateCount0 = 0 
@@ -65,6 +65,7 @@
 .EQU Proto_AccRef = 0x13
 .EQU Proto_RGBLED = 0x14
 .EQU Proto_PWMStop = 0x15
+.EQU Proto_Track = 0x16
 ;---------------------------
 
 ;LED
@@ -285,7 +286,7 @@ TypeCheck:
 CmdCheck:
 	LDS Ret1, InCmd_DatSpac
 	CPI Ret1,0x00	;Tjekker om InCmd er tom.
-	BRNE DataCheck	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
+	BRNE DataCheckInter	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
 	CALL IsCmd		;Hvis InCmd derimod er tom, tjekker programmet om den modtagne besked i InBesked er en kommmando med subroutinen IsCom.
 	LDS Ret1, Intype_DatSpac
 	CPI Ret1, Proto_GET	;Derefter sammenligner programmet InType, altså telegrammets type, med 0xAA, altså et 'get'-telegram.
@@ -295,6 +296,8 @@ CmdCheck:
 	
 					;Hvis typen ikke er nogen af de ovenstående, antager programmet at typen er 0x55, altså et 'set'-telegram. 
 	LDS Ret1, InCmd_DatSpac
+	CPI Ret1, Proto_PWMStop
+	BREQ CmdCheck_PWMStop
 	CPI Ret1, Proto_Start	;Programmet sammenligner telegrammets kommando med 0x10, altså 'start' eller 'hastighed'.
 	BREQ EndOfProtoInter	;Hvis kommandoen er 0x10, hopper programmet til slutningen af protokollen, så dataen til telegrammet 0x55, 0x10 kan hentes i næste omgang i løkken.
 	CPI Ret1, Proto_PWMPre	;Programmet sammenligner telegrammets kommando med 0x12, altså PWM'ens prescaler.
@@ -310,24 +313,51 @@ CmdCheck:
 	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
 	JMP CleanupEndOfProto	;Hopper til efter telegramfortolkningen.
 
+	CmdCheck_PWMStop:
+		CALL StopCar
+		JMP CleanupEndOfProto
+
 	IsGet:
 		LDS Ret1, InCmd_DatSpac
 		CPI Ret1, Proto_PWMPre
-		BREQ IsFreq
+		BREQ CmdCheck_IsGet_IsFreq
 		CPI Ret1, Proto_AccRef
-		BREQ EndOfProto
+		BREQ SkipEndOfProtoInter
+		CPI Ret1, Proto_RGBLED
+		BREQ CmdCheck_IsGet_IsRGBLED
+		CPI Ret1, Proto_Track
+		BREQ CmdCheck_IsGet_Track
 		CPI Ret1, Proto_Start
 		BRNE Error			;Sætter fejl hvis typen 0x55 ikke er sat.
 		CALL SendSpeed
 		JMP CleanupEndOfProto
 
-		IsFreq:
+		CmdCheck_IsGet_IsFreq:
 			CALL SendPrescaler
 			JMP CleanupEndOfProto
+
+		CmdCheck_IsGet_IsRGBLED:
+			CALL GetLED
+			LDI Arg,Proto_Reply
+			CALL Send
+			MOV Arg,Ret1
+			CALL Send
+			JMP CleanupEndOfProto
+
+		CmdCheck_IsGet_Track:
+			CALL SendTrack
+			JMP CleanupEndOfProto
+
 ;Dette er en mellem station til EndOfProto
 JMP	SkipEndOfProtoInter
+DataCheckInter:
+JMP DataCheck
 EndOfProtoInter:
 JMP EndOfProto
+Error:
+	CALL Cleanup
+	;Indsæt hvad der ellers skal ske i Error her 
+	JMP EndOfProto
 SkipEndOfProtoInter:
 
 DataCheck:
@@ -342,6 +372,8 @@ DataCheck:
 	BREQ SetFrequency
 	CPI Ret1, Proto_AccRef
 	BREQ SetAcceleration
+	CPI Ret1, Proto_RGBLED
+	BREQ SetRGBLED
 	CPI Ret1, Proto_Start
 	BRNE Error
 	CALL SetSpeed
@@ -366,12 +398,13 @@ DataCheck:
 
 	SetAcceleration:
 		CALL SetAccRef
-		JMP EndOfProto
+		JMP CleanupEndOfProto
 
-Error:
-	CALL Cleanup
-	;Indsæt hvad der ellers skal ske i Error her 
-	JMP EndOfProto
+	SetRGBLED:
+		MOV  Arg, InBesked
+		CALL LED1SekSet
+		JMP CleanupEndOfProto
+
 
 CleanupEndOfProto:
 	CALL Cleanup
@@ -485,13 +518,19 @@ IsType:
 		RET
 
 IsCmd:
-	CPI InBesked, Proto_Start
+	CPI InBesked, Proto_Start		;0x10
 	BREQ wasCommand
-	CPI InBesked, Proto_Stop
+	CPI InBesked, Proto_Stop		;0x11
 	BREQ wasCommand
-	CPI InBesked, Proto_PWMPre
+	CPI InBesked, Proto_PWMPre		;0x12
 	BREQ wasCommand
-	CPI InBesked, Proto_AccRef
+	CPI InBesked, Proto_AccRef		;0x13
+	BREQ wasCommand
+	CPI InBesked, Proto_RGBLED		;0x14
+	BREQ wasCommand
+	CPI InBesked, Proto_PWMStop		;0x15
+	BREQ wasCommand
+	CPI InBesked, Proto_Track		;0x16
 	BREQ wasCommand
 
 	;INDSÆT NYE TELEGRAMKOMMANDOER.
@@ -660,7 +699,7 @@ SendTrack:
 	LDI ZL, LOW(ZStart)
 	ZTjek:
 		CP Temp1, ZH
-		BREQ FirstZTjek
+		BREQ ZTjek2
 	ZTjek2B:
 		LD Arg, Z+
 		CALL Send
