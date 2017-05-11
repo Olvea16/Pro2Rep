@@ -172,7 +172,6 @@ MOV AccRefN, Ret1
 
 SEI	;Enabler interrupts. 
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
-
 ;---------------------------------------
 Auto:
 SBIC UCSRA,RXC	
@@ -304,18 +303,22 @@ CmdCheck:
 	BREQ EndOfProtoInter ;Hvis kommandoen er 0x12, hopper programmet til slutningen af protokollen, så dataen til telegrammet 0x55, 0x12 kan hentes i næste omgang i løkken.
 	CPI Ret1, Proto_AccRef
 	BREQ EndOfProtoInter
-
+	CPI Ret1, Proto_RGBLED
+	BREQ EndOfProtoInter
 	;Indsæt nye kommandoer over dette punkt. 
 	
 					;Hvis kommandoen er ingen af de ovenstående, antager programmet at kommandoen er 0x11, altså kommandoen 'stop'.
 	CALL StopCar	;Kalder subroutinen StopCar, der sætter PWM'en til 0.
-	LDI Arg, CmdIn_Stop_LED	
+	LDI Arg, 0x10	
 	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
 	JMP CleanupEndOfProto	;Hopper til efter telegramfortolkningen.
 
 	CmdCheck_PWMStop:
 		CALL StopCar
 		JMP CleanupEndOfProto
+
+DataCheckInter:
+JMP DataCheck
 
 	IsGet:
 		LDS Ret1, InCmd_DatSpac
@@ -350,8 +353,6 @@ CmdCheck:
 
 ;Dette er en mellem station til EndOfProto
 JMP	SkipEndOfProtoInter
-DataCheckInter:
-JMP DataCheck
 EndOfProtoInter:
 JMP EndOfProto
 Error:
