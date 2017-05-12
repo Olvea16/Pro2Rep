@@ -1,0 +1,17 @@
+----------
+5:53:51 PM: Refreshed Ports.
+5:53:51 PM: Program started.
+5:54:26 PM: Connecting, please wait.
+5:54:26 PM: COM5 has been opened with a baud rate of 9600.
+5:54:26 PM: Connection lost. Please try reconnecting.
+5:54:30 PM: Connecting, please wait.
+5:54:30 PM: COM5 has been opened with a baud rate of 9600.
+5:54:30 PM: Connection lost. Please try reconnecting.
+5:54:30 PM: Unauthorized access. Couldn't connect.
+5:54:31 PM: Refreshed Ports.
+5:54:32 PM: Couldn't connect.
+5:54:34 PM: Connecting, please wait.
+5:54:34 PM: COM6 has been opened with a baud rate of 9600.
+5:54:34 PM: Connection lost. Please try reconnecting.
+5:54:37 PM: Connecting, please wait.
+5:54:37 PM: COM5 has been opened with a baud rate of 9600.

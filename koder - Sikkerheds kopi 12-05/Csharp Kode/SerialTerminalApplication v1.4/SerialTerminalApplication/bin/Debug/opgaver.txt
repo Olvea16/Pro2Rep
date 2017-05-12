@@ -1,0 +1,2 @@
+- Flere indstillinger
+- Indstillinger via. settings-menu i toolbar.

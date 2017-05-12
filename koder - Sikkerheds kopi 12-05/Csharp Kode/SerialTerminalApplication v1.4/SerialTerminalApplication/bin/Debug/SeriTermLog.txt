@@ -1,0 +1,776 @@
+----------
+10:50:19 PM: Refreshed Ports.
+10:50:19 PM: Program started by Oliver.
+----------
+10:51:49 PM: Refreshed Ports.
+10:51:49 PM: Program started by Oliver.
+----------
+10:52:04 PM: Refreshed Ports.
+10:52:04 PM: Program started by Oliver.
+10:52:09 PM: Connecting, please wait.
+10:52:09 PM: COM6 has been opened with a baud rate of 9600.
+10:52:10 PM: Disconnecting, please wait.
+10:52:10 PM: Connection lost. Please try reconnecting.
+----------
+10:52:16 PM: Refreshed Ports.
+10:52:16 PM: Program started by Oliver.
+----------
+10:52:29 PM: Refreshed Ports.
+10:52:29 PM: Program started by Oliver.
+10:52:33 PM: Connecting, please wait.
+10:52:33 PM: COM6 has been opened with a baud rate of 9600.
+10:52:35 PM: Disconnecting, please wait.
+10:52:35 PM: Connection lost. Please try reconnecting.
+----------
+10:52:38 PM: Refreshed Ports.
+10:52:38 PM: Program started by Oliver.
+----------
+10:55:19 PM: Refreshed Ports.
+10:55:19 PM: Program started by Oliver.
+10:55:22 PM: Connecting, please wait.
+10:55:23 PM: COM4 has been opened with a baud rate of 9600.
+10:55:24 PM: Disconnecting, please wait.
+10:55:24 PM: Connection lost. Please try reconnecting.
+10:55:28 PM: Connecting, please wait.
+10:55:29 PM: COM5 has been opened with a baud rate of 9600.
+10:55:30 PM: Disconnecting, please wait.
+10:55:30 PM: Connection lost. Please try reconnecting.
+----------
+11:03:18 PM: Refreshed Ports.
+11:03:18 PM: Program started by Oliver.
+11:03:23 PM: Connecting, please wait.
+11:03:24 PM: COM4 has been opened with a baud rate of 115200.
+11:03:26 PM: Disconnecting, please wait.
+11:03:26 PM: Connection lost. Please try reconnecting.
+----------
+11:19:24 PM: Refreshed Ports.
+11:19:24 PM: Program started by Oliver.
+----------
+11:19:30 PM: Refreshed Ports.
+11:19:30 PM: Program started by Oliver.
+----------
+11:20:19 PM: Refreshed Ports.
+11:20:19 PM: Program started by Oliver.
+----------
+11:21:09 PM: Refreshed Ports.
+11:21:09 PM: Program started by Oliver.
+----------
+11:21:26 PM: Refreshed Ports.
+11:21:26 PM: Program started by Oliver.
+11:21:31 PM: Connecting, please wait.
+11:21:33 PM: COM5 has been opened with a baud rate of 9600.
+----------
+11:22:05 PM: Refreshed Ports.
+11:22:05 PM: Program started by Oliver.
+11:22:09 PM: Connecting, please wait.
+11:22:11 PM: COM4 has been opened with a baud rate of 9600.
+11:22:14 PM: Disconnecting, please wait.
+11:22:14 PM: Connection lost. Please try reconnecting.
+----------
+11:22:18 PM: Refreshed Ports.
+11:22:18 PM: Program started by Oliver.
+----------
+4:50:17 PM: Refreshed Ports.
+4:50:17 PM: Program started by Oliver.
+4:50:22 PM: Connecting, please wait.
+4:50:25 PM: COM4 has been opened with a baud rate of 9600.
+----------
+4:53:35 PM: Refreshed Ports.
+4:53:35 PM: Program started by Oliver.
+4:53:41 PM: Connecting, please wait.
+4:53:42 PM: COM4 has been opened with a baud rate of 9600.
+----------
+4:56:31 PM: Refreshed Ports.
+4:56:31 PM: Program started by Oliver.
+4:56:34 PM: Connecting, please wait.
+4:56:37 PM: COM4 has been opened with a baud rate of 9600.
+4:56:41 PM: Succesfully sent: (0x00, 0x00, 0x3C).
+4:56:59 PM: Succesfully sent: (0x11, 0x00, 0x3C).
+----------
+5:05:35 PM: Refreshed Ports.
+5:05:35 PM: Program started by Oliver.
+5:05:36 PM: Connecting, please wait.
+5:05:39 PM: COM4 has been opened with a baud rate of 9600.
+----------
+5:09:52 PM: Refreshed Ports.
+5:09:52 PM: Program started by Oliver.
+5:09:55 PM: Connecting, please wait.
+5:09:57 PM: COM4 has been opened with a baud rate of 9600.
+----------
+5:14:18 PM: Refreshed Ports.
+5:14:18 PM: Program started by Oliver.
+5:14:22 PM: Connecting, please wait.
+5:14:26 PM: COM4 has been opened with a baud rate of 9600.
+5:14:27 PM: Succesfully sent: (0x55, 0x10, 0x3C, ).
+5:14:37 PM: Succesfully sent: (0x4D, ).
+5:14:40 PM: Succesfully sent: (0x4D, ).
+5:14:41 PM: Succesfully sent: (0x4D, ).
+5:14:46 PM: Disconnecting, please wait.
+5:14:46 PM: Connection lost. Please try reconnecting.
+----------
+5:15:28 PM: Refreshed Ports.
+5:15:28 PM: Program started by Oliver.
+5:15:30 PM: Connecting, please wait.
+5:15:33 PM: COM4 has been opened with a baud rate of 9600.
+5:15:33 PM: Succesfully sent: (0x55, 0x10, 0x3C, ).
+----------
+5:15:59 PM: Refreshed Ports.
+5:15:59 PM: Program started by Oliver.
+5:16:01 PM: Connecting, please wait.
+5:16:03 PM: COM4 has been opened with a baud rate of 9600.
+5:16:06 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+----------
+5:19:14 PM: Refreshed Ports.
+5:19:14 PM: Program started by Oliver.
+5:19:15 PM: Connecting, please wait.
+5:19:17 PM: COM4 has been opened with a baud rate of 9600.
+----------
+5:20:49 PM: Refreshed Ports.
+5:20:49 PM: Program started by Oliver.
+5:20:53 PM: Connecting, please wait.
+5:20:54 PM: COM4 has been opened with a baud rate of 9600.
+5:20:55 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+----------
+5:23:28 PM: Refreshed Ports.
+5:23:28 PM: Program started by Oliver.
+5:23:31 PM: Connecting, please wait.
+5:23:32 PM: COM4 has been opened with a baud rate of 9600.
+5:23:33 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+5:23:36 PM: Succesfully sent: (0x55, 0x10, 0x03).
+----------
+5:25:37 PM: Refreshed Ports.
+5:25:37 PM: Program started by Oliver.
+5:25:38 PM: Connecting, please wait.
+5:25:40 PM: COM4 has been opened with a baud rate of 9600.
+5:25:43 PM: Please enter valid bytes to send.
+----------
+5:26:16 PM: Refreshed Ports.
+5:26:16 PM: Program started by Oliver.
+5:26:17 PM: Connecting, please wait.
+5:26:20 PM: COM4 has been opened with a baud rate of 9600.
+5:26:22 PM: Please enter valid bytes to send.
+5:26:28 PM: Succesfully sent: (0x55, 0x3C).
+5:26:31 PM: Succesfully sent: (0x3C).
+5:26:38 PM: Succesfully sent: (0xFF).
+5:26:39 PM: Succesfully sent: (0xFF).
+5:26:43 PM: Disconnecting, please wait.
+5:26:43 PM: Connection lost. Please try reconnecting.
+----------
+5:28:49 PM: Refreshed Ports.
+5:28:49 PM: Program started by Oliver.
+5:28:51 PM: Connecting, please wait.
+5:28:52 PM: COM4 has been opened with a baud rate of 9600.
+5:28:54 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+5:28:58 PM: Please enter valid bytes to send.
+5:29:04 PM: Please enter valid bytes to send.
+5:29:05 PM: Please enter valid bytes to send.
+5:29:15 PM: Please enter valid bytes to send.
+5:29:16 PM: Please enter valid bytes to send.
+5:29:21 PM: Please enter valid bytes to send.
+5:29:27 PM: Succesfully sent: (0x55, 0x10, 0x10).
+5:29:32 PM: Please enter valid bytes to send.
+5:29:38 PM: Succesfully sent: (0x55, 0x10, 0x0A).
+----------
+5:33:12 PM: Refreshed Ports.
+5:33:12 PM: Program started by Oliver.
+5:33:18 PM: Connecting, please wait.
+5:33:19 PM: COM4 has been opened with a baud rate of 9600.
+5:33:20 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+5:33:22 PM: Please enter a valid file path.
+5:33:28 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+5:33:30 PM: Tried to send invalid file.
+5:33:30 PM: Succesfully sent: (0x00, 0x00, 0x00).
+5:33:42 PM: Connection lost. Please try reconnecting.
+----------
+5:34:18 PM: Refreshed Ports.
+5:34:18 PM: Program started by Oliver.
+5:34:20 PM: Connecting, please wait.
+5:34:22 PM: Connecting, please wait.
+5:34:22 PM: Connection lost. Please try reconnecting.
+5:34:22 PM: COM4 has been opened with a baud rate of 9600.
+5:34:25 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+5:34:28 PM: Disconnecting, please wait.
+5:34:29 PM: Connection lost. Please try reconnecting.
+----------
+5:36:35 PM: Refreshed Ports.
+5:36:35 PM: Program started by Oliver.
+5:36:37 PM: Connecting, please wait.
+5:36:40 PM: COM4 has been opened with a baud rate of 9600.
+5:36:41 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+----------
+5:47:01 PM: Refreshed Ports.
+5:47:01 PM: Program started by Oliver.
+5:47:05 PM: Connecting, please wait.
+5:47:07 PM: COM4 has been opened with a baud rate of 9600.
+5:47:50 PM: Succesfully sent: (0x3C).
+5:50:03 PM: Disconnecting, please wait.
+5:50:03 PM: Connection lost. Please try reconnecting.
+5:50:04 PM: Connecting, please wait.
+5:50:07 PM: COM4 has been opened with a baud rate of 9600.
+5:50:09 PM: Succesfully sent: (0x3C).
+5:51:04 PM: Succesfully sent: (0x80).
+5:52:51 PM: Disconnecting, please wait.
+5:52:52 PM: Connection lost. Please try reconnecting.
+5:52:52 PM: Connecting, please wait.
+5:52:55 PM: COM4 has been opened with a baud rate of 9600.
+5:52:57 PM: Succesfully sent: (0x80).
+5:53:08 PM: Succesfully sent: (0xFF).
+5:53:10 PM: Succesfully sent: (0xFF).
+5:53:19 PM: Succesfully sent: (0xF1, 0xFF).
+5:58:34 PM: Disconnecting, please wait.
+5:58:35 PM: Connection lost. Please try reconnecting.
+5:58:35 PM: Connecting, please wait.
+5:58:38 PM: COM4 has been opened with a baud rate of 9600.
+5:58:41 PM: Succesfully sent: (0xF1, 0xFF).
+5:59:47 PM: Succesfully sent: (0xF1, 0xFF).
+5:59:48 PM: Succesfully sent: (0xF1, 0xFF).
+5:59:49 PM: Succesfully sent: (0xF1, 0xFF).
+5:59:50 PM: Disconnecting, please wait.
+5:59:51 PM: Connection lost. Please try reconnecting.
+5:59:51 PM: Connecting, please wait.
+5:59:54 PM: COM4 has been opened with a baud rate of 9600.
+5:59:55 PM: Succesfully sent: (0xF1, 0xFF).
+5:59:56 PM: Succesfully sent: (0xF1, 0xFF).
+6:00:00 PM: Disconnecting, please wait.
+6:00:00 PM: Connection lost. Please try reconnecting.
+----------
+6:06:49 PM: Refreshed Ports.
+6:06:49 PM: Program started by Oliver.
+6:06:53 PM: Connecting, please wait.
+6:06:56 PM: COM4 has been opened with a baud rate of 9600.
+6:06:57 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+----------
+8:55:31 AM: Refreshed Ports.
+8:55:31 AM: Program started by Oliver.
+8:57:26 AM: Connecting, please wait.
+8:57:30 AM: COM4 has been opened with a baud rate of 9600.
+8:57:34 AM: Succesfully sent: (0x55, 0x10, 0x3C).
+----------
+9:02:05 AM: Refreshed Ports.
+9:02:05 AM: Program started by Oliver.
+9:02:44 AM: Connecting, please wait.
+9:02:47 AM: COM4 has been opened with a baud rate of 9600.
+9:03:26 AM: Succesfully sent: (0x55, 0x10, 0x3C).
+9:03:37 AM: Succesfully sent: (0x55, 0x10, 0x64).
+9:04:37 AM: Exported read data to: (C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\ReadData.txt)
+9:05:06 AM: Disconnecting, please wait.
+9:05:06 AM: Connection lost. Please try reconnecting.
+10:56:54 AM: Connecting, please wait.
+10:56:59 AM: Connection lost. Please try reconnecting.
+10:57:02 AM: Connecting, please wait.
+10:57:38 AM: Connection lost. Please try reconnecting.
+10:58:02 AM: Connecting, please wait.
+10:58:05 AM: COM4 has been opened with a baud rate of 9600.
+10:58:18 AM: Succesfully sent: (0x16).
+10:58:27 AM: Succesfully sent: (0x23).
+10:58:45 AM: Succesfully sent: (0x99).
+10:58:50 AM: Succesfully sent: (0x19).
+11:00:00 AM: Connection lost. Please try reconnecting.
+----------
+11:00:09 AM: Refreshed Ports.
+11:00:09 AM: Program started by Oliver.
+11:00:13 AM: Connecting, please wait.
+11:00:16 AM: COM4 has been opened with a baud rate of 9600.
+11:00:28 AM: Succesfully sent: (0x99, 0x1E).
+11:00:37 AM: Disconnecting, please wait.
+11:00:37 AM: Connection lost. Please try reconnecting.
+11:00:38 AM: Connecting, please wait.
+11:00:49 AM: Connection lost. Please try reconnecting.
+11:01:37 AM: Connecting, please wait.
+11:01:43 AM: Connection lost. Please try reconnecting.
+11:02:02 AM: Connecting, please wait.
+11:02:08 AM: COM4 has been opened with a baud rate of 9600.
+11:02:08 AM: Succesfully sent: (0x99, 0x1E).
+11:02:19 AM: Succesfully sent: (0x28).
+11:02:28 AM: Succesfully sent: (0x00).
+11:02:46 AM: Succesfully sent: (0x19).
+11:24:57 AM: Disconnecting, please wait.
+11:24:57 AM: Connection lost. Please try reconnecting.
+11:25:01 AM: Connecting, please wait.
+11:25:06 AM: Connection lost. Please try reconnecting.
+11:25:17 AM: Connecting, please wait.
+11:25:22 AM: COM4 has been opened with a baud rate of 9600.
+11:26:15 AM: Disconnecting, please wait.
+11:26:15 AM: Disconnecting, please wait.
+11:26:15 AM: Connection lost. Please try reconnecting.
+11:26:20 AM: Connecting, please wait.
+11:26:24 AM: COM4 has been opened with a baud rate of 9600.
+11:26:29 AM: Succesfully sent: (0x99, 0x19).
+11:26:43 AM: Succesfully sent: (0x1E).
+11:26:47 AM: Succesfully sent: (0x00).
+11:26:55 AM: Succesfully sent: (0x14).
+11:27:04 AM: Succesfully sent: (0x00).
+11:27:11 AM: Disconnecting, please wait.
+11:27:11 AM: Connection lost. Please try reconnecting.
+----------
+11:28:17 AM: Refreshed Ports.
+11:28:17 AM: Program started by Oliver.
+11:28:19 AM: Connecting, please wait.
+11:28:23 AM: COM4 has been opened with a baud rate of 9600.
+11:28:46 AM: Succesfully sent: (0x99, 0x19).
+11:28:56 AM: Succesfully sent: (0x99, 0x00).
+----------
+11:30:56 AM: Refreshed Ports.
+11:30:56 AM: Program started by Oliver.
+11:31:02 AM: Connecting, please wait.
+11:31:05 AM: COM4 has been opened with a baud rate of 9600.
+11:31:15 AM: Succesfully sent: (0x99, 0x19).
+11:31:25 AM: Succesfully sent: (0x99, 0x23).
+11:31:48 AM: Succesfully sent: (0x99, 0x00).
+11:32:25 AM: Disconnecting, please wait.
+11:32:25 AM: Connection lost. Please try reconnecting.
+----------
+11:32:35 AM: Refreshed Ports.
+11:32:35 AM: Program started by Oliver.
+11:32:40 AM: Connecting, please wait.
+11:32:43 AM: Connection lost. Please try reconnecting.
+11:32:47 AM: Connecting, please wait.
+11:32:51 AM: COM4 has been opened with a baud rate of 9600.
+11:35:26 AM: Tried to send invalid file.
+11:35:26 AM: Succesfully sent: (0x00, 0x00, 0x00).
+11:35:27 AM: Succesfully sent: (0x28).
+11:35:42 AM: Succesfully sent: (0x99).
+11:35:48 AM: Succesfully sent: (0x28).
+11:35:54 AM: Succesfully sent: (0x00).
+11:36:45 AM: Succesfully sent: (0x2D).
+11:37:05 AM: Disconnecting, please wait.
+11:37:06 AM: Connection lost. Please try reconnecting.
+11:37:25 AM: Connecting, please wait.
+11:37:28 AM: COM4 has been opened with a baud rate of 9600.
+11:37:29 AM: Tried to send invalid file.
+11:37:29 AM: Succesfully sent: (0x00, 0x00, 0x00).
+11:37:31 AM: Succesfully sent: (0x2D).
+11:37:32 AM: Tried to send invalid file.
+11:37:32 AM: Succesfully sent: (0x00, 0x00, 0x00).
+11:37:59 AM: Succesfully sent: (0x99, 0x2D).
+11:38:06 AM: Disconnecting, please wait.
+11:38:06 AM: Connection lost. Please try reconnecting.
+11:38:49 AM: Connecting, please wait.
+11:38:51 AM: COM4 has been opened with a baud rate of 9600.
+11:39:47 AM: Succesfully sent: (0x99, 0x1E).
+11:41:34 AM: Connection lost. Please try reconnecting.
+----------
+11:42:14 AM: Refreshed Ports.
+11:42:14 AM: Program started by Oliver.
+11:42:15 AM: Connecting, please wait.
+11:42:18 AM: COM4 has been opened with a baud rate of 9600.
+11:42:29 AM: Succesfully sent: (0x99, 0x2A).
+11:42:56 AM: Disconnecting, please wait.
+11:42:56 AM: Connection lost. Please try reconnecting.
+11:42:57 AM: Connecting, please wait.
+11:42:59 AM: COM4 has been opened with a baud rate of 9600.
+11:43:13 AM: Succesfully sent: (0x99, 0x29).
+11:43:27 AM: Disconnecting, please wait.
+11:43:27 AM: Connection lost. Please try reconnecting.
+11:43:28 AM: Connecting, please wait.
+11:43:35 AM: Connection lost. Please try reconnecting.
+11:43:37 AM: Connecting, please wait.
+11:43:39 AM: COM4 has been opened with a baud rate of 9600.
+11:43:41 AM: Succesfully sent: (0x99, 0x28).
+11:44:00 AM: Disconnecting, please wait.
+11:44:00 AM: Connection lost. Please try reconnecting.
+11:44:12 AM: Connecting, please wait.
+11:44:18 AM: Connection lost. Please try reconnecting.
+11:44:24 AM: Connecting, please wait.
+11:44:28 AM: COM4 has been opened with a baud rate of 9600.
+11:44:31 AM: Succesfully sent: (0x99, 0x64).
+11:46:50 AM: Disconnecting, please wait.
+11:46:50 AM: Connection lost. Please try reconnecting.
+11:46:53 AM: Connecting, please wait.
+11:46:59 AM: COM4 has been opened with a baud rate of 9600.
+11:47:40 AM: Disconnecting, please wait.
+11:47:40 AM: Connection lost. Please try reconnecting.
+11:47:41 AM: Connecting, please wait.
+11:47:42 AM: COM4 has been opened with a baud rate of 9600.
+11:47:46 AM: Succesfully sent: (0x99, 0x19).
+11:47:53 AM: Disconnecting, please wait.
+11:47:54 AM: Connection lost. Please try reconnecting.
+11:47:59 AM: Connecting, please wait.
+11:48:11 AM: Connection lost. Please try reconnecting.
+11:48:13 AM: Connecting, please wait.
+11:48:18 AM: COM4 has been opened with a baud rate of 9600.
+11:48:31 AM: Succesfully sent: (0x99, 0x1E).
+11:48:38 AM: Succesfully sent: (0x99, 0x00).
+11:49:18 AM: Succesfully sent: (0x99, 0x23).
+11:49:24 AM: Succesfully sent: (0x99, 0x00).
+11:49:32 AM: Succesfully sent: (0x99, 0x28).
+11:49:38 AM: Succesfully sent: (0x99, 0x00).
+11:52:28 AM: Succesfully sent: (0x29).
+11:52:34 AM: Succesfully sent: (0x00).
+11:52:54 AM: Disconnecting, please wait.
+11:52:55 AM: Connection lost. Please try reconnecting.
+11:52:56 AM: Connecting, please wait.
+11:53:02 AM: COM4 has been opened with a baud rate of 9600.
+11:53:08 AM: Succesfully sent: (0x99, 0x2A).
+11:53:18 AM: Disconnecting, please wait.
+11:53:18 AM: Connection lost. Please try reconnecting.
+----------
+11:53:45 AM: Refreshed Ports.
+11:53:45 AM: Program started by Oliver.
+11:53:46 AM: Connecting, please wait.
+11:53:49 AM: COM4 has been opened with a baud rate of 9600.
+11:53:58 AM: Succesfully sent: (0x99, 0x2D).
+11:54:04 AM: Disconnecting, please wait.
+11:54:04 AM: Connection lost. Please try reconnecting.
+11:54:19 AM: Connecting, please wait.
+11:54:20 AM: Connection lost. Please try reconnecting.
+11:54:24 AM: Connecting, please wait.
+11:54:25 AM: COM4 has been opened with a baud rate of 9600.
+11:54:27 AM: Succesfully sent: (0x99, 0x2D).
+11:54:34 AM: Disconnecting, please wait.
+11:54:34 AM: Connection lost. Please try reconnecting.
+11:54:41 AM: Connecting, please wait.
+11:54:49 AM: Connection lost. Please try reconnecting.
+11:54:51 AM: Connecting, please wait.
+11:54:56 AM: COM4 has been opened with a baud rate of 9600.
+11:55:01 AM: Succesfully sent: (0x99, 0x64).
+11:55:19 AM: Connection lost. Please try reconnecting.
+----------
+11:56:18 AM: Refreshed Ports.
+11:56:18 AM: Program started by Oliver.
+11:56:24 AM: Connecting, please wait.
+11:56:26 AM: Connection lost. Please try reconnecting.
+11:56:27 AM: Connecting, please wait.
+11:56:27 AM: Connection lost. Please try reconnecting.
+11:56:31 AM: Connecting, please wait.
+11:56:31 AM: COM6 has been opened with a baud rate of 9600.
+11:56:48 AM: Connection lost. Please try reconnecting.
+----------
+12:13:10 PM: Refreshed Ports.
+12:13:10 PM: Program started by Oliver.
+12:13:21 PM: Connecting, please wait.
+12:13:22 PM: COM6 has been opened with a baud rate of 9600.
+----------
+12:16:14 PM: Refreshed Ports.
+12:16:14 PM: Program started by Oliver.
+12:16:20 PM: Connecting, please wait.
+12:16:20 PM: COM6 has been opened with a baud rate of 9600.
+----------
+12:17:55 PM: Refreshed Ports.
+12:17:55 PM: Program started by Oliver.
+12:17:57 PM: Connecting, please wait.
+12:17:57 PM: COM6 has been opened with a baud rate of 9600.
+----------
+1:23:53 PM: Refreshed Ports.
+1:23:53 PM: Program started by Oliver.
+1:23:57 PM: Connecting, please wait.
+1:23:58 PM: COM5 has been opened with a baud rate of 9600.
+1:24:11 PM: Please enter valid bytes to send.
+----------
+1:25:54 PM: Refreshed Ports.
+1:25:54 PM: Program started by Oliver.
+1:25:55 PM: Connecting, please wait.
+1:25:55 PM: COM6 has been opened with a baud rate of 9600.
+1:26:05 PM: Please enter valid bytes to send.
+----------
+1:26:12 PM: Refreshed Ports.
+1:26:12 PM: Program started by Oliver.
+1:26:16 PM: Connecting, please wait.
+1:26:18 PM: COM5 has been opened with a baud rate of 9600.
+1:26:28 PM: Please enter valid bytes to send.
+1:26:44 PM: Please enter valid bytes to send.
+1:26:49 PM: Please enter valid bytes to send.
+----------
+1:27:05 PM: Refreshed Ports.
+1:27:05 PM: Program started by Oliver.
+1:27:09 PM: Connecting, please wait.
+1:27:10 PM: COM5 has been opened with a baud rate of 9600.
+1:27:18 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+1:27:47 PM: Please enter valid bytes to send.
+----------
+1:29:14 PM: Refreshed Ports.
+1:29:14 PM: Program started by Oliver.
+1:29:19 PM: Connecting, please wait.
+1:29:21 PM: COM5 has been opened with a baud rate of 9600.
+1:29:23 PM: Please enter valid bytes to send.
+----------
+1:57:27 PM: Refreshed Ports.
+1:57:27 PM: Program started by Oliver.
+1:57:31 PM: Connecting, please wait.
+1:57:35 PM: COM5 has been opened with a baud rate of 9600.
+1:57:40 PM: Please enter valid bytes to send.
+----------
+1:59:37 PM: Refreshed Ports.
+1:59:37 PM: Program started by Oliver.
+1:59:40 PM: Connecting, please wait.
+1:59:43 PM: COM5 has been opened with a baud rate of 9600.
+2:00:19 PM: Please enter valid bytes to send.
+----------
+2:01:24 PM: Refreshed Ports.
+2:01:24 PM: Program started by Oliver.
+2:01:27 PM: Connecting, please wait.
+2:01:31 PM: COM5 has been opened with a baud rate of 9600.
+2:01:44 PM: Succesfully sent: (0x61, 0x61, 0x61).
+----------
+2:02:35 PM: Refreshed Ports.
+2:02:35 PM: Program started by Oliver.
+2:02:38 PM: Connecting, please wait.
+2:02:40 PM: COM5 has been opened with a baud rate of 9600.
+2:02:50 PM: Please enter valid bytes to send.
+----------
+2:03:20 PM: Refreshed Ports.
+2:03:20 PM: Program started by Oliver.
+2:03:24 PM: Connecting, please wait.
+2:03:27 PM: COM5 has been opened with a baud rate of 9600.
+----------
+3:14:47 PM: Refreshed Ports.
+3:14:47 PM: Program started by Oliver.
+3:14:56 PM: Connecting, please wait.
+3:15:00 PM: COM5 has been opened with a baud rate of 9600.
+3:15:12 PM: Please enter valid bytes to send.
+----------
+3:15:53 PM: Refreshed Ports.
+3:15:54 PM: Program started by Oliver.
+3:15:59 PM: Connecting, please wait.
+3:16:01 PM: COM5 has been opened with a baud rate of 9600.
+3:16:12 PM: Succesfully sent: (0x61, 0x10, 0x0A).
+----------
+3:19:32 PM: Refreshed Ports.
+3:19:32 PM: Program started by Oliver.
+3:19:36 PM: Connecting, please wait.
+3:19:40 PM: COM5 has been opened with a baud rate of 9600.
+3:19:42 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+3:19:47 PM: Succesfully sent: (0x61, 0x62, 0x63).
+3:19:56 PM: Succesfully sent: (0x0A, 0x64, 0xFF).
+3:20:02 PM: Succesfully sent: (0x00, 0x64, 0xFF).
+3:20:06 PM: Succesfully sent: (0x30, 0x64, 0xFF).
+3:20:10 PM: Succesfully sent: (0x30, 0x31, 0xFF).
+3:20:13 PM: Succesfully sent: (0x30, 0x31, 0x32).
+----------
+3:20:49 PM: Refreshed Ports.
+3:20:49 PM: Program started by Oliver.
+3:21:08 PM: Connecting, please wait.
+3:21:11 PM: COM5 has been opened with a baud rate of 9600.
+----------
+3:27:42 PM: Refreshed Ports.
+3:27:42 PM: Program started by Oliver.
+3:27:44 PM: Connecting, please wait.
+3:27:46 PM: COM5 has been opened with a baud rate of 9600.
+3:27:52 PM: Disconnecting, please wait.
+3:27:52 PM: Connection lost. Please try reconnecting.
+----------
+3:30:26 PM: Refreshed Ports.
+3:30:26 PM: Program started by Oliver.
+3:30:29 PM: Connecting, please wait.
+3:30:29 PM: COM6 has been opened with a baud rate of 9600.
+----------
+3:31:54 PM: Refreshed Ports.
+3:31:54 PM: Program started by Oliver.
+3:31:57 PM: Connecting, please wait.
+3:31:57 PM: COM6 has been opened with a baud rate of 9600.
+3:32:01 PM: Connection timed out. Disconnecting.
+3:32:01 PM: Connection lost. Please try reconnecting.
+3:32:14 PM: Connecting, please wait.
+3:32:15 PM: COM5 has been opened with a baud rate of 9600.
+3:32:27 PM: Connection timed out. Disconnecting.
+3:32:27 PM: Connection lost. Please try reconnecting.
+----------
+3:35:42 PM: Refreshed Ports.
+3:35:42 PM: Program started by Oliver.
+----------
+4:21:09 PM: Refreshed Ports.
+4:21:09 PM: Program started by Oliver.
+----------
+4:23:04 PM: Refreshed Ports.
+4:23:04 PM: Program started by Oliver.
+----------
+4:23:46 PM: Refreshed Ports.
+4:23:46 PM: Program started by Oliver.
+----------
+4:24:47 PM: Refreshed Ports.
+4:24:47 PM: Program started by Oliver.
+----------
+4:26:12 PM: Refreshed Ports.
+4:26:12 PM: Program started by Oliver.
+----------
+4:26:30 PM: Refreshed Ports.
+4:26:30 PM: Program started by Oliver.
+----------
+4:26:54 PM: Refreshed Ports.
+4:26:54 PM: Program started by Oliver.
+5:15:26 PM: Refreshed Ports.
+----------
+5:15:26 PM: Program started by Oliver.
+5:26:34 PM: Refreshed Ports.
+----------
+5:26:34 PM: Program started by Oliver.
+5:29:08 PM: Refreshed Ports.
+----------
+5:29:08 PM: Program started by Oliver.
+5:29:56 PM: Refreshed Ports.
+----------
+5:29:56 PM: Program started by Oliver.
+5:30:25 PM: Refreshed Ports.
+----------
+5:30:25 PM: Program started by Oliver.
+5:31:23 PM: Refreshed Ports.
+----------
+5:31:23 PM: Program started by Oliver.
+5:31:47 PM: Refreshed Ports.
+----------
+5:31:47 PM: Program started by Oliver.
+5:32:03 PM: Refreshed Ports.
+----------
+5:32:03 PM: Program started by Oliver.
+5:33:59 PM: Refreshed Ports.
+----------
+5:33:59 PM: Program started by Oliver.
+5:38:06 PM: Refreshed Ports.
+----------
+5:38:06 PM: Program started by Oliver.
+5:41:25 PM: Refreshed Ports.
+----------
+5:41:25 PM: Program started by Oliver.
+5:45:46 PM: Refreshed Ports.
+----------
+5:45:46 PM: Program started by Oliver.
+5:50:03 PM: Refreshed Ports.
+----------
+5:50:03 PM: Program started by Oliver.
+5:53:58 PM: Refreshed Ports.
+----------
+5:53:58 PM: Program started by Oliver.
+5:54:43 PM: Connecting, please wait.
+5:54:49 PM: Connection lost. Please try reconnecting.
+5:58:16 PM: Refreshed Ports.
+----------
+5:58:16 PM: Program started by Oliver.
+5:59:30 PM: Refreshed Ports.
+----------
+5:59:30 PM: Program started by Oliver.
+5:59:45 PM: Refreshed Ports.
+----------
+5:59:45 PM: Program started by Oliver.
+6:00:11 PM: Refreshed Ports.
+----------
+6:00:11 PM: Program started by Oliver.
+6:00:21 PM: Refreshed Ports.
+----------
+6:00:21 PM: Program started by Oliver.
+6:00:29 PM: Refreshed Ports.
+6:01:04 PM: Refreshed Ports.
+----------
+6:01:04 PM: Program started by Oliver.
+6:01:13 PM: Refreshed Ports.
+6:01:14 PM: Refreshed Ports.
+6:02:47 PM: Refreshed Ports.
+----------
+6:02:47 PM: Program started by Oliver.
+6:04:08 PM: Refreshed Ports.
+----------
+6:04:08 PM: Program started by Oliver.
+6:04:19 PM: Refreshed Ports.
+6:04:20 PM: Refreshed Ports.
+6:04:26 PM: Refreshed Ports.
+6:04:27 PM: Refreshed Ports.
+6:04:27 PM: Refreshed Ports.
+6:04:32 PM: Refreshed Ports.
+----------
+6:04:32 PM: Program started by Oliver.
+6:05:05 PM: Refreshed Ports.
+----------
+6:05:05 PM: Program started by Oliver.
+6:05:22 PM: Refreshed Ports.
+----------
+6:05:22 PM: Program started by Oliver.
+6:12:06 PM: Refreshed Ports.
+----------
+6:12:06 PM: Program started by Oliver.
+6:12:19 PM: Refreshed Ports.
+----------
+6:12:19 PM: Program started by Oliver.
+6:19:37 PM: Refreshed Ports.
+----------
+6:19:37 PM: Program started by Oliver.
+6:20:47 PM: Refreshed Ports.
+----------
+6:20:47 PM: Program started by Oliver.
+6:25:12 PM: Refreshed Ports.
+----------
+6:25:12 PM: Program started by Oliver.
+6:25:25 PM: Refreshed Ports.
+----------
+6:25:25 PM: Program started by Oliver.
+6:25:41 PM: Refreshed Ports.
+----------
+6:25:41 PM: Program started by Oliver.
+6:25:54 PM: Refreshed Ports.
+----------
+6:25:54 PM: Program started by Oliver.
+6:26:02 PM: Refreshed Ports.
+----------
+6:26:02 PM: Program started by Oliver.
+6:26:12 PM: Refreshed Ports.
+----------
+6:26:12 PM: Program started by Oliver.
+6:27:08 PM: Refreshed Ports.
+----------
+6:27:08 PM: Program started by Oliver.
+6:30:06 PM: Refreshed Ports.
+----------
+6:30:06 PM: Program started by Oliver.
+----------
+6:35:29 PM: Refreshed Ports.
+6:35:29 PM: Refreshed Ports.
+6:35:29 PM: Refreshed Ports.
+6:39:05 PM: Refreshed Ports.
+----------
+6:39:05 PM: Program started by Oliver.
+6:41:04 PM: Refreshed Ports.
+----------
+6:41:04 PM: Program started by Oliver.
+6:41:16 PM: Saved settings.
+6:42:49 PM: Refreshed Ports.
+----------
+6:42:49 PM: Program started by Oliver.
+6:42:59 PM: Saved settings.
+6:45:09 PM: Refreshed Ports.
+----------
+6:45:09 PM: Program started by Oliver.
+6:45:11 PM: Connecting, please wait.
+6:45:15 PM: COM5 has been opened with a baud rate of 9600.
+6:45:21 PM: Succesfully sent: (0x61, 0x10, 0x0A).
+7:04:34 PM: Connecting, please wait.
+7:04:36 PM: COM5 has been opened with a baud rate of 9600.
+7:04:47 PM: Tried to send invalid file.
+7:04:47 PM: Succesfully sent: (0x00, 0x00, 0x00).
+7:08:16 : Refreshed Ports.
+----------
+7:08:16 : Program started by Oliver.
+7:08:21 : Connecting, please wait.
+7:08:23 : COM5 has been opened with a baud rate of 9600.
+7:08:31 : Tried to send invalid file.
+7:08:31 : Succesfully sent: (0x00, 0x00, 0x00).
+7:08:39 : Disconnecting, please wait.
+7:08:39 : Connection lost. Please try reconnecting.
+7:10:02 : Refreshed Ports.
+----------
+7:10:02 : Program started by Oliver.
+7:10:07 : Connecting, please wait.
+7:10:09 : COM5 has been opened with a baud rate of 9600.
+7:10:38 : Tried to send invalid file.
+7:13:19 : Refreshed Ports.
+----------
+7:13:19 : Program started by Oliver.
+7:13:21 : Connecting, please wait.
+7:13:25 : COM5 has been opened with a baud rate of 9600.
+7:13:26 : Tried to send invalid file.
+7:13:40 : Refreshed Ports.
+----------
+7:13:40 : Program started by Oliver.
+7:13:42 : Connecting, please wait.
+7:13:44 : COM5 has been opened with a baud rate of 9600.
+7:21:01 : Refreshed Ports.
+----------
+7:21:01 : Program started by Oliver.
+7:21:05 : Connecting, please wait.
+7:21:06 : COM5 has been opened with a baud rate of 9600.
+7:23:42 : Refreshed Ports.
+----------
+7:23:42 : Program started by Oliver.
+7:23:46 : Connecting, please wait.
+7:23:48 : COM5 has been opened with a baud rate of 9600.
+7:23:51 : Succesfully sent: (0x00, 0x99, 0x00).
+7:24:27 : Succesfully sent: (0x00, 0x99, 0x00).
+7:24:47 : Succesfully sent: (0x77, 0x37).
+7:26:06 : Succesfully sent: (0x99, 0x37).

@@ -1,0 +1,27 @@
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.exe.config
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.exe
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.pdb
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.Form1.resources
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.Properties.Resources.resources
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.csproj.GenerateResource.Cache
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.exe
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.pdb
+c:\users\oliver\documents\visual studio 2015\Projects\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.csprojResolveAssemblyReference.cache
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.exe
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.pdb
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.exe.config
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.exe
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.pdb
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.csprojResolveAssemblyReference.cache
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.Form1.resources
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.Properties.Resources.resources
+C:\Users\Oliver\OneDrive for Business\Pro2\Kode og ting til koder\Csharp Kode\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.csproj.GenerateResource.Cache
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.exe.config
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.exe
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\bin\Debug\SerialTerminalApplication.pdb
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.Form1.resources
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.Properties.Resources.resources
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.csproj.GenerateResource.Cache
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.exe
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.pdb
+C:\Users\Oliver\Desktop\SerialTerminalApplication\SerialTerminalApplication\obj\Debug\SerialTerminalApplication.csprojResolveAssemblyReference.cache

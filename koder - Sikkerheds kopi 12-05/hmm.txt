@@ -1,0 +1,2 @@
+Måske vent til ny måling. (jep)
+Initialize DistL og DistH? (den indstiller selv laststate til lige, state til lige og statecount til 0)

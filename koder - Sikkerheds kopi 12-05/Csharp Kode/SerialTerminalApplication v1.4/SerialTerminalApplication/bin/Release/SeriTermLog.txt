@@ -1,0 +1,8 @@
+6:52:09 PM: Connecting, please wait.
+6:52:11 PM: COM5 has been opened with a baud rate of 9600.
+6:52:13 PM: Tried to send invalid file.
+6:52:13 PM: Succesfully sent: (0x00, 0x00, 0x00).
+6:52:16 PM: Succesfully sent: (0x55, 0x10, 0x3C).
+6:52:18 PM: Tried to send invalid file.
+6:52:18 PM: Succesfully sent: (0x00, 0x00, 0x00).
+6:52:23 PM: Connection lost. Please try reconnecting.

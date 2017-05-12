@@ -1,0 +1,53 @@
+----------
+4:34:25 PM
+aCONNECT,74DFBF947EE6,0
+0x55, 0x10, 0x3C, 
+
+----------
+4:47:29 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+4:58:50 PM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+5:07:15 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+5:07:24 PM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+5:12:49 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+6:07:02 PM
+System.ComponentModel.Container+Site
+
+----------
+6:08:49 PM
+System.ComponentModel.Container+Site
+
+----------
+6:09:31 PM
+Couldn't connect.The semaphore timeout period has expired.
+
+
+----------
+6:09:39 PM
+Couldn't connect. Retrying.The semaphore timeout period has expired.
+
+
+----------
+8:11:43 PM
+aCONNECT,74DFBF947EE6,0
+0x55, 0x10, 0x3C, 0x55, 0x10, 0x3C, 0xAA, 0x11, 0xFF, 0x55, 0x11, 0x35, 
+

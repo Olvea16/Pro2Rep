@@ -1,0 +1,4 @@
+- Guide til oprettelse af send-filer i oprettet send-fil
+
+- Tidsforsinkelse mellem bytes i telegram (sat i indstillinger)
+- Tidsforsinkelse mellem bytes i send-fil (sat efter bytes i fil, default er 0)
