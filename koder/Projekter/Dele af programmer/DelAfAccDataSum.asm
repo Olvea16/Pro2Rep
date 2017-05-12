@@ -3,56 +3,59 @@
 .DEF AccData = R21
 .DEF AccRefP = R25
 .DEF AccRefN = R26
+;"Nye"-------
 .DEF AccSumH = R27
 .DEF AccSumL = R28
+.DEF DivCounter = R29
+.EQU AntalDiv = 255
+;
 
 
-.EQU AccSumHAntalBit = 4
-.EQU AccSumAntalDiv = 15
+AccDiv:
+	CPI DivCounter, AntalDiv
+	BREQ SidsteGangAccSum
+		;Addere hvor mange gange der er blevet sumeret 
+		INC DivCounter
+		;
+		;Summere AccData
+		ADD AccSumL, AccData
+		LDI Temp1,0
+		ADC AccSumH, Temp1
+		;
+		JMP EndOfSum
 
-
-
-
-BRTC StateMachineEnd	;Hvis T flag ikke er sat hopper over denne del og state machine
-MOV Temp1, AccSumH
-ANDI Temp1, 0b11110000
-CPI Temp1, (AccSumAntalDiv<<AccSumHAntalBit)
-BREQ SidsteGangAccSum
-	;Addere hvor mange gange der er blevet sumeret 
-	LDI Temp2, 0b00010000
-	ADD Temp1, Temp2
-	ANDI AccSumH, 0b00001111
-	OR AccSumH, Temp1
-	;
-	;Summere AccData
-	ADD AccSumL, AccData
-	LDI Temp2,0
-	ADC AccSumH, Temp2
-	;
-	JMP EndOfSum
-
-SidsteGangAccSum:
-	;Summere AccData
-	ADD AccSumL, AccData
-	LDI Temp2,0
-	ADC AccSumH, Temp2
-	;
-	;Nulstiller antal div
-	ANDI AccSumH, 0b00001111
-	;
-	;Dividere med 16 for at få gennemsnit
-	LSR AccSumH
-	ROR AccSumL		;Div 2
-	LSR AccSumH
-	ROR AccSumL		;Div 4
-	LSR AccSumH
-	ROR AccSumL		;Div 8
-	LSR AccSumH
-	ROR AccSumL		;Div 16
-	;
-	RJMP StateMachine
-
+	SidsteGangAccSum:
+		;Summere AccData
+		ADD AccSumL, AccData
+		LDI Temp1,0
+		ADC AccSumH, Temp1
+		;
+		;Nulstiller antal div
+		LDI DivCounter, 0
+		;
+		;Dividere med 256 for at få gennemsnit af 256 Acc værdiger
+		LSR AccSumH
+		ROR AccSumL		;Div 2
+		LSR AccSumH
+		ROR AccSumL		;Div 4
+		LSR AccSumH
+		ROR AccSumL		;Div 8
+		LSR AccSumH
+		ROR AccSumL		;Div 16
+		LSR AccSumH
+		ROR AccSumL		;Div 32
+		LSR AccSumH
+		ROR AccSumL		;Div 64
+		LSR AccSumH
+		ROR AccSumL		;Div 128
+		LSR AccSumH
+		ROR AccSumL		;Div 256
+		;
+		MOV Ret1, AccSumL
+		LDI AccSumH, 0
+		LDI AccSumL, 0
 EndOfSum:
+RET 
 
 ;---------------------------------------------------------------------
 
