@@ -1,10 +1,11 @@
 
-AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm Fri May 12 14:56:22 2017
+AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm Fri May 12 17:32:37 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
 C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(12): warning: Register r26 already defined by the .DEF directive
 C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(13): warning: Register r27 already defined by the .DEF directive
 C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(14): warning: Register r28 already defined by the .DEF directive
+C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(15): warning: Register r29 already defined by the .DEF directive
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
                                  
                                  ;Register
@@ -836,6 +837,7 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm
                                  .DEF AccRefN = R26
                                  .DEF AccSumH = R27
                                  .DEF AccSumL = R28
+                                 .DEF AccCounter = R29
                                  
                                  ;Vi må ikke tage R30 og R31 hvis vi gerne vil have Z (X og Y er R26 til R29) Vi skal nok samle nogel af registeren og tjekker om vi ik kan bruge Temp og Ret. Evt lave Arg om til et register vi bruger til at give verdi til subrutiner med så EEPROMSave og L                                 EDVerdi kan komme der ind
                                  ;--------------------------
@@ -849,6 +851,9 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm
                                  ;---------------------------
                                  
                                  ;Data Space
+                                 
+                                 .EQU AccRefP_Konst = 0x8B
+                                 .EQU AccRefN_Konst = 0x7B
                                  
                                  .EQU Intype_DatSpac = 0x00
                                  .EQU InCmd_DatSpac = 0x01
@@ -877,6 +882,8 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm
                                  
                                  .EQU AccSumHAntalBit = 4
                                  .EQU AccSumAntalDiv = 15
+                                 
+                                 .EQU AccCount = 255
                                  ;---------------------------
                                  
                                  
@@ -886,10 +893,10 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm
 000000 c031                      .ORG 0			;Vektoradresse for Reset.
                                  RJMP Setup      ;Springer til setup.
                                  
-000020 940c 01cc                 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
+000020 940c 020f                 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
                                  JMP ADCDone
                                  
-00000e 940c 01d1                 .ORG OC1Aaddr	;Timer 1 compereA servisrutine
+00000e 940c 0214                 .ORG OC1Aaddr	;Timer 1 compereA servisrutine
                                  JMP Timer1CompereA	
                                  
                                  
@@ -915,11 +922,11 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm
                                  
 00003c e000                      ;Indhætning af verdier fra EEPROM
 00003d e010                      LDI Temp1, HIGH(EEPROM_AccRefP)
-00003e 940e 01a3                 LDI Temp2, LOW(EEPROM_AccRefP)
+00003e 940e 01c7                 LDI Temp2, LOW(EEPROM_AccRefP)
 000040 2f93                      CALL LoadFromEEPROM
 000041 e000                      MOV AccRefP, Ret1
 000042 e011                      LDI Temp1, HIGH(EEPROM_AccRefN)
-000043 940e 01a3                 LDI Temp2, LOW(EEPROM_AccRefN)
+000043 940e 01c7                 LDI Temp2, LOW(EEPROM_AccRefN)
 000045 2fa3                      CALL LoadFromEEPROM
                                  MOV AccRefN, Ret1
                                  ;---
@@ -968,454 +975,564 @@ C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm
 000066 9a36                      SEI	;Enabler interrupts. 
                                  SBI ADCSRA, ADSC		;Starter conversion (ADC)
                                  ;---------------------------------------
-000067 e596                      
-000068 e4ae                      LDI AccRefP, 86
-                                 LDI AccRefN, 78
+000067 e89b                      
+                                 LDI AccRefP, 0x8B
+000068 e7ab                      ;Midt = 84
+                                 LDI AccRefN, 0x7B
 000069 e32f                      
-00006a 940e 01aa                 LDI Arg,63
+00006a 940e 01ce                 LDI Arg,63
 00006c 94e8                      CALL SetLED
                                  CLT
                                  
                                  StraightInit:
-00006d e70d                      ;Set hastighed til 50
-00006e bd03                      LDI Temp1, 0x7D
-                                 OUT OCR2, Temp1
+00006d e0d0                      ;Set hastighed til 50
+00006e e32c                      LDI AccCounter,0
+00006f 940e 01af                 LDI Arg, 60
+000071 bd33                      CALL CalcOCR2
+                                 OUT OCR2, Ret1
                                  
                                  ;Sluk elektromagnet
                                  ;IN Temp1,PORTB
                                  ;ANDI Temp1,0b1111110
                                  ;OUT PORTB, Temp1
                                  
-00006f e32f                      ;Tænd hvidt lys
-000070 940e 01aa                 LDI Arg,0b111111
+000072 e32f                      ;Tænd hvidt lys
+000073 940e 01ce                 LDI Arg,0b111111
                                  CALL SetLED
                                  
-000072 9b5f                      Straight:
-000073 940c 008a                 SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-                                 JMP UAuto
-000075 1759                      ;Tester Accelerometerdata
-000076 f418                      CP AccData, AccRefP
-000077 175a                      BRSH TurnInit
-000078 f008                      CP AccData, AccRefN
-000079 cff8                      BRLO TurnInit
+                                 Straight:
+                                 ;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+                                 ;JMP UAuto
+                                 ;Tester Accelerometerdata
+000075 940e 01f0                 
+000077 3030                      CALL AccSumSub
+000078 f3e1                      CPI Ret1,0
+                                 BREQ Straight
+000079 1739                      
+00007a f418                      CP Ret1, AccRefP
+00007b 173a                      BRSH Turn1Tick
+00007c f030                      CP Ret1, AccRefN
+00007d cff7                      BRLO Turn2Tick
                                  RJMP Straight
                                  
-                                 TurnInit:
-00007a e500                      ;Set hastighed til 32
-00007b bd03                      LDI Temp1, 0x50
-                                 OUT OCR2, Temp1
+00007e 3fdf                      	Turn1Tick:
+00007f f440                      	CPI AccCounter, AccCount
+000080 95d3                      	BRSH Turn1Init
+000081 940c 0075                 	INC AccCounter
+                                 	JMP Straight
                                  
-00007c b308                      ;Tænd elektromagnet
-00007d 6001                      IN Temp1,PORTB
-00007e bb08                      ORI Temp1,0b00000001
-                                 OUT PORTB, Temp1
+000083 3fdf                      	Turn2Tick:
+000084 f4b8                      	CPI AccCounter, AccCount
+000085 95d3                      	BRSH Turn2Init
+000086 940c 0075                 	INC AccCounter
+                                 	JMP Straight
                                  
-00007f e12b                      ;Tænd gult lys
-000080 940e 01aa                 LDI Arg,0b011011
+                                 Turn1Init:
+000088 e0d0                      ;Set hastighed til 32
+000089 e220                      LDI AccCounter,0
+00008a 940e 01af                 LDI Arg, 32
+00008c bd33                      CALL CalcOCR2
+                                 OUT OCR2, Ret1
+                                 
+                                 ;Tænd elektromagnet
+                                 ;IN Temp1,PORTB
+                                 ;ORI Temp1,0b00000001
+                                 ;OUT PORTB, Temp1
+                                 
+00008d e023                      ;Tænd gult lys
+00008e 940e 01ce                 LDI Arg,0b000011
                                  CALL SetLED
                                  
-000082 9b5f                      Turn:
-000083 940c 008a                 SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-                                 JMP UAuto
-000085 1759                      ;Tester Accelerometerdata
-000086 f3d8                      CP AccData, AccRefP
-000087 175a                      BRLO Turn
-000088 f7c8                      CP AccData, AccRefN
-000089 cfe3                      BRSH Turn
-                                 RJMP StraightInit
+                                 Turn1:
+                                 ;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+                                 ;JMP UAuto
+                                 ;Tester Accelerometerdata
+000090 940e 01f0                 
+000092 3030                      CALL AccSumSub
+000093 f3e1                      CPI Ret1,0
+                                 BREQ Turn1
+000094 3836                      
+000095 f7d0                      CPI Ret1, (AccRefP_Konst-5)
+000096 c000                      BRSH Turn1
+                                 RJMP StraightTick1
+                                 
+000097 3fdf                      	StraightTick1:
+000098 f6a0                      		CPI AccCounter, AccCount
+000099 95d3                      		BRSH StraightInit
+00009a 940c 0090                 		INC AccCounter
+                                 		JMP Turn1
+                                 
+                                 
+                                 Turn2Init:
+00009c e0d0                      ;Set hastighed til 32
+00009d e500                      LDI AccCounter,0
+00009e bd03                      LDI Temp1, 0x50
+                                 OUT OCR2, Temp1
+                                 
+                                 ;Tænd elektromagnet
+                                 ;IN Temp1,PORTB
+                                 ;ORI Temp1,0b00000001
+                                 ;OUT PORTB, Temp1
+                                 
+00009f e128                      ;Tænd gult lys
+0000a0 940e 01ce                 LDI Arg,0b011000
+                                 CALL SetLED
+                                 
+                                 Turn2:
+                                 ;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+                                 ;JMP UAuto
+                                 ;Tester Accelerometerdata
+0000a2 940e 01f0                 
+0000a4 3030                      CALL AccSumSub
+0000a5 f3e1                      CPI Ret1,0
+                                 BREQ Turn2
+0000a6 3832                      
+0000a7 f3d0                      CPI Ret1, (AccRefN_Konst+7)
+0000a8 c000                      BRLO Turn2
+                                 RJMP StraightTick2
+                                 
+0000a9 3fdf                      	StraightTick2:
+0000aa f610                      		CPI AccCounter, AccCount
+0000ab 95d3                      		BRSH StraightInit
+0000ac 940c 00a2                 		INC AccCounter
+                                 		JMP Turn2
+                                 
                                  
                                  UAuto:
-                                 
-                                 
                                  StartOfProto:
-00008a 9b5f                      
-00008b 940c 0110                 SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-00008d b14c                      JMP EndOfProto		;Hvis RXC er 0, skal programmet hoppe over telegramfortolkningen.
+0000ae 9b5f                      
+0000af 940c 0134                 SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+0000b1 b14c                      JMP EndOfProto		;Hvis RXC er 0, skal programmet hoppe over telegramfortolkningen.
                                  IN InBesked,UDR		;Hvis RXC er 1, skal programmet læse og fortolke dataen i UDR.
                                  
-00008e 9130 0000                 TypeCheck:
-000090 3030                      	LDS Ret1, Intype_DatSpac
-000091 f421                      	CPI Ret1,0x00	;Tjekker om InType er tom.
-000092 940e 015f                 	BRNE CmdCheck	;Hvis InType ikke er tom, hopper programmet til CmdCheck.
-000094 940c 0110                 	CALL IsType		;Hvis InType er tom, tjekker programmet om den modtagne besked i InBesked er en type med subroutinen IsType.
+0000b2 9130 0000                 TypeCheck:
+0000b4 3030                      	LDS Ret1, Intype_DatSpac
+0000b5 f421                      	CPI Ret1,0x00	;Tjekker om InType er tom.
+0000b6 940e 0183                 	BRNE CmdCheck	;Hvis InType ikke er tom, hopper programmet til CmdCheck.
+0000b8 940c 0134                 	CALL IsType		;Hvis InType er tom, tjekker programmet om den modtagne besked i InBesked er en type med subroutinen IsType.
                                  	JMP EndOfProto	;Derefter hopper programmet videre til efter telegramfortolkningen og fortsætter i næste omgang i main-løkken.
                                  
-000096 9130 0001                 CmdCheck:
-000098 3030                      	LDS Ret1, InCmd_DatSpac
-000099 f4e9                      	CPI Ret1,0x00	;Tjekker om InCmd er tom.
-00009a 940e 016c                 	BRNE DataCheckInter	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
-00009c 9130 0000                 	CALL IsCmd		;Hvis InCmd derimod er tom, tjekker programmet om den modtagne besked i InBesked er en kommmando med subroutinen IsCom.
-00009e 3a3a                      	LDS Ret1, Intype_DatSpac
-00009f f0c9                      	CPI Ret1, Proto_GET	;Derefter sammenligner programmet InType, altså telegrammets type, med 0xAA, altså et 'get'-telegram.
+0000ba 9130 0001                 CmdCheck:
+0000bc 3030                      	LDS Ret1, InCmd_DatSpac
+0000bd f4e9                      	CPI Ret1,0x00	;Tjekker om InCmd er tom.
+0000be 940e 0190                 	BRNE DataCheckInter	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
+0000c0 9130 0000                 	CALL IsCmd		;Hvis InCmd derimod er tom, tjekker programmet om den modtagne besked i InBesked er en kommmando med subroutinen IsCom.
+0000c2 3a3a                      	LDS Ret1, Intype_DatSpac
+0000c3 f0c9                      	CPI Ret1, Proto_GET	;Derefter sammenligner programmet InType, altså telegrammets type, med 0xAA, altså et 'get'-telegram.
                                  	BREQ IsGet		;Hvis telegramtypen er get, hopper programmet til IsGet.
                                  
                                  	;Indsæt nye typer over dette punkt.
                                  	
-0000a0 9130 0001                 					;Hvis typen ikke er nogen af de ovenstående, antager programmet at typen er 0x55, altså et 'set'-telegram. 
-0000a2 3135                      	LDS Ret1, InCmd_DatSpac
-0000a3 f079                      	CPI Ret1, Proto_PWMStop
-0000a4 3130                      	BREQ CmdCheck_PWMStop
-0000a5 f189                      	CPI Ret1, Proto_Start	;Programmet sammenligner telegrammets kommando med 0x10, altså 'start' eller 'hastighed'.
-0000a6 3132                      	BREQ EndOfProtoInter	;Hvis kommandoen er 0x10, hopper programmet til slutningen af protokollen, så dataen til telegrammet 0x55, 0x10 kan hentes i næste omgang i løkken.
-0000a7 f179                      	CPI Ret1, Proto_PWMPre	;Programmet sammenligner telegrammets kommando med 0x12, altså PWM'ens prescaler.
-0000a8 3133                      	BREQ EndOfProtoInter ;Hvis kommandoen er 0x12, hopper programmet til slutningen af protokollen, så dataen til telegrammet 0x55, 0x12 kan hentes i næste omgang i løkken.
-0000a9 f169                      	CPI Ret1, Proto_AccRef
-0000aa 3134                      	BREQ EndOfProtoInter
-0000ab f159                      	CPI Ret1, Proto_RGBLED
+0000c4 9130 0001                 					;Hvis typen ikke er nogen af de ovenstående, antager programmet at typen er 0x55, altså et 'set'-telegram. 
+0000c6 3135                      	LDS Ret1, InCmd_DatSpac
+0000c7 f079                      	CPI Ret1, Proto_PWMStop
+0000c8 3130                      	BREQ CmdCheck_PWMStop
+0000c9 f189                      	CPI Ret1, Proto_Start	;Programmet sammenligner telegrammets kommando med 0x10, altså 'start' eller 'hastighed'.
+0000ca 3132                      	BREQ EndOfProtoInter	;Hvis kommandoen er 0x10, hopper programmet til slutningen af protokollen, så dataen til telegrammet 0x55, 0x10 kan hentes i næste omgang i løkken.
+0000cb f179                      	CPI Ret1, Proto_PWMPre	;Programmet sammenligner telegrammets kommando med 0x12, altså PWM'ens prescaler.
+0000cc 3133                      	BREQ EndOfProtoInter ;Hvis kommandoen er 0x12, hopper programmet til slutningen af protokollen, så dataen til telegrammet 0x55, 0x12 kan hentes i næste omgang i løkken.
+0000cd f169                      	CPI Ret1, Proto_AccRef
+0000ce 3134                      	BREQ EndOfProtoInter
+0000cf f159                      	CPI Ret1, Proto_RGBLED
                                  	BREQ EndOfProtoInter
                                  	;Indsæt nye kommandoer over dette punkt. 
                                  	
-0000ac 940e 0112                 					;Hvis kommandoen er ingen af de ovenstående, antager programmet at kommandoen er 0x11, altså kommandoen 'stop'.
-0000ae e120                      	CALL StopCar	;Kalder subroutinen StopCar, der sætter PWM'en til 0.
-0000af 940e 01b6                 	LDI Arg, 0x10	
-0000b1 940c 010e                 	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
+0000d0 940e 0136                 					;Hvis kommandoen er ingen af de ovenstående, antager programmet at kommandoen er 0x11, altså kommandoen 'stop'.
+0000d2 e120                      	CALL StopCar	;Kalder subroutinen StopCar, der sætter PWM'en til 0.
+0000d3 940e 01da                 	LDI Arg, 0x10	
+0000d5 940c 0132                 	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
                                  	JMP CleanupEndOfProto	;Hopper til efter telegramfortolkningen.
                                  
-0000b3 940e 0112                 	CmdCheck_PWMStop:
-0000b5 940c 010e                 		CALL StopCar
+0000d7 940e 0136                 	CmdCheck_PWMStop:
+0000d9 940c 0132                 		CALL StopCar
                                  		JMP CleanupEndOfProto
                                  
-0000b7 940c 00dd                 DataCheckInter:
+0000db 940c 0101                 DataCheckInter:
                                  JMP DataCheck
                                  
-0000b9 9130 0001                 	IsGet:
-0000bb 3132                      		LDS Ret1, InCmd_DatSpac
-0000bc f051                      		CPI Ret1, Proto_PWMPre
-0000bd 3133                      		BREQ CmdCheck_IsGet_IsFreq
-0000be f0c1                      		CPI Ret1, Proto_AccRef
-0000bf 3134                      		BREQ EndOfProtoInter
-0000c0 f051                      		CPI Ret1, Proto_RGBLED
-0000c1 3130                      		BREQ CmdCheck_IsGet_IsRGBLED
-0000c2 f4b1                      		CPI Ret1, Proto_Start
-0000c3 940e 0119                 		BRNE Error			;Sætter fejl hvis typen 0x55 ikke er sat.
-0000c5 940c 010e                 		CALL SendSpeed
+0000dd 9130 0001                 	IsGet:
+0000df 3132                      		LDS Ret1, InCmd_DatSpac
+0000e0 f051                      		CPI Ret1, Proto_PWMPre
+0000e1 3133                      		BREQ CmdCheck_IsGet_IsFreq
+0000e2 f0c1                      		CPI Ret1, Proto_AccRef
+0000e3 3134                      		BREQ EndOfProtoInter
+0000e4 f051                      		CPI Ret1, Proto_RGBLED
+0000e5 3130                      		BREQ CmdCheck_IsGet_IsRGBLED
+0000e6 f4b1                      		CPI Ret1, Proto_Start
+0000e7 940e 013d                 		BRNE Error			;Sætter fejl hvis typen 0x55 ikke er sat.
+0000e9 940c 0132                 		CALL SendSpeed
                                  		JMP CleanupEndOfProto
                                  
-0000c7 940e 0124                 		CmdCheck_IsGet_IsFreq:
-0000c9 940c 010e                 			CALL SendPrescaler
+0000eb 940e 0148                 		CmdCheck_IsGet_IsFreq:
+0000ed 940c 0132                 			CALL SendPrescaler
                                  			JMP CleanupEndOfProto
                                  
-0000cb 940e 01c8                 		CmdCheck_IsGet_IsRGBLED:
-0000cd eb2b                      			CALL GetLED
-0000ce 940e 0115                 			LDI Arg,Proto_Reply
-0000d0 2f23                      			CALL Send
-0000d1 940e 0115                 			MOV Arg,Ret1
-0000d3 940c 010e                 			CALL Send
+0000ef 940e 01ec                 		CmdCheck_IsGet_IsRGBLED:
+0000f1 eb2b                      			CALL GetLED
+0000f2 940e 0139                 			LDI Arg,Proto_Reply
+0000f4 2f23                      			CALL Send
+0000f5 940e 0139                 			MOV Arg,Ret1
+0000f7 940c 0132                 			CALL Send
                                  			JMP CleanupEndOfProto
                                  
-0000d5 940c 00dd                 ;Dette er en mellem station til EndOfProto
+0000f9 940c 0101                 ;Dette er en mellem station til EndOfProto
                                  JMP	SkipEndOfProtoInter
-0000d7 940c 0110                 EndOfProtoInter:
+0000fb 940c 0134                 EndOfProtoInter:
                                  JMP EndOfProto
-0000d9 940e 0181                 Error:
+0000fd 940e 01a5                 Error:
                                  	CALL Cleanup
-0000db 940c 0110                 	;Indsæt hvad der ellers skal ske i Error her 
+0000ff 940c 0134                 	;Indsæt hvad der ellers skal ske i Error her 
                                  	JMP EndOfProto
                                  SkipEndOfProtoInter:
                                  
                                  DataCheck:
-0000dd 9130 0000                 	;MOV InData,InBesked Slettes
-0000df 3a3a                      	LDS Ret1, Intype_DatSpac
-0000e0 f099                      	CPI Ret1, Proto_GET
-0000e1 3535                      	BREQ GetWithData
-0000e2 f7b1                      	CPI Ret1, Proto_SET
-0000e3 9130 0001                 	BRNE Error
-0000e5 3132                      	LDS Ret1, InCmd_DatSpac
-0000e6 f0a9                      	CPI Ret1, Proto_PWMPre
-0000e7 3133                      	BREQ SetFrequency
-0000e8 f0e1                      	CPI Ret1, Proto_AccRef
-0000e9 3134                      	BREQ SetAcceleration
-0000ea f0f1                      	CPI Ret1, Proto_RGBLED
-0000eb 3130                      	BREQ SetRGBLED
-0000ec f761                      	CPI Ret1, Proto_Start
-0000ed 940e 0120                 	BRNE Error
-0000ef e026                      	CALL SetSpeed
-0000f0 940e 01b6                 	LDI Arg, CmdIn_Start_LED	
-0000f2 940c 010e                 	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
+000101 9130 0000                 	;MOV InData,InBesked Slettes
+000103 3a3a                      	LDS Ret1, Intype_DatSpac
+000104 f099                      	CPI Ret1, Proto_GET
+000105 3535                      	BREQ GetWithData
+000106 f7b1                      	CPI Ret1, Proto_SET
+000107 9130 0001                 	BRNE Error
+000109 3132                      	LDS Ret1, InCmd_DatSpac
+00010a f0a9                      	CPI Ret1, Proto_PWMPre
+00010b 3133                      	BREQ SetFrequency
+00010c f0e1                      	CPI Ret1, Proto_AccRef
+00010d 3134                      	BREQ SetAcceleration
+00010e f0f1                      	CPI Ret1, Proto_RGBLED
+00010f 3130                      	BREQ SetRGBLED
+000110 f761                      	CPI Ret1, Proto_Start
+000111 940e 0144                 	BRNE Error
+000113 e026                      	CALL SetSpeed
+000114 940e 01da                 	LDI Arg, CmdIn_Start_LED	
+000116 940c 0132                 	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
                                  	JMP CleanupEndOfProto
                                  
-0000f4 9130 0001                 	GetWithData:
-0000f6 3133                      		LDS Ret1, InCmd_DatSpac
-0000f7 f709                      		CPI Ret1, Proto_AccRef
-0000f8 940e 014f                 		BRNE Error
-0000fa 940c 010e                 		CALL SendAccRef
+000118 9130 0001                 	GetWithData:
+00011a 3133                      		LDS Ret1, InCmd_DatSpac
+00011b f709                      		CPI Ret1, Proto_AccRef
+00011c 940e 0173                 		BRNE Error
+00011e 940c 0132                 		CALL SendAccRef
                                  		JMP CleanupEndOfProto
                                  
-0000fc 3048                      	SetFrequency:
-0000fd f6dc                      		CPI InBesked,8
-0000fe 940e 012d                 		BRGE Error
-000100 e028                      		CALL SetPrescaler
-000101 940e 01b6                 		LDI Arg, CmdIn_PWMPrescaler_LED	
-000103 940c 010e                 		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
+000120 3048                      	SetFrequency:
+000121 f6dc                      		CPI InBesked,8
+000122 940e 0151                 		BRGE Error
+000124 e028                      		CALL SetPrescaler
+000125 940e 01da                 		LDI Arg, CmdIn_PWMPrescaler_LED	
+000127 940c 0132                 		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
                                  		JMP CleanupEndOfProto
                                  
-000105 940e 0132                 	SetAcceleration:
-000107 940c 010e                 		CALL SetAccRef
+000129 940e 0156                 	SetAcceleration:
+00012b 940c 0132                 		CALL SetAccRef
                                  		JMP CleanupEndOfProto
                                  
-000109 2f24                      	SetRGBLED:
-00010a 940e 01b6                 		MOV  Arg, InBesked
-00010c 940c 010e                 		CALL LED1SekSet
+00012d 2f24                      	SetRGBLED:
+00012e 940e 01da                 		MOV  Arg, InBesked
+000130 940c 0132                 		CALL LED1SekSet
                                  		JMP CleanupEndOfProto
                                  
                                  
-00010e 940e 0181                 CleanupEndOfProto:
+000132 940e 01a5                 CleanupEndOfProto:
                                  	CALL Cleanup
                                  EndOfProto:
-000110 940c 008a                 
+000134 940c 00ae                 
                                  JMP UAuto	;Hopper til starten af main
                                  
                                  ;Subroutines---------------------------------------
-000112 e000                      StopCar:
-000113 bd03                      	LDI Temp1,0			;
-000114 9508                      	OUT OCR2,Temp1		;Sætter bilens hastighed til 0%
+000136 e000                      StopCar:
+000137 bd03                      	LDI Temp1,0			;
+000138 9508                      	OUT OCR2,Temp1		;Sætter bilens hastighed til 0%
                                  	RET
                                  
-000115 9b5d                      Send:
-000116 cffe                      	SBIS UCSRA,UDRE		;Tjekker om der stadig er noget der er ved at blive sent ved at se om UDRE er "1" (hvilket den bliver når UDR (det register som indeholder der der bliver sendt) er tom)
-000117 b92c                      	RJMP Send			;Hvis UDRE er "0", hopper den tilbage til Send:, og dermed venter på at UDR er tom.
-000118 9508                      	OUT UDR,Arg		;Lægger Arg ind i den tomme UDR. Dermed vil Arg blive sendt.
+000139 9b5d                      Send:
+00013a cffe                      	SBIS UCSRA,UDRE		;Tjekker om der stadig er noget der er ved at blive sent ved at se om UDRE er "1" (hvilket den bliver når UDR (det register som indeholder der der bliver sendt) er tom)
+00013b b92c                      	RJMP Send			;Hvis UDRE er "0", hopper den tilbage til Send:, og dermed venter på at UDR er tom.
+00013c 9508                      	OUT UDR,Arg		;Lægger Arg ind i den tomme UDR. Dermed vil Arg blive sendt.
                                  	RET					;Subroutinen er færdig, returnerer til adressen efter subroutinen blev kaldet fra. 
                                  
-000119 eb2b                      SendSpeed:
-00011a 940e 0115                 	LDI Arg, Proto_REPLY	;
-00011c 2f2c                      	CALL Send			;Sender Replytypen (0xBB)
-00011d 940e 0115                 	MOV Arg,AccSumL		;
-00011f 9508                      	CALL Send			;Sender den nuværende hastighed 
+00013d eb2b                      SendSpeed:
+00013e 940e 0139                 	LDI Arg, Proto_REPLY	;
+000140 2f25                      	CALL Send			;Sender Replytypen (0xBB)
+000141 940e 0139                 	MOV Arg,AccData		;
+000143 9508                      	CALL Send			;Sender den nuværende hastighed 
                                  	RET
                                  
-000120 940e 018b                 SetSpeed:
-000122 bd33                      	CALL CalcOCR2		;Kalder en subrutine der udregner OCR2 (Dens resutat ligger i Ret1)
-000123 9508                      	OUT OCR2,Ret1		;Sætter hastigheden på bilen til resultatet fra CalcOCR2.
+000144 940e 01af                 SetSpeed:
+000146 bd33                      	CALL CalcOCR2		;Kalder en subrutine der udregner OCR2 (Dens resutat ligger i Ret1)
+000147 9508                      	OUT OCR2,Ret1		;Sætter hastigheden på bilen til resultatet fra CalcOCR2.
                                  	RET
                                  
-000124 eb2b                      SendPrescaler:
-000125 940e 0115                 	LDI Arg, Proto_REPLY
-000127 b505                      	CALL Send
-000128 7007                      	IN Temp1,TCCR2
-000129 2f20                      	ANDI Temp1,0b00000111
-00012a 940e 0115                 	MOV Arg,Temp1
-00012c 9508                      	CALL Send
+000148 eb2b                      SendPrescaler:
+000149 940e 0139                 	LDI Arg, Proto_REPLY
+00014b b505                      	CALL Send
+00014c 7007                      	IN Temp1,TCCR2
+00014d 2f20                      	ANDI Temp1,0b00000111
+00014e 940e 0139                 	MOV Arg,Temp1
+000150 9508                      	CALL Send
                                  	RET
                                  
-00012d b505                      SetPrescaler:
-00012e 7f08                      	IN Temp1,TCCR2
-00012f 2b04                      	ANDI Temp1,0b11111000
-000130 bd05                      	OR Temp1,InBesked
-000131 9508                      	OUT TCCR2,Temp1
+000151 b505                      SetPrescaler:
+000152 7f08                      	IN Temp1,TCCR2
+000153 2b04                      	ANDI Temp1,0b11111000
+000154 bd05                      	OR Temp1,InBesked
+000155 9508                      	OUT TCCR2,Temp1
                                  	RET
                                  
                                  
-000132 fd40                      SetAccRef:
-000133 940c 0142                 	SBRC InBesked,0
+000156 fd40                      SetAccRef:
+000157 940c 0166                 	SBRC InBesked,0
                                  	JMP SetAccRefN
-000135 9546                      	;AccRefP
-000136 e70f                      		LSR InBesked
-000137 0f40                      		LDI Temp1,127
-000138 2f94                      		ADD InBesked,Temp1
-000139 2f29                      		MOV AccRefP, InBesked
-00013a e000                      		MOV Arg, AccRefP
-00013b e010                      		LDI Temp1, HIGH(EEPROM_AccRefP)
-00013c 940e 0199                 		LDI Temp2, LOW(EEPROM_AccRefP)
-00013e e024                      		CALL SaveInEEPROM
-00013f 940e 01b6                 		LDI Arg, CmdIn_AccRefP_LED	
-000141 9508                      		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefP
+000159 9546                      	;AccRefP
+00015a e70f                      		LSR InBesked
+00015b 0f40                      		LDI Temp1,127
+00015c 2f94                      		ADD InBesked,Temp1
+00015d 2f29                      		MOV AccRefP, InBesked
+00015e e000                      		MOV Arg, AccRefP
+00015f e010                      		LDI Temp1, HIGH(EEPROM_AccRefP)
+000160 940e 01bd                 		LDI Temp2, LOW(EEPROM_AccRefP)
+000162 e024                      		CALL SaveInEEPROM
+000163 940e 01da                 		LDI Arg, CmdIn_AccRefP_LED	
+000165 9508                      		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefP
                                  	RET
                                  
-000142 9546                      	SetAccRefN:
-000143 e70f                      		LSR InBesked
-000144 1b04                      		LDI Temp1,127
-000145 2fa0                      		SUB Temp1,InBesked
-000146 2f2a                      		MOV AccRefN, Temp1
-000147 e000                      		MOV Arg, AccRefN
-000148 e011                      		LDI Temp1, HIGH(EEPROM_AccRefN)
-000149 940e 0199                 		LDI Temp2, LOW(EEPROM_AccRefN)
-00014b e025                      		CALL SaveInEEPROM
-00014c 940e 01b6                 		LDI Arg, CmdIn_AccRefN_LED	
-00014e 9508                      		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefN
+000166 9546                      	SetAccRefN:
+000167 e70f                      		LSR InBesked
+000168 1b04                      		LDI Temp1,127
+000169 2fa0                      		SUB Temp1,InBesked
+00016a 2f2a                      		MOV AccRefN, Temp1
+00016b e000                      		MOV Arg, AccRefN
+00016c e011                      		LDI Temp1, HIGH(EEPROM_AccRefN)
+00016d 940e 01bd                 		LDI Temp2, LOW(EEPROM_AccRefN)
+00016f e025                      		CALL SaveInEEPROM
+000170 940e 01da                 		LDI Arg, CmdIn_AccRefN_LED	
+000172 9508                      		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefN
                                  	RET
                                  
-00014f 3041                      SendAccRef:
-000150 f039                      	CPI InBesked,1
-000151 eb2b                      	BREQ SendAccRefN
-000152 940e 0115                 	LDI Arg, Proto_REPLY
-000154 2f29                      	CALL Send
-000155 940e 0115                 	MOV Arg, AccRefP
-000157 9508                      	CALL Send
+000173 3041                      SendAccRef:
+000174 f039                      	CPI InBesked,1
+000175 eb2b                      	BREQ SendAccRefN
+000176 940e 0139                 	LDI Arg, Proto_REPLY
+000178 2f29                      	CALL Send
+000179 940e 0139                 	MOV Arg, AccRefP
+00017b 9508                      	CALL Send
                                  	RET
                                  
-000158 eb2b                      	SendAccRefN:
-000159 940e 0115                 	LDI Arg, Proto_REPLY
-00015b 2f2a                      	CALL Send
-00015c 940e 0115                 	MOV Arg, AccRefN
-00015e 9508                      	CALL Send
+00017c eb2b                      	SendAccRefN:
+00017d 940e 0139                 	LDI Arg, Proto_REPLY
+00017f 2f2a                      	CALL Send
+000180 940e 0139                 	MOV Arg, AccRefN
+000182 9508                      	CALL Send
                                  	RET
                                  
-00015f 3545                      IsType:
-000160 f041                      	CPI InBesked, Proto_SET
-000161 3a4a                      	BREQ wasType
-000162 f031                      	CPI InBesked, Proto_GET
-000163 3b4b                      	BREQ wasType
-000164 f021                      	CPI InBesked, Proto_REPLY
+000183 3545                      IsType:
+000184 f041                      	CPI InBesked, Proto_SET
+000185 3a4a                      	BREQ wasType
+000186 f031                      	CPI InBesked, Proto_GET
+000187 3b4b                      	BREQ wasType
+000188 f021                      	CPI InBesked, Proto_REPLY
                                  	BREQ wasType
                                  	
                                  	;INDSÆT NYE TELEGRAMTYPER
-000165 e020                      
-000166 9320 0000                 	LDI Arg,0
-000168 9508                      	STS Intype_DatSpac, Arg
+000189 e020                      
+00018a 9320 0000                 	LDI Arg,0
+00018c 9508                      	STS Intype_DatSpac, Arg
                                  	RET
                                  
                                  	wasType:
-000169 9340 0000                 		;MOV InType,InBesked
-00016b 9508                      		STS Intype_DatSpac, InBesked
+00018d 9340 0000                 		;MOV InType,InBesked
+00018f 9508                      		STS Intype_DatSpac, InBesked
                                  		RET
                                  
-00016c 3140                      IsCmd:
-00016d f081                      	CPI InBesked, Proto_Start		;0x10
-00016e 3141                      	BREQ wasCommand
-00016f f071                      	CPI InBesked, Proto_Stop		;0x11
-000170 3142                      	BREQ wasCommand
-000171 f061                      	CPI InBesked, Proto_PWMPre		;0x12
-000172 3143                      	BREQ wasCommand
-000173 f051                      	CPI InBesked, Proto_AccRef		;0x13
-000174 3144                      	BREQ wasCommand
-000175 f041                      	CPI InBesked, Proto_RGBLED		;0x14
-000176 3145                      	BREQ wasCommand
-000177 f031                      	CPI InBesked, Proto_PWMStop		;0x15
-000178 3146                      	BREQ wasCommand
-000179 f021                      	CPI InBesked, Proto_Track		;0x16
+000190 3140                      IsCmd:
+000191 f081                      	CPI InBesked, Proto_Start		;0x10
+000192 3141                      	BREQ wasCommand
+000193 f071                      	CPI InBesked, Proto_Stop		;0x11
+000194 3142                      	BREQ wasCommand
+000195 f061                      	CPI InBesked, Proto_PWMPre		;0x12
+000196 3143                      	BREQ wasCommand
+000197 f051                      	CPI InBesked, Proto_AccRef		;0x13
+000198 3144                      	BREQ wasCommand
+000199 f041                      	CPI InBesked, Proto_RGBLED		;0x14
+00019a 3145                      	BREQ wasCommand
+00019b f031                      	CPI InBesked, Proto_PWMStop		;0x15
+00019c 3146                      	BREQ wasCommand
+00019d f021                      	CPI InBesked, Proto_Track		;0x16
                                  	BREQ wasCommand
                                  
                                  	;INDSÆT NYE TELEGRAMKOMMANDOER.
-00017a e020                      
-00017b 9320 0001                 	LDI Arg,0
-00017d 9508                      	STS InCmd_DatSpac, Arg
+00019e e020                      
+00019f 9320 0001                 	LDI Arg,0
+0001a1 9508                      	STS InCmd_DatSpac, Arg
                                  	RET
                                  
-00017e 9340 0001                 	wasCommand:
-000180 9508                      		STS InCmd_DatSpac, InBesked
+0001a2 9340 0001                 	wasCommand:
+0001a4 9508                      		STS InCmd_DatSpac, InBesked
                                  		RET
                                  
                                  Cleanup:
-000181 e020                      	;Renser Intype
-000182 9320 0000                 	LDI Arg,0
+0001a5 e020                      	;Renser Intype
+0001a6 9320 0000                 	LDI Arg,0
                                  	STS Intype_DatSpac, Arg
-000184 9320 0001                 	;Renser InCmd
+0001a8 9320 0001                 	;Renser InCmd
                                  	STS InCmd_DatSpac, Arg
-000186 e040                      	;Renser InBesked
-000187 e000                      	LDI InBesked,0
-000188 e010                      	LDI Temp1, 0
-000189 e030                      	LDI Temp2, 0
+0001aa e040                      	;Renser InBesked
+0001ab e000                      	LDI InBesked,0
+0001ac e010                      	LDI Temp1, 0
+0001ad e030                      	LDI Temp2, 0
                                  	LDI Ret1, 0
                                  
                                  	;Hvis der er flere der skal renses så ind her
-00018a 9508                      
+0001ae 9508                      
                                  	RET
                                  
-00018b 2f04                      CalcOCR2:
-00018c 2f30                      	MOV Temp1,InBesked
-00018d 0f30                      	MOV Ret1,Temp1
-00018e 9506                      	ADD Ret1,Temp1
-00018f 0f30                      	LSR Temp1
-000190 9506                      	ADD Ret1,Temp1
-000191 9506                      	LSR Temp1
-000192 9506                      	LSR Temp1
-000193 0f30                      	LSR Temp1
-000194 9506                      	ADD Ret1,Temp1
-000195 1b30                      	LSR Temp1
-000196 9506                      	SUB Ret1,Temp1
-000197 0f30                      	LSR Temp1
-000198 9508                      	ADD Ret1,Temp1
+0001af 2f02                      CalcOCR2:
+0001b0 2f30                      	MOV Temp1,Arg
+0001b1 0f30                      	MOV Ret1,Temp1
+0001b2 9506                      	ADD Ret1,Temp1
+0001b3 0f30                      	LSR Temp1
+0001b4 9506                      	ADD Ret1,Temp1
+0001b5 9506                      	LSR Temp1
+0001b6 9506                      	LSR Temp1
+0001b7 0f30                      	LSR Temp1
+0001b8 9506                      	ADD Ret1,Temp1
+0001b9 1b30                      	LSR Temp1
+0001ba 9506                      	SUB Ret1,Temp1
+0001bb 0f30                      	LSR Temp1
+0001bc 9508                      	ADD Ret1,Temp1
                                  	RET
                                  
                                  
-000199 99e1                      SaveInEEPROM:
-00019a cffe                      	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
-00019b bb0f                      	RJMP SaveInEEPROM
-00019c bb1e                      	OUT EEARH, Temp1		;Sætter lokationen i EEPROM 
-00019d bb2d                      	OUT EEARL, Temp2		;Sætter lokationen i EEPROM
-00019e 94f8                      	OUT EEDR, Arg	;Giver EEPROM den som skal gemmes
-00019f 9ae2                      	CLI						;Stoper for intarups da de næste to ikke må forstyres 
-0001a0 9ae1                      	SBI EECR, EEMWE			;Sætter Master Write til
-0001a1 9478                      	SBI EECR, EEWE			;Sætter write igang 
-0001a2 9508                      	SEI						;Starter intarups igen 
+0001bd 99e1                      SaveInEEPROM:
+0001be cffe                      	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
+0001bf bb0f                      	RJMP SaveInEEPROM
+0001c0 bb1e                      	OUT EEARH, Temp1		;Sætter lokationen i EEPROM 
+0001c1 bb2d                      	OUT EEARL, Temp2		;Sætter lokationen i EEPROM
+0001c2 94f8                      	OUT EEDR, Arg	;Giver EEPROM den som skal gemmes
+0001c3 9ae2                      	CLI						;Stoper for intarups da de næste to ikke må forstyres 
+0001c4 9ae1                      	SBI EECR, EEMWE			;Sætter Master Write til
+0001c5 9478                      	SBI EECR, EEWE			;Sætter write igang 
+0001c6 9508                      	SEI						;Starter intarups igen 
                                  RET
                                  
                                  
-0001a3 99e1                      LoadFromEEPROM:
-0001a4 cffe                      	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
-0001a5 bb0f                      	RJMP LoadFromEEPROM
-0001a6 bb1e                      	OUT EEARH, Temp1		;Sætter lokationen i EEPROM 
-0001a7 9ae0                      	OUT EEARL, Temp2		;Sætter lokationen i EEPROM
-0001a8 b33d                      	SBI EECR, EERE			;Sætter Read til 
-0001a9 9508                      	IN Ret1, EEDR		;Henter hvad der er i EEPROM ned i Ret1
+0001c7 99e1                      LoadFromEEPROM:
+0001c8 cffe                      	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
+0001c9 bb0f                      	RJMP LoadFromEEPROM
+0001ca bb1e                      	OUT EEARH, Temp1		;Sætter lokationen i EEPROM 
+0001cb 9ae0                      	OUT EEARL, Temp2		;Sætter lokationen i EEPROM
+0001cc b33d                      	SBI EECR, EERE			;Sætter Read til 
+0001cd 9508                      	IN Ret1, EEDR		;Henter hvad der er i EEPROM ned i Ret1
                                  RET
                                  
-0001aa fd63                      SetLED:
-0001ab c009                      	SBRC SREG2, LEDTimeOn
-0001ac 3420                      	RJMP EndOfSetLED
-0001ad f438                      	CPI Arg,64
-0001ae 940e 01c4                 	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
-0001b0 0f22                      	CALL ClearLED
-0001b1 b31b                      	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
-0001b2 7811                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-0001b3 2b12                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-0001b4 bb1b                      	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
+0001ce fd63                      SetLED:
+0001cf c009                      	SBRC SREG2, LEDTimeOn
+0001d0 3420                      	RJMP EndOfSetLED
+0001d1 f438                      	CPI Arg,64
+0001d2 940e 01e8                 	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
+0001d4 0f22                      	CALL ClearLED
+0001d5 b31b                      	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
+0001d6 7811                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+0001d7 2b12                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+0001d8 bb1b                      	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
                                  	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
                                  	ERROREndOfSetLED:
-0001b5 9508                      	EndOfSetLED:
+0001d9 9508                      	EndOfSetLED:
                                  RET
                                  
-0001b6 6063                      LED1SekSet:
+0001da 6063                      LED1SekSet:
                                  	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
-0001b7 3420                      	;Tjekker om LEDVerdi er gyldig
-0001b8 f450                      	CPI Arg,64
+0001db 3420                      	;Tjekker om LEDVerdi er gyldig
+0001dc f450                      	CPI Arg,64
                                  	BRSH ErrorLED1SekSet	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl 
-0001b9 0f22                      	;Tænder LED'er med værdi
-0001ba b31b                      	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
-0001bb 7811                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-0001bc 2b12                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-0001bd bb1b                      	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
+0001dd 0f22                      	;Tænder LED'er med værdi
+0001de b31b                      	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
+0001df 7811                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+0001e0 2b12                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+0001e1 bb1b                      	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
                                  	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
-0001be e000                      	;Timer1 start (Den er på 1 sek)
-0001bf bd0d                      	LDI Temp1,0
-0001c0 bd0c                      	OUT TCNT1H, Temp1
-0001c1 e00d                      	OUT TCNT1L, Temp1
-0001c2 bd0e                      	LDI Temp1, (1<<WGM12)|(1<<CS12)|(1<<CS10)	;CTC, pre 1024 og tænder for timer1 som er sat til 1 sek
+0001e2 e000                      	;Timer1 start (Den er på 1 sek)
+0001e3 bd0d                      	LDI Temp1,0
+0001e4 bd0c                      	OUT TCNT1H, Temp1
+0001e5 e00d                      	OUT TCNT1L, Temp1
+0001e6 bd0e                      	LDI Temp1, (1<<WGM12)|(1<<CS12)|(1<<CS10)	;CTC, pre 1024 og tænder for timer1 som er sat til 1 sek
                                  	OUT TCCR1B, Temp1 
-0001c3 9508                      ErrorLED1SekSet:
+0001e7 9508                      ErrorLED1SekSet:
                                  RET
                                  
-0001c4 b31b                      ClearLED:
-0001c5 7811                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-0001c6 bb1b                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-0001c7 9508                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA som slukker alle LED'er
+0001e8 b31b                      ClearLED:
+0001e9 7811                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+0001ea bb1b                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+0001eb 9508                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA som slukker alle LED'er
                                  RET
                                  	
-0001c8 b33b                      GetLED:
-0001c9 773e                      	IN Ret1, PORTA			;Loader PORTA ind 
-0001ca 9536                      	ANDI Ret1, 0b01111110	;Udmasker bit 0 og 7 
-0001cb 9508                      	LSR Ret1				;Rykker Ret1 en til højre så det passer med at LED verdi er mellem 0 og 63 
+0001ec b33b                      GetLED:
+0001ed 773e                      	IN Ret1, PORTA			;Loader PORTA ind 
+0001ee 9536                      	ANDI Ret1, 0b01111110	;Udmasker bit 0 og 7 
+0001ef 9508                      	LSR Ret1				;Rykker Ret1 en til højre så det passer med at LED verdi er mellem 0 og 63 
+                                 RET
+                                 
+0001f0 2f0b                      AccSumSub:
+0001f1 7f00                      	MOV Temp1, AccSumH
+0001f2 3f00                      	ANDI Temp1, 0b11110000
+0001f3 f051                      	CPI Temp1, (AccSumAntalDiv<<AccSumHAntalBit)
+                                 	BREQ SidsteGangAccSum
+0001f4 e110                      		;Addere hvor mange gange der er blevet sumeret 
+0001f5 0f01                      		LDI Temp2, 0b00010000
+0001f6 70bf                      		ADD Temp1, Temp2
+0001f7 2bb0                      		ANDI AccSumH, 0b00001111
+                                 		OR AccSumH, Temp1
+                                 		;
+0001f8 0fc5                      		;Summere AccData
+0001f9 e010                      		ADD AccSumL, AccData
+0001fa 1fb1                      		LDI Temp2,0
+                                 		ADC AccSumH, Temp2
+0001fb e030                      		;
+0001fc 940c 020e                 		LDI Ret1, 0
+                                 		JMP EndOfSum
+                                 
+                                 	SidsteGangAccSum:
+0001fe 0fc5                      		;Summere AccData
+0001ff e010                      		ADD AccSumL, AccData
+000200 1fb1                      		LDI Temp2,0
+                                 		ADC AccSumH, Temp2
+                                 		;
+000201 70bf                      		;Nulstiller antal div
+                                 		ANDI AccSumH, 0b00001111
+                                 		;
+000202 95b6                      		;Dividere med 16 for at få gennemsnit
+000203 95c7                      		LSR AccSumH
+000204 95b6                      		ROR AccSumL		;Div 2
+000205 95c7                      		LSR AccSumH
+000206 95b6                      		ROR AccSumL		;Div 4
+000207 95c7                      		LSR AccSumH
+000208 95b6                      		ROR AccSumL		;Div 8
+000209 95c7                      		LSR AccSumH
+                                 		ROR AccSumL		;Div 16
+00020a 2f3c                      		;
+00020b e0b0                      		MOV Ret1, AccSumL
+00020c e0c0                      		LDI AccSumH, 0
+00020d c000                      		LDI AccSumL, 0
+                                 		RJMP EndOfSum
+00020e 9508                      EndOfSum:
                                  RET
                                  
                                  ;Intarups -----------------------------------------------------------------
                                  
                                  ADCDone:				
-0001cc b154                      	;Når en ADC er færdig hopper den hertil
-0001cd b155                      	IN	AccData, ADCL		;Indlæser den lave del af ADC
-0001ce 9a36                      	IN  AccData, ADCH		;Indlæser den høje del af ADC
-0001cf 9468                      	SBI ADCSRA, ADSC		;Starter conversion igen 
-0001d0 9518                      	SET						;Sætter T Falg til 1 for at sige AccData er klar 
+00020f b154                      	;Når en ADC er færdig hopper den hertil
+000210 b155                      	IN	AccData, ADCL		;Indlæser den lave del af ADC
+000211 9a36                      	IN  AccData, ADCH		;Indlæser den høje del af ADC
+000212 9468                      	SBI ADCSRA, ADSC		;Starter conversion igen 
+000213 9518                      	SET						;Sætter T Falg til 1 for at sige AccData er klar 
                                  RETI
                                  
-0001d1 930f                      Timer1CompereA:
+000214 930f                      Timer1CompereA:
                                  	PUSH Temp1
-0001d2 940e 01c4                 	;Slukker LED'er
+000215 940e 01e8                 	;Slukker LED'er
                                  	CALL ClearLED
-0001d4 e000                      	;Stopper timer
-0001d5 bd0e                      	LDI Temp1, 0			;Timer fra
-0001d6 7f6c                      	OUT TCCR1B, Temp1		
-0001d7 910f                      	CBR SREG2, LEDTimeOn
+000217 e000                      	;Stopper timer
+000218 bd0e                      	LDI Temp1, 0			;Timer fra
+000219 7f6c                      	OUT TCCR1B, Temp1		
+00021a 910f                      	CBR SREG2, LEDTimeOn
 
 
 RESOURCE USE INFORMATION
@@ -1435,38 +1552,38 @@ counted separately from r26..r31 here.
 "ATmega32A" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  82 r17:  18 r18:  36 r19:  42 r20:  25 
-r21:   6 r22:   4 r23:   0 r24:   0 r25:   7 r26:   7 r27:   0 r28:   1 
-r29:   0 r30:   0 r31:   0 
-Registers used: 10 out of 35 (28.6%)
+r13:   0 r14:   0 r15:   0 r16:  82 r17:  24 r18:  40 r19:  53 r20:  24 
+r21:   5 r22:   4 r23:   0 r24:   0 r25:   6 r26:   6 r27:  11 r28:   8 
+r29:  11 r30:   0 r31:   0 
+Registers used: 12 out of 35 (34.3%)
 
 "ATmega32A" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   5 adiw  :   0 and   :   0 
-andi  :   6 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :  24 brge  :   1 brhc  :   0 
+.lds  :   0 .sts  :   0 adc   :   2 add   :   8 adiw  :   0 and   :   0 
+andi  :   9 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :  28 brge  :   1 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 
-brne  :   6 brpl  :   0 brsh  :   4 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :  39 cbi   :   0 cbr   :   1 
+brne  :   6 brpl  :   0 brsh  :   8 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :  45 cbi   :   0 cbr   :   1 
 clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :   0 cls   :   0 
-clt   :   1 clv   :   0 clz   :   0 com   :   0 cp    :   4 cpc   :   0 
-cpi   :  33 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :  11 inc   :   0 jmp   :  22 
-ld    :   0 ldd   :   0 ldi   :  55 lds   :   8 lpm   :   0 lsl   :   2 
-lsr   :   9 mov   :  14 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   3 ori   :   1 out   :  35 pop   :   1 
-push  :   1 rcall :   0 ret   :  22 reti  :   2 rjmp  :   7 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :  13 sbic  :   2 sbis  :   4 
+clt   :   1 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
+cpi   :  43 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :  10 inc   :   4 jmp   :  25 
+ld    :   0 ldd   :   0 ldi   :  66 lds   :   8 lpm   :   0 lsl   :   2 
+lsr   :  13 mov   :  16 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :   0 or    :   4 ori   :   0 out   :  35 pop   :   1 
+push  :   1 rcall :   0 ret   :  23 reti  :   2 rjmp  :   9 rol   :   0 
+ror   :   4 sbc   :   0 sbci  :   0 sbi   :  13 sbic  :   2 sbis  :   2 
 sbiw  :   0 sbr   :   1 sbrc  :   2 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   2 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   6 
 sub   :   2 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 37 out of 113 (32.7%)
+Instructions used: 39 out of 113 (34.5%)
 
 "ATmega32A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0003b2    856      0    856   32768   2.6%
+[.cseg] 0x000000 0x000438    990      0    990   32768   3.0%
 [.dseg] 0x000060 0x000060      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
-Assembly complete, 0 errors, 3 warnings
+Assembly complete, 0 errors, 4 warnings

@@ -12,6 +12,7 @@
 .DEF AccRefN = R26
 .DEF AccSumH = R27
 .DEF AccSumL = R28
+.DEF AccCounter = R29
 
 ;Vi må ikke tage R30 og R31 hvis vi gerne vil have Z (X og Y er R26 til R29) Vi skal nok samle nogel af registeren og tjekker om vi ik kan bruge Temp og Ret. Evt lave Arg om til et register vi bruger til at give verdi til subrutiner med så EEPROMSave og LEDVerdi kan komme der ind
 ;--------------------------
@@ -25,6 +26,9 @@
 ;---------------------------
 
 ;Data Space
+
+.EQU AccRefP_Konst = 0x8B
+.EQU AccRefN_Konst = 0x7B
 
 .EQU Intype_DatSpac = 0x00
 .EQU InCmd_DatSpac = 0x01
@@ -53,6 +57,8 @@
 
 .EQU AccSumHAntalBit = 4
 .EQU AccSumAntalDiv = 15
+
+.EQU AccCount = 255
 ;---------------------------
 
 
@@ -145,8 +151,9 @@ SEI	;Enabler interrupts.
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
 ;---------------------------------------
 
-LDI AccRefP, 86
-LDI AccRefN, 78
+LDI AccRefP, 0x8B
+;Midt = 84
+LDI AccRefN, 0x7B
 
 LDI Arg,63
 CALL SetLED
@@ -154,8 +161,10 @@ CLT
 
 StraightInit:
 ;Set hastighed til 50
-LDI Temp1, 0x7D
-OUT OCR2, Temp1
+LDI AccCounter,0
+LDI Arg, 60
+CALL CalcOCR2
+OUT OCR2, Ret1
 
 ;Sluk elektromagnet
 ;IN Temp1,PORTB
@@ -167,38 +176,102 @@ LDI Arg,0b111111
 CALL SetLED
 
 Straight:
-SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-JMP UAuto
+;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+;JMP UAuto
 ;Tester Accelerometerdata
-CP AccData, AccRefP
-BRSH TurnInit
-CP AccData, AccRefN
-BRLO TurnInit
+
+CALL AccSumSub
+CPI Ret1,0
+BREQ Straight
+
+CP Ret1, AccRefP
+BRSH Turn1Tick
+CP Ret1, AccRefN
+BRLO Turn2Tick
 RJMP Straight
 
-TurnInit:
+	Turn1Tick:
+	CPI AccCounter, AccCount
+	BRSH Turn1Init
+	INC AccCounter
+	JMP Straight
+
+	Turn2Tick:
+	CPI AccCounter, AccCount
+	BRSH Turn2Init
+	INC AccCounter
+	JMP Straight
+
+Turn1Init:
 ;Set hastighed til 32
+LDI AccCounter,0
+LDI Arg, 32
+CALL CalcOCR2
+OUT OCR2, Ret1
+
+;Tænd elektromagnet
+;IN Temp1,PORTB
+;ORI Temp1,0b00000001
+;OUT PORTB, Temp1
+
+;Tænd gult lys
+LDI Arg,0b000011
+CALL SetLED
+
+Turn1:
+;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+;JMP UAuto
+;Tester Accelerometerdata
+
+CALL AccSumSub
+CPI Ret1,0
+BREQ Turn1
+
+CPI Ret1, (AccRefP_Konst-5)
+BRSH Turn1
+RJMP StraightTick1
+
+	StraightTick1:
+		CPI AccCounter, AccCount
+		BRSH StraightInit
+		INC AccCounter
+		JMP Turn1
+
+
+Turn2Init:
+;Set hastighed til 32
+LDI AccCounter,0
 LDI Temp1, 0x50
 OUT OCR2, Temp1
 
 ;Tænd elektromagnet
-IN Temp1,PORTB
-ORI Temp1,0b00000001
-OUT PORTB, Temp1
+;IN Temp1,PORTB
+;ORI Temp1,0b00000001
+;OUT PORTB, Temp1
 
 ;Tænd gult lys
-LDI Arg,0b011011
+LDI Arg,0b011000
 CALL SetLED
 
-Turn:
-SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-JMP UAuto
+Turn2:
+;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+;JMP UAuto
 ;Tester Accelerometerdata
-CP AccData, AccRefP
-BRLO Turn
-CP AccData, AccRefN
-BRSH Turn
-RJMP StraightInit
+
+CALL AccSumSub
+CPI Ret1,0
+BREQ Turn2
+
+CPI Ret1, (AccRefN_Konst+7)
+BRLO Turn2
+RJMP StraightTick2
+
+	StraightTick2:
+		CPI AccCounter, AccCount
+		BRSH StraightInit
+		INC AccCounter
+		JMP Turn2
+
 
 UAuto:
 StartOfProto:
@@ -354,7 +427,7 @@ Send:
 SendSpeed:
 	LDI Arg, Proto_REPLY	;
 	CALL Send			;Sender Replytypen (0xBB)
-	MOV Arg,AccSumL		;
+	MOV Arg,AccData		;
 	CALL Send			;Sender den nuværende hastighed 
 	RET
 
@@ -487,7 +560,7 @@ Cleanup:
 	RET
 
 CalcOCR2:
-	MOV Temp1,InBesked
+	MOV Temp1,Arg
 	MOV Ret1,Temp1
 	ADD Ret1,Temp1
 	LSR Temp1
@@ -570,6 +643,51 @@ GetLED:
 	IN Ret1, PORTA			;Loader PORTA ind 
 	ANDI Ret1, 0b01111110	;Udmasker bit 0 og 7 
 	LSR Ret1				;Rykker Ret1 en til højre så det passer med at LED verdi er mellem 0 og 63 
+RET
+
+AccSumSub:
+	MOV Temp1, AccSumH
+	ANDI Temp1, 0b11110000
+	CPI Temp1, (AccSumAntalDiv<<AccSumHAntalBit)
+	BREQ SidsteGangAccSum
+		;Addere hvor mange gange der er blevet sumeret 
+		LDI Temp2, 0b00010000
+		ADD Temp1, Temp2
+		ANDI AccSumH, 0b00001111
+		OR AccSumH, Temp1
+		;
+		;Summere AccData
+		ADD AccSumL, AccData
+		LDI Temp2,0
+		ADC AccSumH, Temp2
+		;
+		LDI Ret1, 0
+		JMP EndOfSum
+
+	SidsteGangAccSum:
+		;Summere AccData
+		ADD AccSumL, AccData
+		LDI Temp2,0
+		ADC AccSumH, Temp2
+		;
+		;Nulstiller antal div
+		ANDI AccSumH, 0b00001111
+		;
+		;Dividere med 16 for at få gennemsnit
+		LSR AccSumH
+		ROR AccSumL		;Div 2
+		LSR AccSumH
+		ROR AccSumL		;Div 4
+		LSR AccSumH
+		ROR AccSumL		;Div 8
+		LSR AccSumH
+		ROR AccSumL		;Div 16
+		;
+		MOV Ret1, AccSumL
+		LDI AccSumH, 0
+		LDI AccSumL, 0
+		RJMP EndOfSum
+EndOfSum:
 RET
 
 ;Intarups -----------------------------------------------------------------
