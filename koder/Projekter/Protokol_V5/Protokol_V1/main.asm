@@ -390,8 +390,6 @@ DataCheck:
 		JMP CleanupEndOfProto
 
 	SetFrequency:
-		CPI InBesked,8
-		BRGE Error
 		CALL SetPrescaler
 		LDI Arg, CmdIn_PWMPrescaler_LED	
 		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
@@ -428,6 +426,8 @@ Send:
 SendSpeed:
 	LDI Arg, Proto_REPLY	;
 	CALL Send			;Sender Replytypen (0xBB)
+	LDI Arg, Proto_Start	;
+	CALL Send			;Sender command Start (0x10)
 	IN Arg,OCR2		;
 	CALL Send			;Sender den nuværende hastighed 
 	RET
@@ -440,6 +440,8 @@ SetSpeed:
 SendPrescaler:
 	LDI Arg, Proto_REPLY
 	CALL Send
+	LDI Arg, Proto_PWMPre
+	CALL Send
 	IN Temp1,TCCR2
 	ANDI Temp1,0b00000111
 	MOV Arg,Temp1
@@ -447,10 +449,15 @@ SendPrescaler:
 	RET
 
 SetPrescaler:
+	CPI InBesked,8
+	BRGE DoNotSetPre
+	CPI InBesked,0
+	BREQ DoNotSetPre
 	IN Temp1,TCCR2
 	ANDI Temp1,0b11111000
 	OR Temp1,InBesked
 	OUT TCCR2,Temp1
+	DoNotSetPre:
 	RET
 
 
@@ -576,6 +583,24 @@ CalcOCR2:
 	ADD Ret1,Temp1
 	RET
 
+NewCalcOCR2:
+	LDI Temp1,0b10100011		;2.55 som Q2.6 format
+	MUL Arg, Temp1				;Resutat ligger i R1:R0 på format Q8.5
+	LSR R1
+	ROR R0						;Resutat er nu på format Q8.5
+	LSR R1
+	ROR R0						;Resutat er nu på format Q8.4
+	LSR R1
+	ROR R0						;Resutat er nu på format Q8.3
+	LSR R1
+	ROR R0						;Resutat er nu på format Q8.2
+	LSR R1
+	ROR R0						;Resutat er nu på format Q8.1
+	LSR R1
+	ROR R0						;Resutat er nu på format Q8
+	MOV Ret1, R0
+RET
+
 
 SaveInEEPROM:
 	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
@@ -604,12 +629,12 @@ SetLED:
 	RJMP EndOfSetLED
 	CPI Arg,64
 	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
-	CALL ClearLED
+	;CALL ClearLED
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
-	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
-	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
+	IN Temp1, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+	ANDI Temp1, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+	OR Temp1, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
+	OUT	PORTA, Temp1		;Sender den nye værdig ud på PORTA
 	ERROREndOfSetLED:
 	EndOfSetLED:
 RET
