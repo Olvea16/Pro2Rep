@@ -32,7 +32,7 @@
 
 ;Data Space
 
-.EQU Intype_DatSpac = 0x00
+.EQU InType_DatSpac = 0x00
 .EQU InCmd_DatSpac = 0x01
 .EQU InBesked_DatSpac = 0x02
 .EQU ZStart = 0x04
@@ -276,7 +276,7 @@ JMP EndOfProto		;Hvis RXC er 0, skal programmet hoppe over telegramfortolkningen
 IN InBesked,UDR		;Hvis RXC er 1, skal programmet læse og fortolke dataen i UDR.
 
 TypeCheck:
-	LDS Ret1, Intype_DatSpac
+	LDS Ret1, InType_DatSpac
 	CPI Ret1,0x00	;Tjekker om InType er tom.
 	BRNE CmdCheck	;Hvis InType ikke er tom, hopper programmet til CmdCheck.
 	CALL IsType		;Hvis InType er tom, tjekker programmet om den modtagne besked i InBesked er en type med subroutinen IsType.
@@ -287,7 +287,7 @@ CmdCheck:
 	CPI Ret1,0x00	;Tjekker om InCmd er tom.
 	BRNE DataCheckInter	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
 	CALL IsCmd		;Hvis InCmd derimod er tom, tjekker programmet om den modtagne besked i InBesked er en kommmando med subroutinen IsCom.
-	LDS Ret1, Intype_DatSpac
+	LDS Ret1, InType_DatSpac
 	CPI Ret1, Proto_GET	;Derefter sammenligner programmet InType, altså telegrammets type, med 0xAA, altså et 'get'-telegram.
 	BREQ IsGet		;Hvis telegramtypen er get, hopper programmet til IsGet.
 
@@ -363,7 +363,7 @@ SkipEndOfProtoInter:
 
 DataCheck:
 	;MOV InData,InBesked Slettes
-	LDS Ret1, Intype_DatSpac
+	LDS Ret1, InType_DatSpac
 	CPI Ret1, Proto_GET
 	BREQ GetWithData
 	CPI Ret1, Proto_SET
@@ -516,13 +516,16 @@ IsType:
 	
 	;INDSÆT NYE TELEGRAMTYPER
 
+	/*
+	Behøves ikke da der allered er tjekket om den er 0
 	LDI Arg,0
-	STS Intype_DatSpac, Arg
+	STS InType_DatSpac, Arg
+	*/
 	RET
 
 	wasType:
 		;MOV InType,InBesked
-		STS Intype_DatSpac, InBesked
+		STS InType_DatSpac, InBesked
 		RET
 
 IsCmd:
@@ -543,8 +546,11 @@ IsCmd:
 
 	;INDSÆT NYE TELEGRAMKOMMANDOER.
 
+	/*
+	Behøves ikke da der allered er tjekket om den er 0
 	LDI Arg,0
 	STS InCmd_DatSpac, Arg
+	*/
 	RET
 
 	wasCommand:
@@ -554,7 +560,7 @@ IsCmd:
 Cleanup:
 	;Renser Intype
 	LDI Arg,0
-	STS Intype_DatSpac, Arg
+	STS InType_DatSpac, Arg
 	;Renser InCmd
 	STS InCmd_DatSpac, Arg
 	;Renser InBesked
