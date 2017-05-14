@@ -162,7 +162,7 @@ LDI SREG2,0
 ;Opsætning af noget af timere1
 	LDI Temp1, 0
 	OUT TCCR1A, Temp1 
-	LDI Temp1,(1<<OCIE1A)	;Timer 1 comber med OCR1A 
+	LDI Temp1,(1<<OCIE1A)	;inta Timer 1 comber med OCR1A 
 	OUT TIMSK,Temp1
 	LDI Temp1, HIGH(15625-1)	;Hvor meget der skal til får at få 1 sek 
 	OUT	OCR1AH,Temp1
