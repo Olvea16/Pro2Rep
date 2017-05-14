@@ -640,10 +640,10 @@ SetLED:
 RET
 
 LED1SekSet:
-	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
 	;Tjekker om LEDVerdi er gyldig
 	CPI Arg,64
 	BRSH ErrorLED1SekSet	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl 
+	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
 	;Tænder LED'er med værdi
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
