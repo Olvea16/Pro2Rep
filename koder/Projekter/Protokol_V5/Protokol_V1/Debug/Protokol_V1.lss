@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Sun May 14 16:51:04 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm Sun May 14 19:34:09 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
 C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\Protokol_V5\Protokol_V1\main.asm(23): warning: Register r26 already defined by the .DEF directive
@@ -952,16 +952,16 @@ C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\
                                  ;---
                                  
 000046 e108                      ;Opsætning af kommunikation
-000047 b90a                      	LDI R16, (1<<TXEN)|(1<<RXEN);|(1<<RXCIE)	;Opsætter værdien til modtagelse og afsendelse af seriel data.
-000048 e806                      	OUT UCSRB, R16								;Sender værdien til opsætningsregisteret, UCSRB (s. 212).
+000047 b90a                      	LDI R16, (1<<TXEN)|(1<<RXEN)				;Opsætter værdien til modtagelse og afsendelse af seriel data.
+000048 e806                      	OUT UCSRB, R16								;Sender værdien til opsætningsregisteret, UCSRB (s. 409).
 000049 bd00                      	LDI R16, (1<<UCSZ1)|(1<<UCSZ0)|(1<<URSEL)	;Her indstilles mikrokontrolleren til 8 bit data, ingen parity bit og kun 1 stop bit.
-00004a e607                      	OUT UCSRC, R16								;Værdien sendes til registeret UCSRC (s. 214).
-00004b b909                      	LDI R16, 0x67								;Her indstilles baud rate til 9600 (ved 16 MHz).
-                                 	OUT UBRRL, R16								;Værdien for baud rate sendes til registeret UBRRL (s. 216).
+00004a e607                      	OUT UCSRC, R16								;Værdien sendes til registeret UCSRC (s. 410).
+00004b b909                      	LDI R16, 103								;Her indstilles baud rate til 9600 (ved 16 MHz)(s. 405).
+                                 	OUT UBRRL, R16								;Værdien for baud rate sendes til registeret UBRRL 
                                  
 00004c 9a8f                      ;Opsætning af PWM
 00004d e601                      	SBI DDRD,7		;PordtD Bit7 sættes og bliver output.
-00004e bd05                      	LDI R16,(1<<WGM00)|(1<<COM01)|(1<<CS00) 
+00004e bd05                      	LDI R16, (1<<WGM00)|(1<<COM01)|(1<<CS00) 
 00004f e000                      	OUT TCCR2,R16	;Opsætter PWM, sætter prescaleren til 1, fasekorrekt, ikke-inverteret (s. 153).
 000050 bd03                      	LDI R16,0		;
                                  	OUT OCR2,R16	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
@@ -969,9 +969,9 @@ C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\
 000051 e000                      ;Opsætning af ADC
 000052 bb0a                      	LDI R16,0
 000053 e80f                      	OUT DDRA, R16	;Sætter PortA 0 til indput
-000054 b906                      	LDI R16,0x8F	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
-000055 e600                      	OUT ADCSRA, R16
-000056 b907                      	LDI R16,0x60	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
+000054 b906                      	LDI R16, (1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
+000055 e600                      	OUT ADCSRA, R16 
+000056 b907                      	LDI R16, (1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er venstre justified
                                  	OUT ADMUX, R16
                                  
 000057 9ad1                      ;Opsætning af RGB LED

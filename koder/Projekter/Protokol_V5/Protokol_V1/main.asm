@@ -145,11 +145,10 @@ LDI SREG2,0
 	OUT OCR2,R16	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
 
 ;Opsætning af ADC
-	LDI R16,0
-	OUT DDRA, R16	;Sætter PortA 0 til indput
-	LDI R16,0x8F	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
-	OUT ADCSRA, R16
-	LDI R16,0x60	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
+	CBI DDRA, 0		;Sætter PortA 0 til indput
+	LDI R16, (1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
+	OUT ADCSRA, R16 
+	LDI R16, (1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er venstre justified
 	OUT ADMUX, R16
 
 ;Opsætning af RGB LED
