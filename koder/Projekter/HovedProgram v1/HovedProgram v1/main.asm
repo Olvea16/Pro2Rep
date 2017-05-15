@@ -26,10 +26,10 @@
 
 ;Data Space
 
-.EQU Intype_DatSpac = 0x00
-.EQU InCmd_DatSpac = 0x01
-.EQU InBesked_DatSpac = 0x02
-.EQU ZStart = 0x04
+.EQU InType_DataSpace = 0x00
+.EQU InCmd_DataSpace = 0x01
+.EQU InBesked_DataSpace = 0x02
+.EQU ZStart = 4+379			;Random data i starten af dataspace
 
 ;SREG2 Navngivning
 .EQU StateCount0 = 0 
@@ -68,15 +68,15 @@
 
 ;LED
 .EQU LED_Straight = 0b111111
-.EQU LED_Sving1 = 0b000011
-.EQU LED_Sving2 = 0b011000
+.EQU LED_Turn1 = 0b000011
+.EQU LED_Turn2 = 0b011000
 
-.EQU CmdIn_RGBLEDTest_LED = 3
-.EQU CmdIn_AccRefP_LED = 4
-.EQU CmdIn_AccRefN_LED = 5
-.EQU CmdIn_Start_LED = 6
-.EQU CmdIn_Stop_LED = 7
-.EQU CmdIn_PWMPrescaler_LED = 8
+.EQU LED_InCmd_RGBLEDTest = 3
+.EQU LED_InCmd_AccRefP = 4
+.EQU LED_InCmd_AccRefN = 5
+.EQU LED_InCmd_Start = 6
+.EQU LED_InCmd_Stop = 7
+.EQU LED_InCmd_PWMPrescaler = 8
 ;---------------------------
 
 
@@ -178,6 +178,8 @@ LDI AccRefP, 100
 LDI ZH, HIGH(ZStart)
 LDI ZL, LOW(ZStart)
 
+IN Temp1, UDR
+
 Auto:
 SBIC UCSRA,RXC	
 RJMP UAuto
@@ -197,11 +199,11 @@ JMP AutoEnd
 	CPI Ret1, AccRefN_Konst
 	BRLO StateMachine_Turn2
 
-	CPI Ret1, (AccRefN_Konst + Hyst)
-	BRLO AutoEnd
-
 	CPI Ret1, (AccRefP_Konst - Hyst)
 	BRSH AutoEnd
+
+	CPI Ret1, (AccRefN_Konst + Hyst)
+	BRLO AutoEnd
 
 		StateMachine_Straight:
 		MOV Temp1,SREG2
@@ -233,7 +235,7 @@ JMP AutoEnd
 		ORI Temp1, (Turn1<<State0)
 		MOV SREG2, Temp1
 
-		LDI Arg, LED_Sving1
+		LDI Arg, LED_Turn1
 		CALL SetLED
 		JMP AutoEnd
 
@@ -250,7 +252,7 @@ JMP AutoEnd
 		ORI Temp1, (Turn2<<State0)
 		MOV SREG2, Temp1
 
-		LDI Arg, LED_Sving2
+		LDI Arg, LED_Turn2
 		CALL SetLED
 		JMP AutoEnd
 
@@ -264,7 +266,7 @@ AvgAcc:
 	LDI Temp1,0
 	ADC AccSumH, Temp1
 
-	;Hvis tælleren er nået 255, altså 256 omgange, skal programmet gå til den sidste del af udregningen.
+	;Hvis tælleren er nået 255, altså 256 additioner, skal programmet gå til den sidste del af udregningen.
 	CPI DivCounter, 255
 	BREQ AvgAccRet 
 
@@ -292,25 +294,25 @@ JMP EndOfProto		;Hvis RXC er 0, skal programmet hoppe over telegramfortolkningen
 IN InBesked,UDR		;Hvis RXC er 1, skal programmet læse og fortolke dataen i UDR.
 
 TypeCheck:
-	LDS Ret1, Intype_DatSpac
+	LDS Ret1, InType_DataSpace
 	CPI Ret1,0x00	;Tjekker om InType er tom.
 	BRNE CmdCheck	;Hvis InType ikke er tom, hopper programmet til CmdCheck.
 	CALL IsType		;Hvis InType er tom, tjekker programmet om den modtagne besked i InBesked er en type med subroutinen IsType.
 	JMP EndOfProto	;Derefter hopper programmet videre til efter telegramfortolkningen og fortsætter i næste omgang i main-løkken.
 
 CmdCheck:
-	LDS Ret1, InCmd_DatSpac
+	LDS Ret1, InCmd_DataSpace
 	CPI Ret1,0x00	;Tjekker om InCmd er tom.
 	BRNE DataCheckInter	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
 	CALL IsCmd		;Hvis InCmd derimod er tom, tjekker programmet om den modtagne besked i InBesked er en kommmando med subroutinen IsCom.
-	LDS Ret1, Intype_DatSpac
+	LDS Ret1, InType_DataSpace
 	CPI Ret1, Proto_GET	;Derefter sammenligner programmet InType, altså telegrammets type, med 0xAA, altså et 'get'-telegram.
 	BREQ IsGet		;Hvis telegramtypen er get, hopper programmet til IsGet.
 
 	;Indsæt nye typer over dette punkt.
 	
 					;Hvis typen ikke er nogen af de ovenstående, antager programmet at typen er 0x55, altså et 'set'-telegram. 
-	LDS Ret1, InCmd_DatSpac
+	LDS Ret1, InCmd_DataSpace
 	CPI Ret1, Proto_PWMStop
 	BREQ CmdCheck_PWMStop
 	CPI Ret1, Proto_Start	;Programmet sammenligner telegrammets kommando med 0x10, altså 'start' eller 'hastighed'.
@@ -326,7 +328,7 @@ CmdCheck:
 					;Hvis kommandoen er ingen af de ovenstående, antager programmet at kommandoen er 0x11, altså kommandoen 'stop'.
 	CALL StopCar	;Kalder subroutinen StopCar, der sætter PWM'en til 0.
 	LDI Arg, 0x10	
-	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
+	CALL PulseLED		;Tænder LED Værdien for at have modtaget et...
 	JMP CleanupEndOfProto	;Hopper til efter telegramfortolkningen.
 
 	CmdCheck_PWMStop:
@@ -337,7 +339,7 @@ DataCheckInter:
 JMP DataCheck
 
 	IsGet:
-		LDS Ret1, InCmd_DatSpac
+		LDS Ret1, InCmd_DataSpace
 		CPI Ret1, Proto_PWMPre
 		BREQ CmdCheck_IsGet_IsFreq
 		CPI Ret1, Proto_AccRef
@@ -379,12 +381,12 @@ SkipEndOfProtoInter:
 
 DataCheck:
 	;MOV InData,InBesked Slettes
-	LDS Ret1, Intype_DatSpac
+	LDS Ret1, InType_DataSpace
 	CPI Ret1, Proto_GET
 	BREQ GetWithData
 	CPI Ret1, Proto_SET
 	BRNE Error
-	LDS Ret1, InCmd_DatSpac
+	LDS Ret1, InCmd_DataSpace
 	CPI Ret1, Proto_PWMPre
 	BREQ SetFrequency
 	CPI Ret1, Proto_AccRef
@@ -394,12 +396,12 @@ DataCheck:
 	CPI Ret1, Proto_Start
 	BRNE Error
 	CALL SetSpeed
-	LDI Arg, CmdIn_Start_LED	
-	CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
+	LDI Arg, LED_InCmd_Start	
+	CALL PulseLED		;Tænder LED Værdien for at have modtaget et...
 	JMP CleanupEndOfProto
 
 	GetWithData:
-		LDS Ret1, InCmd_DatSpac
+		LDS Ret1, InCmd_DataSpace
 		CPI Ret1, Proto_AccRef
 		BRNE Error
 		CALL SendAccRef
@@ -409,8 +411,8 @@ DataCheck:
 		CPI InBesked,8
 		BRGE Error
 		CALL SetPrescaler
-		LDI Arg, CmdIn_PWMPrescaler_LED	
-		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
+		LDI Arg, LED_InCmd_PWMPrescaler	
+		CALL PulseLED		;Tænder LED Værdien for at have modtaget et...
 		JMP CleanupEndOfProto
 
 	SetAcceleration:
@@ -419,7 +421,7 @@ DataCheck:
 
 	SetRGBLED:
 		MOV  Arg, InBesked
-		CALL LED1SekSet
+		CALL PulseLED
 		JMP CleanupEndOfProto
 
 
@@ -433,6 +435,8 @@ JMP UAuto	;Hopper til starten af main
 StopCar:
 	LDI Temp1,0			;
 	OUT OCR2,Temp1		;Sætter bilens hastighed til 0%
+	LDI Arg,LED_InCmd_Stop
+	CALL PulseLED
 	RET
 
 Send:
@@ -442,11 +446,9 @@ Send:
 	RET					;Subroutinen er færdig, returnerer til adressen efter subroutinen blev kaldet fra. 
 
 SendSpeed:
-	;LDI Arg, Proto_REPLY	;
-	MOV Arg, ZH
+	LDI Arg, Proto_REPLY	;
 	CALL Send			;Sender Replytypen (0xBB)
-	;IN Arg,OCR2		;
-	MOV Arg, ZL
+	IN Arg,OCR2		;
 	CALL Send			;Sender den nuværende hastighed 
 	RET
 
@@ -484,8 +486,8 @@ SetAccRef:
 		LDI Temp1, HIGH(EEPROM_AccRefP)
 		LDI Temp2, LOW(EEPROM_AccRefP)
 		CALL SaveInEEPROM
-		LDI Arg, CmdIn_AccRefP_LED	
-		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefP
+		LDI Arg, LED_InCmd_AccRefP	
+		CALL PulseLED		;Tænder LED Værdien for at have modtaget et AccRefP
 	RET
 
 	SetAccRefN:
@@ -497,8 +499,8 @@ SetAccRef:
 		LDI Temp1, HIGH(EEPROM_AccRefN)
 		LDI Temp2, LOW(EEPROM_AccRefN)
 		CALL SaveInEEPROM
-		LDI Arg, CmdIn_AccRefN_LED	
-		CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et AccRefN
+		LDI Arg, LED_InCmd_AccRefN	
+		CALL PulseLED		;Tænder LED Værdien for at have modtaget et AccRefN
 	RET
 
 SendAccRef:
@@ -530,12 +532,12 @@ IsType:
 	;INDSÆT NYE TELEGRAMTYPER
 
 	LDI Arg,0
-	STS Intype_DatSpac, Arg
+	STS InType_DataSpace, Arg
 	RET
 
 	wasType:
 		;MOV InType,InBesked
-		STS Intype_DatSpac, InBesked
+		STS InType_DataSpace, InBesked
 		RET
 
 IsCmd:
@@ -557,19 +559,19 @@ IsCmd:
 	;INDSÆT NYE TELEGRAMKOMMANDOER.
 
 	LDI Arg,0
-	STS InCmd_DatSpac, Arg
+	STS InCmd_DataSpace, Arg
 	RET
 
 	wasCommand:
-		STS InCmd_DatSpac, InBesked
+		STS InCmd_DataSpace, InBesked
 		RET
 
 Cleanup:
 	;Renser Intype
 	LDI Arg,0
-	STS Intype_DatSpac, Arg
+	STS InType_DataSpace, Arg
 	;Renser InCmd
-	STS InCmd_DatSpac, Arg
+	STS InCmd_DataSpace, Arg
 	;Renser InBesked
 	LDI InBesked,0
 	LDI Temp1, 0
@@ -634,11 +636,11 @@ SetLED:
 	EndOfSetLED:
 RET
 
-LED1SekSet:
+PulseLED:
 	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
 	;Tjekker om LEDVerdi er gyldig
 	CPI Arg,64
-	BRSH ErrorLED1SekSet	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl 
+	BRSH ErrorPulseLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl 
 	;Tænder LED'er med værdi
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
@@ -651,7 +653,7 @@ LED1SekSet:
 	OUT TCNT1L, Temp1
 	LDI Temp1, (1<<WGM12)|(1<<CS12)|(1<<CS10)	;CTC, pre 1024 og tænder for timer1 som er sat til 1 sek
 	OUT TCCR1B, Temp1 
-ErrorLED1SekSet:
+ErrorPulseLED:
 RET
 
 ClearLED:
@@ -683,19 +685,19 @@ StateLED:
 	MOV Temp1, SREG2
 	ANDI Temp1, 0b11000000
 	CPI Temp1, (Turn1<<State0)
-	BREQ Sving1StateLED
+	BREQ Turn1StateLED
 	CPI Temp1, (Turn2<<State0)
-	BREQ Sving2StateLED
+	BREQ Turn2StateLED
 	StraightStateLED:
 	LDI Arg, LED_Straight
 	CALL SetLED
 	RET
-	Sving1StateLED:
-	LDI Arg, LED_Sving1
+	Turn1StateLED:
+	LDI Arg, LED_Turn1
 	CALL SetLED
 	RET
-	Sving2StateLED:
-	LDI Arg, LED_Sving2
+	Turn2StateLED:
+	LDI Arg, LED_Turn2
 	CALL SetLED
 	RET
 
@@ -759,17 +761,3 @@ InteDist:
 	ADC DistH, Temp1
 	POP Temp1
 RETI
-
-;----------------------\/\/\/Junk jart\/\/\/ ----------------------
-
-/*
-;Tænder LED for modtaget Cmd 1 sek
-		LDI Temp1, CmdIn_LED
-		CALL LED1SekSet
-;
-*/
-
-/*
-LDI Temp1, CmdIn_LED	
-CALL LED1SekSet		;Tænder LED Værdien for at have modtaget et...
-*/
