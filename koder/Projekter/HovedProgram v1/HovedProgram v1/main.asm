@@ -128,26 +128,25 @@ MOV AccRefN, Ret1
 ;---
 
 ;Opsætning af kommunikation
-	LDI R16, (1<<TXEN)|(1<<RXEN);|(1<<RXCIE)	;Opsætter værdien til modtagelse og afsendelse af seriel data.
-	OUT UCSRB, R16								;Sender værdien til opsætningsregisteret, UCSRB (s. 212).
-	LDI R16, (1<<UCSZ1)|(1<<UCSZ0)|(1<<URSEL)	;Her indstilles mikrokontrolleren til 8 bit data, ingen parity bit og kun 1 stop bit.
-	OUT UCSRC, R16								;Værdien sendes til registeret UCSRC (s. 214).
-	LDI R16, 0x67								;Her indstilles baud rate til 9600 (ved 16 MHz).
-	OUT UBRRL, R16								;Værdien for baud rate sendes til registeret UBRRL (s. 216).
+	LDI Temp1, (1<<TXEN)|(1<<RXEN)				;Opsætter værdien til modtagelse og afsendelse af seriel data.
+	OUT UCSRB, Temp1								;Sender værdien til opsætningsregisteret, UCSRB (s. 409).
+	LDI Temp1, (1<<UCSZ1)|(1<<UCSZ0)|(1<<URSEL)	;Her indstilles mikrokontrolleren til 8 bit data, ingen parity bit og kun 1 stop bit.
+	OUT UCSRC, Temp1								;Værdien sendes til registeret UCSRC (s. 410).
+	LDI Temp1, 103								;Her indstilles baud rate til 9600 (ved 16 MHz)(s. 405).
+	OUT UBRRL, Temp1								;Værdien for baud rate sendes til registeret UBRRL 
 
 ;Opsætning af PWM
 	SBI DDRD,7		;PordtD Bit7 sættes og bliver output.
-	LDI R16,0x63	;(0110 0011)
-	OUT TCCR2,R16	;Opsætter PWM, sætter prescaleren til 1/32 (ca. 1 kHz), fasekorrekt, ikke-inverteret (s. 153).
-	LDI R16,0		;
-	OUT OCR2,R16	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
+	LDI Temp1, (1<<WGM00)|(1<<COM01)|(1<<CS00) 
+	OUT TCCR2, Temp1	;Opsætter PWM, sætter prescaleren til 1, fasekorrekt, ikke-inverteret (s. 153).
+	LDI Temp1, 0		;
+	OUT OCR2, Temp1	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
 
 ;Opsætning af ADC
-	LDI R16,0
-	OUT DDRA, R16	;Sætter PortA 0 til indput
-	LDI R16,0x8F	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
-	OUT ADCSRA, R16
-	LDI R16,0x60	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
+	CBI DDRA, 0		;Sætter PortA 0 til indput
+	LDI R16, (1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
+	OUT ADCSRA, R16 
+	LDI R16, (1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er venstre justified
 	OUT ADMUX, R16
 
 ;Opsætning af RGB LED
