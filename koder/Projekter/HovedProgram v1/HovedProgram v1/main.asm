@@ -448,6 +448,8 @@ Send:
 SendSpeed:
 	LDI Arg, Proto_REPLY	;
 	CALL Send			;Sender Replytypen (0xBB)
+	LDI Arg, Proto_Start	;
+	CALL Send			;Sender command Start (0x10)
 	IN Arg,OCR2		;
 	CALL Send			;Sender den nuværende hastighed 
 	RET
@@ -460,6 +462,8 @@ SetSpeed:
 SendPrescaler:
 	LDI Arg, Proto_REPLY
 	CALL Send
+	LDI Arg, Proto_PWMPre
+	CALL Send
 	IN Temp1,TCCR2
 	ANDI Temp1,0b00000111
 	MOV Arg,Temp1
@@ -467,10 +471,15 @@ SendPrescaler:
 	RET
 
 SetPrescaler:
+	CPI InBesked,8
+	BRGE DoNotSetPre
+	CPI InBesked,0
+	BREQ DoNotSetPre
 	IN Temp1,TCCR2
 	ANDI Temp1,0b11111000
 	OR Temp1,InBesked
 	OUT TCCR2,Temp1
+	DoNotSetPre:
 	RET
 
 
@@ -510,12 +519,16 @@ SendAccRef:
 	BREQ SendAccRefN
 	LDI Arg, Proto_REPLY
 	CALL Send
+	LDI Arg, Proto_AccRef
+	CALL Send
 	MOV Arg, AccRefP
 	CALL Send
 	RET
 
 	SendAccRefN:
 	LDI Arg, Proto_REPLY
+	CALL Send
+	LDI Arg, Proto_AccRef
 	CALL Send
 	MOV Arg, AccRefN
 	CALL Send
@@ -531,8 +544,11 @@ IsType:
 	
 	;INDSÆT NYE TELEGRAMTYPER
 
+	/*
+	Behøves ikke da der allered er tjekket om den er 0
 	LDI Arg,0
-	STS InType_DataSpace, Arg
+	STS InType_DatSpac, Arg
+	*/
 	RET
 
 	wasType:
@@ -558,8 +574,11 @@ IsCmd:
 
 	;INDSÆT NYE TELEGRAMKOMMANDOER.
 
+	/*
+	Behøves ikke da der allered er tjekket om den er 0
 	LDI Arg,0
-	STS InCmd_DataSpace, Arg
+	STS InCmd_DatSpac, Arg
+	*/
 	RET
 
 	wasCommand:
@@ -626,7 +645,7 @@ SetLED:
 	RJMP EndOfSetLED
 	CPI Arg,64
 	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
-	CALL ClearLED
+	;CALL ClearLED Vi skal lige se om den behøves efter ny metode 
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
 	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
@@ -637,10 +656,10 @@ SetLED:
 RET
 
 PulseLED:
-	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
 	;Tjekker om LEDVerdi er gyldig
 	CPI Arg,64
 	BRSH ErrorPulseLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl 
+	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
 	;Tænder LED'er med værdi
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
@@ -656,7 +675,7 @@ PulseLED:
 ErrorPulseLED:
 RET
 
-ClearLED:
+ClearLED:	;Behøves nok ikke 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
 	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
 	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA som slukker alle LED'er
@@ -761,3 +780,18 @@ InteDist:
 	ADC DistH, Temp1
 	POP Temp1
 RETI
+
+;----------------------\/\/\/Junk jart\/\/\/ ----------------------
+/*
+
+
+
+
+
+
+
+
+
+
+
+*/

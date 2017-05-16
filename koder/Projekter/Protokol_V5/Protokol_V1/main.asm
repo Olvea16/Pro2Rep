@@ -494,12 +494,16 @@ SendAccRef:
 	BREQ SendAccRefN
 	LDI Arg, Proto_REPLY
 	CALL Send
+	LDI Arg, Proto_AccRef
+	CALL Send
 	MOV Arg, AccRefP
 	CALL Send
 	RET
 
 	SendAccRefN:
 	LDI Arg, Proto_REPLY
+	CALL Send
+	LDI Arg, Proto_AccRef
 	CALL Send
 	MOV Arg, AccRefN
 	CALL Send
