@@ -48,6 +48,9 @@
 .EQU Turn1 = 1
 .EQU Turn2 = 2
 
+.EQU Velocity_Turn = 76 ;Ca. 30.
+.EQU Velocity_Straight = 204 ;Ca. 80.
+
 .EQU AccRefN_Konst = 100
 .EQU AccRefP_Konst = 160
 ;
@@ -184,7 +187,6 @@ PreLine:
 NOP
 JMP PreLine
 
-
 AutoInit:
 
 LDI AccRefN, 150
@@ -313,7 +315,53 @@ Driving:
 SBIC UCSRA,RXC	
 RJMP UAuto
 
+CALL StoreTrack
+
+STS DataSpace_ZMaxH, ZH
+STS DataSpace_ZMaxL, ZL
+
+LDI ZL, LOW(ZStart)
+LDI ZH, HIGH(ZStart)
+
 JMP Driving
+
+StateVel:
+CPI Arg,(Straight<<State0)
+BRNE StateVel_Straight
+IN Temp1, PORTB
+ANDI Temp1, 0b11111110
+OUT PORTB, Temp1
+LDI Arg,Velocity_Turn
+CALL SetSpeed
+RET
+
+	StateVel_Straight:
+	IN Temp1, PORTB
+	ORI Temp1,0b00000001
+	OUT PORTB, Temp1
+	LDI Arg,Velocity_Straight
+	CALL SetSpeed
+RET
+
+CalcOffset:
+CPI Arg,Straight
+BRNE CalcOffset_Return
+LDS Temp1,DataSpace_StoredDistH
+LDS Temp2,DataSpace_StoredDistL
+LSR Temp1
+ROR Temp2
+LSR Temp1
+ROR Temp2
+LSR Temp1
+ROR Temp2
+LSR Temp1
+ROR Temp2
+ADD DistL,Temp2
+LDI Temp2,0
+ADC DistH,Temp2
+
+CalcOffset_Return:
+RET
 
 UAuto:
 
