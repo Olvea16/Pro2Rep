@@ -1,0 +1,255 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6667,        247]
+NotebookOptionsPosition[      5626,        205]
+NotebookOutlinePosition[      5967,        220]
+CellTagsIndexPosition[      5924,        217]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Vss", "=", "5"}]], "Input",
+ CellChangeTimes->{{3.7040069719286003`*^9, 3.7040069830472107`*^9}}],
+
+Cell[BoxData["5"], "Output",
+ CellChangeTimes->{{3.7040069746455965`*^9, 3.7040069837625294`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"VsatP", ",", "VsatN"}], "}"}], "=", 
+  RowBox[{"{", 
+   RowBox[{"5", ",", "0"}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.704007107429095*^9, 3.7040071341592927`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.7040071349223595`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"R3", "=", 
+  RowBox[{"100", "*", 
+   RowBox[{"10", "^", "3"}]}]}]], "Input",
+ CellChangeTimes->{{3.704007147797882*^9, 3.704007178118492*^9}}],
+
+Cell[BoxData["100000"], "Output",
+ CellChangeTimes->{{3.7040071731456027`*^9, 3.704007178872447*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"VTH", "=", 
+  FractionBox[
+   RowBox[{"R2", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"R1", "*", "VsatP"}], "+", 
+      RowBox[{"R3", "*", "Vss"}]}], ")"}]}], 
+   RowBox[{
+    RowBox[{"R2", "*", "R3"}], "+", 
+    RowBox[{"R1", "*", 
+     RowBox[{"(", 
+      RowBox[{"R2", "+", "R3"}], ")"}]}]}]]}]], "Input",
+ CellChangeTimes->{{3.704007000399922*^9, 3.7040070149140425`*^9}, {
+  3.704007048632638*^9, 3.704007070628829*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"500000", "+", 
+     RowBox[{"5", " ", "R1"}]}], ")"}], " ", "R2"}], 
+  RowBox[{
+   RowBox[{"100000", " ", "R2"}], "+", 
+   RowBox[{"R1", " ", 
+    RowBox[{"(", 
+     RowBox[{"100000", "+", "R2"}], ")"}]}]}]]], "Output",
+ CellChangeTimes->{3.7040070848791547`*^9, 3.704007138862023*^9, 
+  3.7040071810519934`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"VTL", "=", 
+  FractionBox[
+   RowBox[{"R2", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"R1", "*", "VsatN"}], "+", 
+      RowBox[{"R3", "*", "Vss"}]}], ")"}]}], 
+   RowBox[{
+    RowBox[{"R2", "*", "R3"}], "+", 
+    RowBox[{"R1", "*", 
+     RowBox[{"(", 
+      RowBox[{"R2", "+", "R3"}], ")"}]}]}]]}]], "Input",
+ CellChangeTimes->{{3.7040070748299465`*^9, 3.7040070778306437`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"500000", " ", "R2"}], 
+  RowBox[{
+   RowBox[{"100000", " ", "R2"}], "+", 
+   RowBox[{"R1", " ", 
+    RowBox[{"(", 
+     RowBox[{"100000", "+", "R2"}], ")"}]}]}]]], "Output",
+ CellChangeTimes->{3.7040070857172856`*^9, 3.704007140263646*^9, 
+  3.704007182074211*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"VTH", "\[Equal]", "3.7"}], ",", 
+     RowBox[{"VTL", "\[Equal]", "3.4"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"R1", ",", "R2"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.704007185307903*^9, 3.704007207517744*^9}, {
+  3.7040073816735835`*^9, 3.7040073891249475`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Solve","ratnz",
+   "\"Solve was unable to solve the system with inexact coefficients. The \
+answer was obtained by solving a corresponding exact system and numericizing \
+the result.\"",2,12,1,28835076734877879345,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7040073900561457`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"R1", "\[Rule]", "8823.529411764706`"}], ",", 
+    RowBox[{"R2", "\[Rule]", "23076.923076923078`"}]}], "}"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7040073900561457`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", 
+  RowBox[{"VTH", ",", "VTL"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7040074955922794`*^9, 3.7040075013495407`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"R1", "=", 
+      RowBox[{"9.1", "*", 
+       RowBox[{"10", "^", "3"}]}]}], ",", 
+     RowBox[{"R2", "=", 
+      RowBox[{"22", "*", 
+       RowBox[{"10", "^", "3"}]}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox[
+      RowBox[{"R2", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"R1", "*", "VsatP"}], "+", 
+         RowBox[{"R3", "*", "Vss"}]}], ")"}]}], 
+      RowBox[{
+       RowBox[{"R2", "*", "R3"}], "+", 
+       RowBox[{"R1", "*", 
+        RowBox[{"(", 
+         RowBox[{"R2", "+", "R3"}], ")"}]}]}]], ",", 
+     FractionBox[
+      RowBox[{"R2", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"R1", "*", "VsatN"}], "+", 
+         RowBox[{"R3", "*", "Vss"}]}], ")"}]}], 
+      RowBox[{
+       RowBox[{"R2", "*", "R3"}], "+", 
+       RowBox[{"R1", "*", 
+        RowBox[{"(", 
+         RowBox[{"R2", "+", "R3"}], ")"}]}]}]]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.704007412769473*^9, 3.7040074494562016`*^9}, {
+  3.704007508067156*^9, 3.7040075124679213`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3.6254606972388372`", ",", "3.3230620506313815`"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.704007451826193*^9, 3.704007513637207*^9}]
+}, Open  ]]
+},
+WindowSize->{766, 772},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 121, 2, 30, "Input"],
+Cell[704, 26, 98, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[839, 32, 219, 6, 30, "Input"],
+Cell[1061, 40, 117, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1215, 48, 166, 4, 30, "Input"],
+Cell[1384, 54, 101, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1522, 60, 459, 14, 48, "Input"],
+Cell[1984, 76, 381, 12, 48, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2402, 93, 412, 13, 48, "Input"],
+Cell[2817, 108, 303, 9, 48, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3157, 122, 374, 10, 30, "Input"],
+Cell[3534, 134, 340, 7, 39, "Message"],
+Cell[3877, 143, 243, 7, 30, "Output"]
+}, Open  ]],
+Cell[4135, 153, 155, 3, 30, "Input"],
+Cell[CellGroupData[{
+Cell[4315, 160, 1116, 36, 48, "Input"],
+Cell[5434, 198, 176, 4, 63, "Output"]
+}, Open  ]]
+}
+]
+*)
+
