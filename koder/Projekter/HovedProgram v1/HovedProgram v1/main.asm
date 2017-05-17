@@ -29,7 +29,7 @@
 .EQU InType_DataSpace = 0x00
 .EQU InCmd_DataSpace = 0x01
 .EQU InBesked_DataSpace = 0x02
-.EQU ZStart = 4+379			;Random data i starten af dataspace
+.EQU ZStart = 512			;Random data i starten af dataspace
 
 ;SREG2 Navngivning
 .EQU StateCount0 = 0 
@@ -87,6 +87,9 @@
 RJMP Setup      ;Springer til setup. 
 
 .ORG INT0addr
+JMP StregInterrupt   
+
+.ORG INT1addr
 JMP InteDist
 
 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
@@ -94,7 +97,6 @@ JMP ADCDone
 
 .ORG OC1Aaddr	;Timer 1 compereA servisrutine
 JMP Timer1CompereA	
-
 
 .ORG 50			;Sætter adressen for denne linje til over 30, da dette ville være lige efter 28+2.
 
@@ -109,12 +111,12 @@ LDI SREG2,0
 	OUT SPL,Temp1					;Gemmer i stack pointer 
 
 ;Opsætning af hardware inteerupt 
-	LDI Temp1, (1<<INT0);|(1<<INT1)		;Tænder for INT0 og INT1
+	LDI Temp1, (1<<INT0)|(1<<INT1)		;Tænder for INT0 og INT1
 	OUT GICR, Temp1
-	LDI Temp1, (1<<ISC01);|(1<<ISC11)	;Sætter INT0 og INT1 til at trigge på faldende signal 
+	LDI Temp1, (1<<ISC01)|(1<<ISC11)	;Sætter INT0 og INT1 til at trigge på faldende signal 
 	OUT MCUCR, Temp1
 	SBI PORTD, 2 ;pull-up activated INT0
-	;SBI PORTD, 3 ;pull-up activated INT1
+	SBI PORTD, 3 ;pull-up activated INT1
 
 ;Indhætning af verdier fra EEPROM
 LDI Temp1, HIGH(EEPROM_AccRefP)
@@ -129,25 +131,26 @@ MOV AccRefN, Ret1
 
 ;Opsætning af kommunikation
 	LDI Temp1, (1<<TXEN)|(1<<RXEN)				;Opsætter værdien til modtagelse og afsendelse af seriel data.
-	OUT UCSRB, Temp1								;Sender værdien til opsætningsregisteret, UCSRB (s. 409).
+	OUT UCSRB, Temp1							;Sender værdien til opsætningsregisteret, UCSRB (s. 212).
 	LDI Temp1, (1<<UCSZ1)|(1<<UCSZ0)|(1<<URSEL)	;Her indstilles mikrokontrolleren til 8 bit data, ingen parity bit og kun 1 stop bit.
-	OUT UCSRC, Temp1								;Værdien sendes til registeret UCSRC (s. 410).
-	LDI Temp1, 103								;Her indstilles baud rate til 9600 (ved 16 MHz)(s. 405).
-	OUT UBRRL, Temp1								;Værdien for baud rate sendes til registeret UBRRL 
+	OUT UCSRC, Temp1							;Værdien sendes til registeret UCSRC (s. 214).
+	LDI Temp1, 103								;Her indstilles baud rate til 9600 (ved 16 MHz).
+	OUT UBRRL, Temp1							;Værdien for baud rate sendes til registeret UBRRL (s. 216).
 
 ;Opsætning af PWM
 	SBI DDRD,7		;PordtD Bit7 sættes og bliver output.
-	LDI Temp1, (1<<WGM00)|(1<<COM01)|(1<<CS00) 
-	OUT TCCR2, Temp1	;Opsætter PWM, sætter prescaleren til 1, fasekorrekt, ikke-inverteret (s. 153).
-	LDI Temp1, 0		;
-	OUT OCR2, Temp1	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
+	LDI Temp1, (1<<WGM00)|(1<<COM01)|(1<<CS00)	
+	OUT TCCR2,Temp1	;Opsætter PWM, sætter prescaleren til 1/32 (ca. 1 kHz), fasekorrekt, ikke-inverteret (s. 153).
+	LDI Temp1,0		;
+	OUT OCR2,Temp1	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
 
 ;Opsætning af ADC
-	CBI DDRA, 0		;Sætter PortA 0 til indput
-	LDI R16, (1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
-	OUT ADCSRA, R16 
-	LDI R16, (1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er venstre justified
-	OUT ADMUX, R16
+	LDI Temp1,0
+	OUT DDRA, Temp1	;Sætter PortA 0 til indput
+	LDI Temp1,(1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
+	OUT ADCSRA, Temp1
+	LDI Temp1,(1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
+	OUT ADMUX, Temp1
 
 ;Opsætning af RGB LED
 	SBI DDRA, 1
@@ -170,6 +173,19 @@ MOV AccRefN, Ret1
 SEI	;Enabler interrupts. 
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
 ;---------------------------------------
+LDI Arg,35
+CALL CalcOCR2
+OUT OCR2,Ret1
+
+LDI Arg,0b10010
+CALL SetLED
+
+PreLine:
+NOP
+JMP PreLine
+
+
+AutoInit:
 
 LDI AccRefN, 150
 LDI AccRefP, 100
@@ -178,6 +194,9 @@ LDI ZH, HIGH(ZStart)
 LDI ZL, LOW(ZStart)
 
 IN Temp1, UDR
+
+LDI Arg,LED_Straight
+CALL SetLED
 
 Auto:
 SBIC UCSRA,RXC	
@@ -283,6 +302,19 @@ AvgAcc:
 AvgAccEnd:
 RET 
 
+DrivingInit:
+LDI Temp1,0
+OUT OCR2,Temp1
+
+LDI Arg,0b1001
+CALL SetLED
+
+Driving:
+SBIC UCSRA,RXC	
+RJMP UAuto
+
+JMP Driving
+
 UAuto:
 
 
@@ -379,7 +411,6 @@ Error:
 SkipEndOfProtoInter:
 
 DataCheck:
-	;MOV InData,InBesked Slettes
 	LDS Ret1, InType_DataSpace
 	CPI Ret1, Proto_GET
 	BREQ GetWithData
@@ -447,38 +478,46 @@ Send:
 SendSpeed:
 	LDI Arg, Proto_REPLY	;
 	CALL Send			;Sender Replytypen (0xBB)
-	LDI Arg, Proto_Start	;
-	CALL Send			;Sender command Start (0x10)
+	LDI Arg,Proto_Start
+	CALL Send
 	IN Arg,OCR2		;
 	CALL Send			;Sender den nuværende hastighed 
 	RET
 
 SetSpeed:
+	CPI InBesked, 100
+	BREQ SetSpeed_MaxSpeed
+	MOV Arg, InBesked
 	CALL CalcOCR2		;Kalder en subrutine der udregner OCR2 (Dens resutat ligger i Ret1)
 	OUT OCR2,Ret1		;Sætter hastigheden på bilen til resultatet fra CalcOCR2.
 	RET
 
+	SetSpeed_MaxSpeed:
+		LDI Temp1,0xFF
+		OUT OCR2,Temp1
+		RET
+
 SendPrescaler:
-	LDI Arg, Proto_REPLY
-	CALL Send
-	LDI Arg, Proto_PWMPre
-	CALL Send
 	IN Temp1,TCCR2
 	ANDI Temp1,0b00000111
+	LDI Arg, Proto_REPLY
+	CALL Send
+	LDI Arg,Proto_PWMPRe
+	CALL Send
 	MOV Arg,Temp1
 	CALL Send
 	RET
 
 SetPrescaler:
 	CPI InBesked,8
-	BRGE DoNotSetPre
+	BRSH SetPrescaler_Return
 	CPI InBesked,0
-	BREQ DoNotSetPre
+	BREQ SetPrescaler_Return
 	IN Temp1,TCCR2
 	ANDI Temp1,0b11111000
 	OR Temp1,InBesked
 	OUT TCCR2,Temp1
-	DoNotSetPre:
+	SetPrescaler_Return:
 	RET
 
 
@@ -512,13 +551,11 @@ SetAccRef:
 	RET
 
 SendAccRef:
-	MOV Arg, InBesked
-	CALL Send
 	CPI InBesked,1
 	BREQ SendAccRefN
 	LDI Arg, Proto_REPLY
 	CALL Send
-	LDI Arg, Proto_AccRef
+	LDI Arg,Proto_AccRef
 	CALL Send
 	MOV Arg, AccRefP
 	CALL Send
@@ -527,7 +564,7 @@ SendAccRef:
 	SendAccRefN:
 	LDI Arg, Proto_REPLY
 	CALL Send
-	LDI Arg, Proto_AccRef
+	LDI Arg,Proto_AccRef
 	CALL Send
 	MOV Arg, AccRefN
 	CALL Send
@@ -543,15 +580,9 @@ IsType:
 	
 	;INDSÆT NYE TELEGRAMTYPER
 
-	/*
-	Behøves ikke da der allered er tjekket om den er 0
-	LDI Arg,0
-	STS InType_DatSpac, Arg
-	*/
 	RET
 
 	wasType:
-		;MOV InType,InBesked
 		STS InType_DataSpace, InBesked
 		RET
 
@@ -573,11 +604,6 @@ IsCmd:
 
 	;INDSÆT NYE TELEGRAMKOMMANDOER.
 
-	/*
-	Behøves ikke da der allered er tjekket om den er 0
-	LDI Arg,0
-	STS InCmd_DatSpac, Arg
-	*/
 	RET
 
 	wasCommand:
@@ -601,21 +627,14 @@ Cleanup:
 	RET
 
 CalcOCR2:
-	MOV Temp1,InBesked
-	MOV Ret1,Temp1
-	ADD Ret1,Temp1
-	LSR Temp1
-	ADD Ret1,Temp1
-	LSR Temp1
-	LSR Temp1
-	LSR Temp1
-	ADD Ret1,Temp1
-	LSR Temp1
-	SUB Ret1,Temp1
-	LSR Temp1
-	ADD Ret1,Temp1
-	RET
-
+	LDI Temp1,0b10100011		;2.55 som Q2.6 format
+	MUL Arg, Temp1				;Resutat ligger i R1:R0 på format Q10.6 (maksimalt 6.6, 100 -> 0b11 1111 1010 1100)
+	LSL R0
+	ROL R1						;Resutat er nu på format Q7.5
+	LSL R0
+	ROL R1						;Resutat er nu på format Q8.6
+	MOV Ret1, R1
+RET
 
 SaveInEEPROM:
 	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
@@ -644,12 +663,11 @@ SetLED:
 	RJMP EndOfSetLED
 	CPI Arg,64
 	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
-	;CALL ClearLED Vi skal lige se om den behøves efter ny metode 
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
-	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
-	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
+	IN Temp1, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+	ANDI Temp1, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+	OR Temp1, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
+	OUT	PORTA, Temp1		;Sender den nye værdig ud på PORTA
 	ERROREndOfSetLED:
 	EndOfSetLED:
 RET
@@ -657,8 +675,8 @@ RET
 PulseLED:
 	;Tjekker om LEDVerdi er gyldig
 	CPI Arg,64
-	BRSH ErrorPulseLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl 
-	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek
+	BRSH ErrorPulseLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
+	SBR SREG2, LEDTimeOn ;Sikre at LED'er ikke kan ændres på nær ved at kalde LED1Sek igen inden 1 sek 
 	;Tænder LED'er med værdi
 	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
 	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
@@ -674,12 +692,6 @@ PulseLED:
 ErrorPulseLED:
 RET
 
-ClearLED:	;Behøves nok ikke 
-	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA som slukker alle LED'er
-RET
-	
 GetLED:
 	IN Ret1, PORTA			;Loader PORTA ind 
 	ANDI Ret1, 0b01111110	;Udmasker bit 0 og 7 
@@ -763,7 +775,9 @@ RETI
 Timer1CompereA:
 	PUSH Temp1
 	;Slukker LED'er
-	CALL ClearLED
+	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA som slukker alle LED'er
 	;Stopper timer
 	LDI Temp1, 0			;Timer fra
 	OUT TCCR1B, Temp1		
@@ -772,6 +786,12 @@ Timer1CompereA:
 RETI
 
 InteDist:
+	LDI Arg,0b101101
+	CALL PulseLED
+
+	LDI Arg, 0x75
+	CALL Send
+
 	PUSH Temp1
 	LDI Temp1, 1
 	ADD DistL, Temp1
@@ -780,17 +800,31 @@ InteDist:
 	POP Temp1
 RETI
 
-;----------------------\/\/\/Junk jart\/\/\/ ----------------------
-/*
+StregInterrupt:
+	;Kode til mållinje
+	POP Temp1
+	POP Temp1
+	;Tjek om bit i reg er 0 hvilket vi få den til at sikiipe jmp 
+	MOV Temp1,SREG2
+	ANDI Temp1,0b000000111
+	CPI Temp1,1
+	BRSH StregInterrupt_1
 
+	INC SREG2
+	LDI Temp1, LOW(AutoInit)
+	PUSH Temp1
+	LDI Temp1, HIGH(AutoInit)
+	PUSH Temp1
+	;Sæt bit i reg her til 1
+	RETI
 
-
-
-
-
-
-
-
-
-
-*/
+	StregInterrupt_1:
+	INC SREG2
+	CPI ZL,(LOW(ZStart) + 2)
+	BRLO StregInterrupt_Return
+	LDI Temp1, LOW(DrivingInit)
+	PUSH Temp1
+	LDI Temp1, HIGH(DrivingInit)
+	PUSH Temp1
+StregInterrupt_Return:
+RETI
