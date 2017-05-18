@@ -26,9 +26,14 @@
 
 ;Data Space
 
-.EQU InType_DataSpace = 0x00
-.EQU InCmd_DataSpace = 0x01
-.EQU InBesked_DataSpace = 0x02
+.EQU InType_DataSpace = 0
+.EQU InCmd_DataSpace = 1
+.EQU InBesked_DataSpace = 2
+.EQU DataSpace_ZMaxH = 3
+.EQU DataSpace_ZMaxL = 4
+.EQU DataSpace_StoredDistH = 5
+.EQU DataSpace_StoredDistL = 6
+.EQU DataSpace_Temp1 = 7
 .EQU ZStart = 512			;Random data i starten af dataspace
 
 ;SREG2 Navngivning
@@ -195,7 +200,7 @@ LDI AccRefP, 100
 LDI ZH, HIGH(ZStart)
 LDI ZL, LOW(ZStart)
 
-IN Temp1, UDR
+;IN Temp1, UDR
 
 LDI Arg,LED_Straight
 CALL SetLED
@@ -305,60 +310,114 @@ AvgAccEnd:
 RET 
 
 DrivingInit:
-LDI Temp1,0
-OUT OCR2,Temp1
+	LDI Temp1,0
+	OUT OCR2,Temp1
 
-LDI Arg,0b1001
-CALL SetLED
+	LDI Arg,0b1001
+	CALL SetLED
+
+	CALL StoreTrack
+
+	STS DataSpace_ZMaxH, ZH
+	STS DataSpace_ZMaxL, ZL
+
+	ResetZ:
+	LDI ZL, LOW(ZStart)
+	LDI ZH, HIGH(ZStart)
 
 Driving:
-SBIC UCSRA,RXC	
-RJMP UAuto
+	SBIC UCSRA,RXC	
+	RJMP UAuto
 
-CALL StoreTrack
+	LD Temp1, Z+
+	STS DataSpace_StoredDistL, Temp1
 
-STS DataSpace_ZMaxH, ZH
-STS DataSpace_ZMaxL, ZL
+	LD Temp1, Z+
+	STS DataSpace_StoredDistH, Temp1
 
-LDI ZL, LOW(ZStart)
-LDI ZH, HIGH(ZStart)
+	MOV Arg, Temp1
+	ANDI Arg, 0b11000000
+	
+	CALL CalcOffset
 
-JMP Driving
+	CALL StateVel
+
+	Driving_Wait:
+	CP DistH, Temp2
+	BRLO Driving_Wait
+
+	CP DistL, Temp1
+	BRLO Driving_Wait
+
+	CPI Arg,(Straight<<State0)
+	BRNE Driving_Turn
+
+	Driving_Straight:
+	IN Temp1, PORTB
+	ORI Temp1, 0b00000001
+	OUT PORTB, Temp1
+	
+	LDI Arg,Velocity_Turn 
+	CALL SetSpeed
+
+	Driving_CheckTBit:
+	BRBC 6, Driving_CheckTBit
+	
+	CALL AvgAcc
+
+	CPI DivCounter,0
+	BRNE Driving_CheckTBit
+
+	CP Ret1, AccRefP
+	BRLO Driving_CheckTBit
+
+	CP Ret1, AccRefN
+	BRSH Driving_CheckTBit
+
+	JMP Driving
+
+	Driving_Turn:
+
+	JMP Driving
 
 StateVel:
-CPI Arg,(Straight<<State0)
-BRNE StateVel_Straight
-IN Temp1, PORTB
-ANDI Temp1, 0b11111110
-OUT PORTB, Temp1
-LDI Arg,Velocity_Turn
-CALL SetSpeed
-RET
-
-	StateVel_Straight:
+	CPI Arg,(Straight<<State0)
+	BRNE StateVel_Straight
+	PUSH Temp1
 	IN Temp1, PORTB
-	ORI Temp1,0b00000001
+	ANDI Temp1, 0b11111110
 	OUT PORTB, Temp1
-	LDI Arg,Velocity_Straight
-	CALL SetSpeed
-RET
+	LDI Temp1,Velocity_Turn
+	OUT OCR2, Temp1
+	POP Temp1
+	RET
+
+		StateVel_Straight:
+		PUSH Temp1
+		IN Temp1, PORTB
+		ORI Temp1,0b00000001
+		OUT PORTB, Temp1
+		LDI Temp1,Velocity_Straight
+		OUT OCR2, Temp1
+		POP Temp1
+		RET
 
 CalcOffset:
-CPI Arg,Straight
-BRNE CalcOffset_Return
-LDS Temp1,DataSpace_StoredDistH
-LDS Temp2,DataSpace_StoredDistL
-LSR Temp1
-ROR Temp2
-LSR Temp1
-ROR Temp2
-LSR Temp1
-ROR Temp2
-LSR Temp1
-ROR Temp2
-ADD DistL,Temp2
-LDI Temp2,0
-ADC DistH,Temp2
+	CPI Arg,Straight
+	BRNE CalcOffset_Return
+	LDS Temp1,DataSpace_StoredDistH
+	LDS Temp2,DataSpace_StoredDistL
+	LSR Temp1
+	ROR Temp2
+	LSR Temp1
+	ROR Temp2
+	LSR Temp1
+	ROR Temp2
+	LSR Temp1
+	ROR Temp2
+	ADD DistL,Temp2
+	LDI Temp2,0
+	ADC DistH,Temp2
 
 CalcOffset_Return:
 RET
@@ -849,14 +908,17 @@ InteDist:
 RETI
 
 StregInterrupt:
+	STS DataSpace_Temp1,Temp1
 	;Kode til mållinje
 	POP Temp1
 	POP Temp1
-	;Tjek om bit i reg er 0 hvilket vi få den til at sikiipe jmp 
+	;Tjek om bit i reg er 0 hvilket vi få den til at skippe jmp 
 	MOV Temp1,SREG2
 	ANDI Temp1,0b000000111
 	CPI Temp1,1
-	BRSH StregInterrupt_1
+	BREQ StregInterrupt_1
+	CPI Temp1,2
+	BREQ StregInterrupt_2
 
 	INC SREG2
 	LDI Temp1, LOW(AutoInit)
@@ -867,12 +929,24 @@ StregInterrupt:
 	RETI
 
 	StregInterrupt_1:
-	INC SREG2
 	CPI ZL,(LOW(ZStart) + 2)
 	BRLO StregInterrupt_Return
+	INC SREG2
 	LDI Temp1, LOW(DrivingInit)
 	PUSH Temp1
 	LDI Temp1, HIGH(DrivingInit)
 	PUSH Temp1
+	RETI
+
+	StregInterrupt_2:
+	CPI ZL,(LOW(ZStart)+2)
+	BRLO StregInterrupt_Return
+	LDI ZL, LOW(ZStart)
+	LDI ZH, HIGH(ZStart)
+	LDI Temp1, LOW(ResetZ)
+	PUSH Temp1
+	LDI Temp1, HIGH(ResetZ)
+	PUSH Temp1
+
 StregInterrupt_Return:
 RETI
