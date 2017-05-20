@@ -360,6 +360,7 @@ Driving:
 
 	JMP Driving
 
+;Subroutines---------------------------------------
 StateVel:
 	CPI Arg,(Straight<<State0)
 	BRNE StateVel_Straight
@@ -401,6 +402,7 @@ CalcOffset:
 
 CalcOffset_Return:
 RET
+;---------------------------------------
 
 UAuto:
 
@@ -866,7 +868,7 @@ AvgAcc:
 
 	AvgAccRet:
 		;Flytter resultatet, AccSumH, til returregisteret.
-		MOV Ret1, AccSumH
+		MOV Ret1, AccSumH	;Der med divideres der med 256
 
 		;Nulstiller tæller og variabler.
 		LDI DivCounter, 0
