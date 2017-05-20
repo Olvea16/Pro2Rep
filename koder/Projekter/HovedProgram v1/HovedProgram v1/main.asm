@@ -64,9 +64,11 @@ InType_DataSpace
 .EQU Velocity_PreLine = 76 ;Ca. 30
 
 
+/*;De her skal SLETTES!!!!
 .EQU AccRefN_Konst = 100
 .EQU AccRefP_Konst = 160
-;
+*/
+
 
 ;Protokol 
 .EQU Proto_SET = 0x55
@@ -236,16 +238,16 @@ JMP AutoEnd
 	CPI DivCounter, 0
 	BRNE AutoEnd
 
-	CPI Ret1, AccRefP_Konst
+	CPI Ret1, AccRefP
 	BRSH StateMachine_Turn1
 
-	CPI Ret1, AccRefN_Konst
+	CPI Ret1, AccRefN
 	BRLO StateMachine_Turn2
 
-	CPI Ret1, (AccRefP_Konst - Hyst)
+	CPI Ret1, (AccRefP - Hyst)
 	BRSH AutoEnd
 
-	CPI Ret1, (AccRefN_Konst + Hyst)
+	CPI Ret1, (AccRefN + Hyst)
 	BRLO AutoEnd
 
 		StateMachine_Straight:
