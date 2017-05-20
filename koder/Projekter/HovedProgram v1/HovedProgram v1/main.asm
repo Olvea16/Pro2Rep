@@ -53,8 +53,9 @@
 .EQU Turn1 = 1
 .EQU Turn2 = 2
 
-.EQU Velocity_Turn = 76 ;Ca. 30.
+.EQU Velocity_Turn = 89 ;Ca. 35.
 .EQU Velocity_Straight = 204 ;Ca. 80.
+.EQU Velocity_PreLine = 76 ;Ca. 30
 
 .EQU AccRefN_Konst = 100
 .EQU AccRefP_Konst = 160
@@ -75,6 +76,7 @@
 ;---------------------------
 
 ;LED
+.EQU LED_PreLine = 0b10010
 .EQU LED_Straight = 0b111111
 .EQU LED_Turn1 = 0b000011
 .EQU LED_Turn2 = 0b011000
@@ -181,21 +183,23 @@ MOV AccRefN, Ret1
 SEI	;Enabler interrupts. 
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
 ;---------------------------------------
-LDI Arg,35
-CALL CalcOCR2
-OUT OCR2,Ret1
+PreLine:
+LDI Temp1, Velocity_PreLine
+OUT OCR2, Temp1
 
-LDI Arg,0b10010
+LDI Arg, LED_PreLine
 CALL SetLED
 
-PreLine:
+LoopPreLine:
 NOP
-JMP PreLine
+JMP LoopPreLine
 
 AutoInit:
 
+;De her skal SLETTES!!!!
 LDI AccRefN, 150
 LDI AccRefP, 100
+;--------------------
 
 LDI ZH, HIGH(ZStart)
 LDI ZL, LOW(ZStart)
