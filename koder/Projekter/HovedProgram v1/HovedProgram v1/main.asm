@@ -33,6 +33,9 @@ InType_DataSpace
 .EQU DataSpace_StoredDistH = 4
 .EQU DataSpace_StoredDistL = 5
 .EQU DataSpace_Temp1 = 6
+.EQU DataSpace_Temp2 = 7
+.EQU DataSpace_Velocity_Straight = 8
+.EQU DataSpace_Velocity_Turn = 9
 .EQU ZStart = 512			;Random data i starten af dataspace
 
 ;SREG2 Navngivning
@@ -47,14 +50,19 @@ InType_DataSpace
 ;---------------------------
 
 ;
+;Hysteresen
 .EQU Hyst = 10
+
+;States
 .EQU Straight = 0
 .EQU Turn1 = 1
 .EQU Turn2 = 2
 
+;Hastigheder 
 .EQU Velocity_Turn = 89 ;Ca. 35.
 .EQU Velocity_Straight = 204 ;Ca. 80.
 .EQU Velocity_PreLine = 76 ;Ca. 30
+
 
 .EQU AccRefN_Konst = 100
 .EQU AccRefP_Konst = 160
@@ -75,7 +83,7 @@ InType_DataSpace
 ;---------------------------
 
 ;LED
-.EQU LED_PreLine = 0b10010
+.EQU LED_PreLine = 0b010010
 .EQU LED_Straight = 0b111111
 .EQU LED_Turn1 = 0b000011
 .EQU LED_Turn2 = 0b011000
@@ -138,6 +146,13 @@ CALL LoadFromEEPROM
 MOV AccRefN, Ret1
 ;---
 
+;Gemning af værdiger i data space
+LDI Temp1, Velocity_Turn
+STS DataSpace_Velocity_Turn, Temp1
+LDI Temp1, Velocity_Straight
+STS DataSpace_Velocity_Straight, Temp1
+;-----
+
 ;Opsætning af kommunikation
 	LDI Temp1, (1<<TXEN)|(1<<RXEN)				;Opsætter værdien til modtagelse og afsendelse af seriel data.
 	OUT UCSRB, Temp1							;Sender værdien til opsætningsregisteret, UCSRB (s. 212).
@@ -183,32 +198,32 @@ SEI	;Enabler interrupts.
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
 ;---------------------------------------
 PreLine:
-LDI Temp1, Velocity_PreLine
+LDI Temp1, Velocity_PreLine	;Sætter opmålings hastigheden
 OUT OCR2, Temp1
 
-LDI Arg, LED_PreLine
+LDI Arg, LED_PreLine	;Tænder LED'er
 CALL SetLED
 
-LoopPreLine:
+LoopPreLine:			;Venter på at StregInterrupt sender den vidre 
 NOP
 JMP LoopPreLine
 
 AutoInit:
 
-;De her skal SLETTES!!!!
+/*;De her skal SLETTES!!!!
 LDI AccRefN, 150
 LDI AccRefP, 100
-;--------------------
-
-LDI ZH, HIGH(ZStart)
+;--------------------*/
+;Sætter Z til hvor det første bane stykke skal være 
+LDI ZH, HIGH(ZStart)	
 LDI ZL, LOW(ZStart)
 
-;IN Temp1, UDR
-
+;Sætter LED'er til køre lige lys
 LDI Arg,LED_Straight
 CALL SetLED
 
 Auto:
+;Tjekker om der skulle være kommet en ny besked 
 SBIC UCSRA,RXC	
 RJMP UAuto
 
@@ -336,7 +351,7 @@ Driving:
 	ORI Temp1, 0b00000001
 	OUT PORTB, Temp1
 	
-	LDI Arg,Velocity_Turn 
+	LDS Arg, DataSpace_Velocity_Turn 
 	CALL SetSpeed
 
 	Driving_CheckTBit:
@@ -360,33 +375,35 @@ Driving:
 	JMP Driving
 
 ;Subroutines---------------------------------------
-StateVel:
-	CPI Arg,(Straight<<State0)
-	BRNE StateVel_Straight
+StateVel:;Opdatere hastighed og elektromagnet
 	PUSH Temp1
-	IN Temp1, PORTB
-	ANDI Temp1, 0b11111110
-	OUT PORTB, Temp1
-	LDI Temp1,Velocity_Turn
+	CPI Arg,(Straight<<State0)	;Tjekker hvilket state det er 
+	BRNE StateVel_Straight
+	
+	CBI PORTB,0 ;Tænder for eletromagnet 
+
+	;Sætter sving hastighed 
+	LDS Temp1, DataSpace_Velocity_Turn
 	OUT OCR2, Temp1
 	POP Temp1
 	RET
 
 		StateVel_Straight:
-		PUSH Temp1
-		IN Temp1, PORTB
-		ORI Temp1,0b00000001
-		OUT PORTB, Temp1
-		LDI Temp1,Velocity_Straight
+		SBI PORTB,0 ;Slukker for eletromagnet 
+
+		;Sætter lige ud hastighed 
+		LDS Temp1, DataSpace_Velocity_Straight
 		OUT OCR2, Temp1
+
 		POP Temp1
 		RET
 
-CalcOffset:
+CalcOffset: ;Udregner evt. offset af distancen
 	CPI Arg,Straight
 	BRNE CalcOffset_Return
 	LDS Temp1,DataSpace_StoredDistH
 	LDS Temp2,DataSpace_StoredDistL
+	;Dividere afstanden med 4
 	LSR Temp1
 	ROR Temp2
 	LSR Temp1
@@ -395,6 +412,7 @@ CalcOffset:
 	ROR Temp2
 	LSR Temp1
 	ROR Temp2
+	;Ligger 1/4 af afstanden til Dist 
 	ADD DistL,Temp2
 	LDI Temp2,0
 	ADC DistH,Temp2
@@ -573,15 +591,15 @@ SendSpeed:
 	RET
 
 SetSpeed:
-	CPI InBesked, 100
-	BREQ SetSpeed_MaxSpeed
+	CPI InBesked, 100	
+	BREQ SetSpeed_MaxSpeed	;Hvis der er ønsket 100% hopper den 
 	MOV Arg, InBesked
 	CALL CalcOCR2		;Kalder en subrutine der udregner OCR2 (Dens resutat ligger i Ret1)
 	OUT OCR2,Ret1		;Sætter hastigheden på bilen til resultatet fra CalcOCR2.
 	RET
 
 	SetSpeed_MaxSpeed:
-		LDI Temp1,0xFF
+		LDI Temp1,0xFF	;Sætter hastigheden til maks 
 		OUT OCR2,Temp1
 		RET
 
@@ -715,6 +733,7 @@ Cleanup:
 	RET
 
 CalcOCR2:
+	;Udregner værdien til OCR2 med denne formel OCR2=(Hastighed i %)*2,55
 	LDI Temp1,0b10100011		;2.55 som Q2.6 format
 	MUL Arg, Temp1				;Resutat ligger i R1:R0 på format Q10.6 (maksimalt 6.6, 100 -> 0b11 1111 1010 1100)
 	LSL R0
@@ -725,6 +744,7 @@ CalcOCR2:
 RET
 
 SaveInEEPROM:
+	;Gemmer data i EEPROM	
 	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
 	RJMP SaveInEEPROM
 	OUT EEARH, Temp1		;Sætter lokationen i EEPROM 
@@ -738,6 +758,7 @@ RET
 
 
 LoadFromEEPROM:
+	;Indhenter data fra EEPROM
 	SBIC EECR, EEWE			;Tjekker om EEPROM er klar til at bruges 
 	RJMP LoadFromEEPROM
 	OUT EEARH, Temp1		;Sætter lokationen i EEPROM 
@@ -747,6 +768,7 @@ LoadFromEEPROM:
 RET
 
 SetLED:
+	;Sætter en bestem LED værdi hvis der ikke er en PulseLED igang
 	SBRC SREG2, LEDTimeOn
 	RJMP EndOfSetLED
 	CPI Arg,64
@@ -761,6 +783,7 @@ SetLED:
 RET
 
 PulseLED:
+	;Lyser med en LED værdi i et sekundt 
 	;Tjekker om LEDVerdi er gyldig
 	CPI Arg,64
 	BRSH ErrorPulseLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
@@ -781,12 +804,14 @@ ErrorPulseLED:
 RET
 
 GetLED:
+	;Indhenter LED værdien 
 	IN Ret1, PORTA			;Loader PORTA ind 
 	ANDI Ret1, 0b01111110	;Udmasker bit 0 og 7 
 	LSR Ret1				;Rykker Ret1 en til højre så det passer med at LED verdi er mellem 0 og 63 
 RET
 
 ChangeState:
+	;Gemmer og ændre state
 	CALL StoreTrack
 	MOV Temp1, SREG2
 	ANDI Temp1, 0b00110000
@@ -800,6 +825,7 @@ ChangeState:
 RET
 
 StateLED:
+	;Ændre LED'eren til at lyse efter hvilket state der er
 	MOV Temp1, SREG2
 	ANDI Temp1, 0b11000000
 	CPI Temp1, (Turn1<<State0)
@@ -820,6 +846,7 @@ StateLED:
 	RET
 
 StoreTrack:
+	;Gemmer banestykket med hvilket state det er. 
 	MOV Temp1, SREG2
 	ANDI Temp1,0b11000000
 	OR DistH, Temp1
@@ -830,6 +857,7 @@ StoreTrack:
 RET
 
 SendTrack:
+	;Sender den opmålte bane 
 	CALL StopCar
 	LDI Arg, Proto_REPLY
 	CALL Send
@@ -838,6 +866,7 @@ SendTrack:
 	MOV Temp2, ZL
 	LDI ZH, HIGH(ZStart)
 	LDI ZL, LOW(ZStart)
+	;Tjekker om enden er nået 
 	ZTjek:
 		CP ZH, Temp1
 		BRSH ZTjek2
@@ -883,7 +912,7 @@ ADCDone:
 	IN	AccData, ADCL		;Indlæser den lave del af ADC
 	IN  AccData, ADCH		;Indlæser den høje del af ADC
 	SBI ADCSRA, ADSC	;Starter conversion igen 
-	SET
+	SET	;Sætter T flaget højt for at vise der er en ny værdi 
 RETI
 
 Timer1CompereA:
@@ -900,23 +929,21 @@ Timer1CompereA:
 RETI
 
 InteDist:
-	LDI Arg,0b101101
-	CALL PulseLED
-
-	LDI Arg, 0x75
-	CALL Send
-
 	PUSH Temp1
+	;Addere til den kørte afsatand
 	LDI Temp1, 1
 	ADD DistL, Temp1
 	LDI Temp1, 0
 	ADC DistH, Temp1
+	;---
 	POP Temp1
 RETI
 
 StregInterrupt:
+	;Gemmer temp1 og temp2 i data space 
 	STS DataSpace_Temp1,Temp1
-	;Kode til mållinje
+	STS DataSpace_Temp2,Temp2
+	;Sletter retunering adresse
 	POP Temp1
 	POP Temp1
 	;Tjek om bit i reg er 0 hvilket vi få den til at skippe jmp 
@@ -926,34 +953,55 @@ StregInterrupt:
 	BREQ StregInterrupt_1
 	CPI Temp1,2
 	BREQ StregInterrupt_2
-
-	INC SREG2
-	LDI Temp1, LOW(AutoInit)
-	PUSH Temp1
-	LDI Temp1, HIGH(AutoInit)
-	PUSH Temp1
-	;Sæt bit i reg her til 1
-	RETI
+	;StregInterrupt_0
+		INC SREG2 ;Gør så næste gange er det StregInterrupt_1
+		;Giver en ny retunering adresse -> AutoInit
+		LDI Temp1, LOW(AutoInit)
+		PUSH Temp1
+		LDI Temp1, HIGH(AutoInit)
+		PUSH Temp1
+		LDS Temp1, DataSpace_Temp1
+		RETI
 
 	StregInterrupt_1:
-	CPI ZL,(LOW(ZStart) + 2)
-	BRLO StregInterrupt_Return
-	INC SREG2
-	LDI Temp1, LOW(DrivingInit)
-	PUSH Temp1
-	LDI Temp1, HIGH(DrivingInit)
-	PUSH Temp1
-	RETI
+		;Tjekker at der er kørt flere end 2 banestykker for at sikre det ikke er den "samme" streg 2 flere gange
+		CPI ZL,(LOW(ZStart) + 2)
+		BRLO StregInterrupt_Return
+		INC SREG2 ;Gør så næste gange er det StregInterrupt_2
+		;Giver en ny retunering adresse -> DrivingInit
+		LDI Temp1, LOW(DrivingInit)
+		PUSH Temp1
+		LDI Temp1, HIGH(DrivingInit)
+		PUSH Temp1
+		;Henter Temp1 ind igen
+		LDS Temp1, DataSpace_Temp1
+		RETI
 
 	StregInterrupt_2:
-	CPI ZL,(LOW(ZStart)+2)
-	BRLO StregInterrupt_Return
-	LDI ZL, LOW(ZStart)
-	LDI ZH, HIGH(ZStart)
-	LDI Temp1, LOW(ResetZ)
-	PUSH Temp1
-	LDI Temp1, HIGH(ResetZ)
-	PUSH Temp1
+		;Tjekker at der er kørt flere end 2 banestykker for at sikre det ikke er den "samme" streg 2 flere gange
+		CPI ZL,(LOW(ZStart)+2)
+		BRLO StregInterrupt_Return
+		;Nulstiller Z til bane start 
+		LDI ZL, LOW(ZStart)
+		LDI ZH, HIGH(ZStart)
+		;Sætter hastigheden op 
+		LDS Temp1, DataSpace_Velocity_Straight
+		LDI Temp2, 5
+		ADD Temp1,Temp2
+		STS Temp1, DataSpace_Velocity_Straight
+
+		LDS Temp1, DataSpace_Velocity_Turn
+		LDI Temp2, 5
+		ADD Temp1,Temp2
+		STS Temp1, DataSpace_Velocity_Turn
+		;---
+		;Giver en ny retunering adresse -> ResetZ
+		LDI Temp1, LOW(ResetZ)
+		PUSH Temp1
+		LDI Temp1, HIGH(ResetZ)
+		PUSH Temp1
 
 StregInterrupt_Return:
+LDS Temp1, DataSpace_Temp1
+LDS Temp2, DataSpace_Temp2
 RETI
