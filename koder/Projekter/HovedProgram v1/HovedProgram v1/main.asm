@@ -1,7 +1,7 @@
 ; Sidetal anviser sidenummer i ATmega32A datasheet uploadet på blackboard.
 
 ;Register
-.DEF Temp1 = R16	;Midlertidigt register, bruges også til interrupts.
+.DEF Temp1 = R16	;Midlertidigt register
 .DEF Temp2 = R17	;Midlertidigt register.
 .DEF Arg = R18 ;Argumentregister
 .DEF Ret1 = R19 ;Returregister.
@@ -17,7 +17,7 @@
 .DEF DivCounter = R29
 ;Vi må ikke tage R30 og R31 hvis vi gerne vil have Z (X og Y er R26 til R29) Vi skal nok samle nogel af registeren og tjekker om vi ik kan bruge Temp og Ret. Evt lave Arg om til et register vi bruger til at give verdi til subrutiner med så EEPROMSave og LEDVerdi kan komme der ind
 ;--------------------------
-
+InType_DataSpace
 ;EEPROM
 .EQU EEPROM_AccRefP = 0x000
 .EQU EEPROM_AccRefN = 0x001
@@ -25,15 +25,14 @@
 ;---------------------------
 
 ;Data Space
-
-.EQU InType_DataSpace = 0
-.EQU InCmd_DataSpace = 1
-.EQU InBesked_DataSpace = 2
-.EQU DataSpace_ZMaxH = 3
-.EQU DataSpace_ZMaxL = 4
-.EQU DataSpace_StoredDistH = 5
-.EQU DataSpace_StoredDistL = 6
-.EQU DataSpace_Temp1 = 7
+;Placeringen 
+.EQU DataSpace_InType = 0
+.EQU DataSpace_InCmd = 1
+.EQU DataSpace_ZMaxH = 2
+.EQU DataSpace_ZMaxL = 3
+.EQU DataSpace_StoredDistH = 4
+.EQU DataSpace_StoredDistL = 5
+.EQU DataSpace_Temp1 = 6
 .EQU ZStart = 512			;Random data i starten af dataspace
 
 ;SREG2 Navngivning
@@ -414,25 +413,25 @@ JMP EndOfProto		;Hvis RXC er 0, skal programmet hoppe over telegramfortolkningen
 IN InBesked,UDR		;Hvis RXC er 1, skal programmet læse og fortolke dataen i UDR.
 
 TypeCheck:
-	LDS Ret1, InType_DataSpace
+	LDS Ret1, DataSpace_InType
 	CPI Ret1,0x00	;Tjekker om InType er tom.
 	BRNE CmdCheck	;Hvis InType ikke er tom, hopper programmet til CmdCheck.
 	CALL IsType		;Hvis InType er tom, tjekker programmet om den modtagne besked i InBesked er en type med subroutinen IsType.
 	JMP EndOfProto	;Derefter hopper programmet videre til efter telegramfortolkningen og fortsætter i næste omgang i main-løkken.
 
 CmdCheck:
-	LDS Ret1, InCmd_DataSpace
+	LDS Ret1, DataSpace_InCmd
 	CPI Ret1,0x00	;Tjekker om InCmd er tom.
 	BRNE DataCheckInter	;Hvis InCmd ikke er tom, hopper programmet til DataCheck.
 	CALL IsCmd		;Hvis InCmd derimod er tom, tjekker programmet om den modtagne besked i InBesked er en kommmando med subroutinen IsCom.
-	LDS Ret1, InType_DataSpace
+	LDS Ret1, DataSpace_InType
 	CPI Ret1, Proto_GET	;Derefter sammenligner programmet InType, altså telegrammets type, med 0xAA, altså et 'get'-telegram.
 	BREQ IsGet		;Hvis telegramtypen er get, hopper programmet til IsGet.
 
 	;Indsæt nye typer over dette punkt.
 	
 					;Hvis typen ikke er nogen af de ovenstående, antager programmet at typen er 0x55, altså et 'set'-telegram. 
-	LDS Ret1, InCmd_DataSpace
+	LDS Ret1, DataSpace_InCmd
 	CPI Ret1, Proto_PWMStop
 	BREQ CmdCheck_PWMStop
 	CPI Ret1, Proto_Start	;Programmet sammenligner telegrammets kommando med 0x10, altså 'start' eller 'hastighed'.
@@ -459,7 +458,7 @@ DataCheckInter:
 JMP DataCheck
 
 	IsGet:
-		LDS Ret1, InCmd_DataSpace
+		LDS Ret1, DataSpace_InCmd
 		CPI Ret1, Proto_PWMPre
 		BREQ CmdCheck_IsGet_IsFreq
 		CPI Ret1, Proto_AccRef
@@ -500,12 +499,12 @@ Error:
 SkipEndOfProtoInter:
 
 DataCheck:
-	LDS Ret1, InType_DataSpace
+	LDS Ret1, DataSpace_InType
 	CPI Ret1, Proto_GET
 	BREQ GetWithData
 	CPI Ret1, Proto_SET
 	BRNE Error
-	LDS Ret1, InCmd_DataSpace
+	LDS Ret1, DataSpace_InCmd
 	CPI Ret1, Proto_PWMPre
 	BREQ SetFrequency
 	CPI Ret1, Proto_AccRef
@@ -520,7 +519,7 @@ DataCheck:
 	JMP CleanupEndOfProto
 
 	GetWithData:
-		LDS Ret1, InCmd_DataSpace
+		LDS Ret1, DataSpace_InCmd
 		CPI Ret1, Proto_AccRef
 		BRNE Error
 		CALL SendAccRef
@@ -672,7 +671,7 @@ IsType:
 	RET
 
 	wasType:
-		STS InType_DataSpace, InBesked
+		STS DataSpace_InType, InBesked
 		RET
 
 IsCmd:
@@ -696,15 +695,15 @@ IsCmd:
 	RET
 
 	wasCommand:
-		STS InCmd_DataSpace, InBesked
+		STS DataSpace_InCmd, InBesked
 		RET
 
 Cleanup:
 	;Renser Intype
 	LDI Arg,0
-	STS InType_DataSpace, Arg
+	STS DataSpace_InType, Arg
 	;Renser InCmd
-	STS InCmd_DataSpace, Arg
+	STS DataSpace_InCmd, Arg
 	;Renser InBesked
 	LDI InBesked,0
 	LDI Temp1, 0
