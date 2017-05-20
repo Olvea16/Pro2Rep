@@ -87,13 +87,6 @@ LDI SREG2,0
 	LDI Temp1, LOW(RAMEND)			;Loader højeste hukommelsesadresse (D0 til D7)(The last on-chip RAM address)
 	OUT SPL,Temp1					;Gemmer i stack pointer 
 
-;Opsætning af hardware inteerupt 
-	LDI Temp1, (1<<INT0);|(1<<INT1)		;Tænder for INT0 og INT1
-	OUT GICR, Temp1
-	LDI Temp1, (1<<ISC01);|(1<<ISC11)	;Sætter INT0 og INT1 til at trigge på faldende signal 
-	OUT MCUCR, Temp1
-	SBI PORTD, 2 ;pull-up activated INT0
-	;SBI PORTD, 3 ;pull-up activated INT1
 
 ;Indhætning af verdier fra EEPROM
 LDI Temp1, HIGH(EEPROM_AccRefP)
@@ -147,6 +140,7 @@ MOV AccRefN, Ret1
 	LDI Temp1, LOW(15625-1)		;Hvor meget der skal til får at få 1 sek 
 	OUT	OCR1AL,Temp1
 
+SBI DDRB,0 ;Sætter B0 til out
 SEI	;Enabler interrupts. 
 SBI ADCSRA, ADSC		;Starter conversion (ADC)
 ;---------------------------------------
@@ -167,17 +161,15 @@ CALL CalcOCR2
 OUT OCR2, Ret1
 
 ;Sluk elektromagnet
-;IN Temp1,PORTB
-;ANDI Temp1,0b1111110
-;OUT PORTB, Temp1
+SBI PORTB,0
 
 ;Tænd hvidt lys
 LDI Arg,0b111111
 CALL SetLED
 
 Straight:
-;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-;JMP UAuto
+/*SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+JMP UAuto*/
 ;Tester Accelerometerdata
 
 CALL AccSumSub
@@ -210,17 +202,15 @@ CALL CalcOCR2
 OUT OCR2, Ret1
 
 ;Tænd elektromagnet
-;IN Temp1,PORTB
-;ORI Temp1,0b00000001
-;OUT PORTB, Temp1
+CBI PORTB,0
 
 ;Tænd gult lys
 LDI Arg,0b000011
 CALL SetLED
 
 Turn1:
-;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-;JMP UAuto
+/*SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+JMP UAuto*/
 ;Tester Accelerometerdata
 
 CALL AccSumSub
@@ -237,6 +227,10 @@ RJMP StraightTick1
 		INC AccCounter
 		JMP Turn1
 
+RJMP OverIntStraightInit
+IntStraightInit:
+JMP StraightInit
+OverIntStraightInit:
 
 Turn2Init:
 ;Set hastighed til 32
@@ -245,32 +239,40 @@ LDI Temp1, 0x50
 OUT OCR2, Temp1
 
 ;Tænd elektromagnet
-;IN Temp1,PORTB
-;ORI Temp1,0b00000001
-;OUT PORTB, Temp1
+CBI PORTB,0
 
 ;Tænd gult lys
 LDI Arg,0b011000
 CALL SetLED
 
 Turn2:
-;SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
-;JMP UAuto
+/*SBIS UCSRA,RXC		;Tester bitten RXC, der viser, om mikrocontrolleren har modtaget en besked, i registeret UCSRA.
+JMP UAuto*/
 ;Tester Accelerometerdata
 
 CALL AccSumSub
 CPI Ret1,0
 BREQ Turn2
 
-CPI Ret1, (AccRefN_Konst+7)
+CPI Ret1, (AccRefN_Konst+5)
 BRLO Turn2
 RJMP StraightTick2
 
 	StraightTick2:
 		CPI AccCounter, AccCount
-		BRSH StraightInit
+		BRSH IntStraightInit
 		INC AccCounter
 		JMP Turn2
+
+
+
+
+
+
+
+
+
+
 
 
 UAuto:

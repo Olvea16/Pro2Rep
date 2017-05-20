@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\TestAfAccolemeterV3\TestAfAccolemeter\main.asm Fri May 19 10:45:23 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\EletroTjek\HallsensorTjek\main.asm Fri May 19 13:18:27 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -568,31 +568,4 @@ EQU  ACIaddr      00000024
 EQU  TWIaddr      00000026
 EQU  SPMRaddr     00000028
 EQU  INT_VECTORS_SIZE 0000002a
-CSEG Setup        00000032
-CSEG Timer1CompereA 000000c8
-CSEG DataIndR17   00000079
-CSEG ADCErFerdig  000000b0
-DEF  Arg1         r28
-DEF  Arg2         r29
-DEF  Ret1         r30
-DEF  Ret2         r31
-DEF  Temp1        r16
-DEF  Time         r27
-CSEG Main         00000053
-CSEG FindOCR2R17  00000055
-CSEG Overflowikkesat 00000061
-CSEG SendR18      00000063
-CSEG SetNyHastR20 00000067
-CSEG SendHastighReplyR23 00000069
-CSEG neste1w      00000084
-CSEG neste1q      00000089
-CSEG neste1wUdata 00000092
-CSEG neste1qUdata 00000099
-CSEG Hast         0000009d
-CSEG UdDataIndR17 000000af
-CSEG isType       000000b6
-CSEG wasType      000000be
-CSEG isCommand    000000c0
-CSEG wasCommand   000000c6
-CSEG ErStartet    000000ce
-CSEG IkkeEndnu    000000d7
+CSEG Main         00000002

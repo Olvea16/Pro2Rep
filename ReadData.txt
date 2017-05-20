@@ -1,0 +1,20 @@
+----------
+10:45:38 
+Couldn't connect.Semaforens timeout-periode er udløbet.
+
+
+----------
+12:30:38 
+Couldn't connect.Enheden er ikke tilsluttet.
+
+
+----------
+1:58:36 
+Couldn't connect.Enheden er ikke tilsluttet.
+
+
+----------
+2:06:15 
+Couldn't connect.Enheden er ikke tilsluttet.
+
+

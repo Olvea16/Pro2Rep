@@ -1,11 +1,11 @@
 
-AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm Thu May 18 08:28:59 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm Fri May 19 11:41:04 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
-C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(14): warning: Register r26 already defined by the .DEF directive
-C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(15): warning: Register r27 already defined by the .DEF directive
-C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(16): warning: Register r28 already defined by the .DEF directive
-C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(17): warning: Register r29 already defined by the .DEF directive
+C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(14): warning: Register r26 already defined by the .DEF directive
+C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(15): warning: Register r27 already defined by the .DEF directive
+C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(16): warning: Register r28 already defined by the .DEF directive
+C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm(17): warning: Register r29 already defined by the .DEF directive
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
                                  
                                  ; Sidetal anviser sidenummer i ATmega32A datasheet uploadet på blackboard.

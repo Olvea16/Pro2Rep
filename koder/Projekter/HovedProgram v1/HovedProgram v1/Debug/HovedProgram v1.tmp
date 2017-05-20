@@ -1,18 +1,18 @@
 <ASSEMBLER_INFO>
  <VERSION>2.2.6</VERSION>
  <DEVICE>"ATmega32A"</DEVICE>
- <WORKING_DIR>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\Debug</WORKING_DIR>
+ <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\Debug</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\Debug\HovedProgram v1.obj</FILE>
+  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\Debug\HovedProgram v1.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
   <FILE>HovedProgram v1.hex</FILE>
@@ -22,91 +22,91 @@
   <FILE>HovedProgram v1.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <Setup><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>111</LINE></Setup>
-  <StregInterrupt><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>910</LINE></StregInterrupt>
-  <InteDist><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>895</LINE></InteDist>
-  <ADCDone><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>874</LINE></ADCDone>
-  <Timer1CompereA><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>882</LINE></Timer1CompereA>
-  <LoadFromEEPROM><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>759</LINE></LoadFromEEPROM>
-  <CalcOCR2><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>736</LINE></CalcOCR2>
-  <SetLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>768</LINE></SetLED>
-  <PreLine><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>191</LINE></PreLine>
-  <AutoInit><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>195</LINE></AutoInit>
-  <Auto><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>208</LINE></Auto>
-  <UAuto><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>425</LINE></UAuto>
-  <StateMachine><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>216</LINE></StateMachine>
-  <AutoEnd><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>284</LINE></AutoEnd>
-  <AvgAcc><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>288</LINE></AvgAcc>
-  <StateMachine_Turn1><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>250</LINE></StateMachine_Turn1>
-  <StateMachine_Turn2><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>267</LINE></StateMachine_Turn2>
-  <StateMachine_Straight><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>233</LINE></StateMachine_Straight>
-  <StoreTrack><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>841</LINE></StoreTrack>
-  <AvgAccRet><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>301</LINE></AvgAccRet>
-  <AvgAccEnd><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>309</LINE></AvgAccEnd>
-  <DrivingInit><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>312</LINE></DrivingInit>
-  <ResetZ><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>324</LINE></ResetZ>
-  <Driving><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>328</LINE></Driving>
-  <CalcOffset><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>405</LINE></CalcOffset>
-  <StateVel><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>383</LINE></StateVel>
-  <Driving_Wait><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>345</LINE></Driving_Wait>
-  <Driving_Turn><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>379</LINE></Driving_Turn>
-  <Driving_Straight><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>355</LINE></Driving_Straight>
-  <SetSpeed><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>594</LINE></SetSpeed>
-  <Driving_CheckTBit><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>363</LINE></Driving_CheckTBit>
-  <StateVel_Straight><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>395</LINE></StateVel_Straight>
-  <CalcOffset_Return><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>422</LINE></CalcOffset_Return>
-  <StartOfProto><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>428</LINE></StartOfProto>
-  <EndOfProto><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>567</LINE></EndOfProto>
-  <TypeCheck><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>434</LINE></TypeCheck>
-  <CmdCheck><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>441</LINE></CmdCheck>
-  <IsType><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>680</LINE></IsType>
-  <DataCheckInter><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>476</LINE></DataCheckInter>
-  <IsCmd><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>696</LINE></IsCmd>
-  <IsGet><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>479</LINE></IsGet>
-  <CmdCheck_PWMStop><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>472</LINE></CmdCheck_PWMStop>
-  <EndOfProtoInter><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>512</LINE></EndOfProtoInter>
-  <StopCar><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>572</LINE></StopCar>
-  <PulseLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>782</LINE></PulseLED>
-  <CleanupEndOfProto><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>565</LINE></CleanupEndOfProto>
-  <DataCheck><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>520</LINE></DataCheck>
-  <CmdCheck_IsGet_IsFreq><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>494</LINE></CmdCheck_IsGet_IsFreq>
-  <CmdCheck_IsGet_IsRGBLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>498</LINE></CmdCheck_IsGet_IsRGBLED>
-  <CmdCheck_IsGet_Track><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>506</LINE></CmdCheck_IsGet_Track>
-  <Error><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>514</LINE></Error>
-  <SendSpeed><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>585</LINE></SendSpeed>
-  <SendPrescaler><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>607</LINE></SendPrescaler>
-  <GetLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>802</LINE></GetLED>
-  <Send><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>579</LINE></Send>
-  <SendTrack><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>851</LINE></SendTrack>
-  <SkipEndOfProtoInter><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>518</LINE></SkipEndOfProtoInter>
-  <Cleanup><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>720</LINE></Cleanup>
-  <GetWithData><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>540</LINE></GetWithData>
-  <SetFrequency><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>547</LINE></SetFrequency>
-  <SetAcceleration><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>555</LINE></SetAcceleration>
-  <SetRGBLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>559</LINE></SetRGBLED>
-  <SendAccRef><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>660</LINE></SendAccRef>
-  <SetPrescaler><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>618</LINE></SetPrescaler>
-  <SetAccRef><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>631</LINE></SetAccRef>
-  <SetSpeed_MaxSpeed><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>602</LINE></SetSpeed_MaxSpeed>
-  <SetPrescaler_Return><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>627</LINE></SetPrescaler_Return>
-  <SetAccRefN><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>647</LINE></SetAccRefN>
-  <SaveInEEPROM><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>746</LINE></SaveInEEPROM>
-  <SendAccRefN><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>671</LINE></SendAccRefN>
-  <wasType><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>692</LINE></wasType>
-  <wasCommand><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>716</LINE></wasCommand>
-  <EndOfSetLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>779</LINE></EndOfSetLED>
-  <ERROREndOfSetLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>778</LINE></ERROREndOfSetLED>
-  <ErrorPulseLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>799</LINE></ErrorPulseLED>
-  <ChangeState><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>808</LINE></ChangeState>
-  <StateLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>821</LINE></StateLED>
-  <Turn1StateLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>832</LINE></Turn1StateLED>
-  <Turn2StateLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>836</LINE></Turn2StateLED>
-  <StraightStateLED><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>828</LINE></StraightStateLED>
-  <ZTjek><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>860</LINE></ZTjek>
-  <ZTjek2><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>867</LINE></ZTjek2>
-  <ZTjek2B><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>863</LINE></ZTjek2B>
-  <StregInterrupt_1><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>931</LINE></StregInterrupt_1>
-  <StregInterrupt_2><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>941</LINE></StregInterrupt_2>
-  <StregInterrupt_Return><FILE>C:\Users\Oliver\Documents\GitRep\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>951</LINE></StregInterrupt_Return>
+  <Setup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>111</LINE></Setup>
+  <StregInterrupt><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>910</LINE></StregInterrupt>
+  <InteDist><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>895</LINE></InteDist>
+  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>874</LINE></ADCDone>
+  <Timer1CompereA><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>882</LINE></Timer1CompereA>
+  <LoadFromEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>759</LINE></LoadFromEEPROM>
+  <CalcOCR2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>736</LINE></CalcOCR2>
+  <SetLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>768</LINE></SetLED>
+  <PreLine><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>191</LINE></PreLine>
+  <AutoInit><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>195</LINE></AutoInit>
+  <Auto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>208</LINE></Auto>
+  <UAuto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>425</LINE></UAuto>
+  <StateMachine><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>216</LINE></StateMachine>
+  <AutoEnd><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>284</LINE></AutoEnd>
+  <AvgAcc><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>288</LINE></AvgAcc>
+  <StateMachine_Turn1><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>250</LINE></StateMachine_Turn1>
+  <StateMachine_Turn2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>267</LINE></StateMachine_Turn2>
+  <StateMachine_Straight><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>233</LINE></StateMachine_Straight>
+  <StoreTrack><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>841</LINE></StoreTrack>
+  <AvgAccRet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>301</LINE></AvgAccRet>
+  <AvgAccEnd><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>309</LINE></AvgAccEnd>
+  <DrivingInit><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>312</LINE></DrivingInit>
+  <ResetZ><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>324</LINE></ResetZ>
+  <Driving><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>328</LINE></Driving>
+  <CalcOffset><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>405</LINE></CalcOffset>
+  <StateVel><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>383</LINE></StateVel>
+  <Driving_Wait><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>345</LINE></Driving_Wait>
+  <Driving_Turn><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>379</LINE></Driving_Turn>
+  <Driving_Straight><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>355</LINE></Driving_Straight>
+  <SetSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>594</LINE></SetSpeed>
+  <Driving_CheckTBit><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>363</LINE></Driving_CheckTBit>
+  <StateVel_Straight><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>395</LINE></StateVel_Straight>
+  <CalcOffset_Return><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>422</LINE></CalcOffset_Return>
+  <StartOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>428</LINE></StartOfProto>
+  <EndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>567</LINE></EndOfProto>
+  <TypeCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>434</LINE></TypeCheck>
+  <CmdCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>441</LINE></CmdCheck>
+  <IsType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>680</LINE></IsType>
+  <DataCheckInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>476</LINE></DataCheckInter>
+  <IsCmd><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>696</LINE></IsCmd>
+  <IsGet><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>479</LINE></IsGet>
+  <CmdCheck_PWMStop><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>472</LINE></CmdCheck_PWMStop>
+  <EndOfProtoInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>512</LINE></EndOfProtoInter>
+  <StopCar><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>572</LINE></StopCar>
+  <PulseLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>782</LINE></PulseLED>
+  <CleanupEndOfProto><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>565</LINE></CleanupEndOfProto>
+  <DataCheck><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>520</LINE></DataCheck>
+  <CmdCheck_IsGet_IsFreq><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>494</LINE></CmdCheck_IsGet_IsFreq>
+  <CmdCheck_IsGet_IsRGBLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>498</LINE></CmdCheck_IsGet_IsRGBLED>
+  <CmdCheck_IsGet_Track><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>506</LINE></CmdCheck_IsGet_Track>
+  <Error><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>514</LINE></Error>
+  <SendSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>585</LINE></SendSpeed>
+  <SendPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>607</LINE></SendPrescaler>
+  <GetLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>802</LINE></GetLED>
+  <Send><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>579</LINE></Send>
+  <SendTrack><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>851</LINE></SendTrack>
+  <SkipEndOfProtoInter><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>518</LINE></SkipEndOfProtoInter>
+  <Cleanup><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>720</LINE></Cleanup>
+  <GetWithData><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>540</LINE></GetWithData>
+  <SetFrequency><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>547</LINE></SetFrequency>
+  <SetAcceleration><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>555</LINE></SetAcceleration>
+  <SetRGBLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>559</LINE></SetRGBLED>
+  <SendAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>660</LINE></SendAccRef>
+  <SetPrescaler><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>618</LINE></SetPrescaler>
+  <SetAccRef><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>631</LINE></SetAccRef>
+  <SetSpeed_MaxSpeed><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>602</LINE></SetSpeed_MaxSpeed>
+  <SetPrescaler_Return><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>627</LINE></SetPrescaler_Return>
+  <SetAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>647</LINE></SetAccRefN>
+  <SaveInEEPROM><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>746</LINE></SaveInEEPROM>
+  <SendAccRefN><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>671</LINE></SendAccRefN>
+  <wasType><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>692</LINE></wasType>
+  <wasCommand><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>716</LINE></wasCommand>
+  <EndOfSetLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>779</LINE></EndOfSetLED>
+  <ERROREndOfSetLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>778</LINE></ERROREndOfSetLED>
+  <ErrorPulseLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>799</LINE></ErrorPulseLED>
+  <ChangeState><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>808</LINE></ChangeState>
+  <StateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>821</LINE></StateLED>
+  <Turn1StateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>832</LINE></Turn1StateLED>
+  <Turn2StateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>836</LINE></Turn2StateLED>
+  <StraightStateLED><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>828</LINE></StraightStateLED>
+  <ZTjek><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>860</LINE></ZTjek>
+  <ZTjek2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>867</LINE></ZTjek2>
+  <ZTjek2B><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>863</LINE></ZTjek2B>
+  <StregInterrupt_1><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>931</LINE></StregInterrupt_1>
+  <StregInterrupt_2><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>941</LINE></StregInterrupt_2>
+  <StregInterrupt_Return><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HovedProgram v1\HovedProgram v1\main.asm</FILE><LINE>951</LINE></StregInterrupt_Return>
  </LABELS>
 </ASSEMBLER_INFO>

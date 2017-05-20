@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\LEDACCTEST\LEDACCTEST\main.asm Fri May 12 17:45:56 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\LEDACCTEST\LEDACCTEST\main.asm Fri May 19 11:36:44 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
@@ -834,53 +834,60 @@ AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\LEDACCTEST\L
                                  .DEF Temp2 = R17
                                  .DEF Arg = R21
                                  .DEF SREG2 = R22
+                                 .DEF AccData = R23
+                                 
+                                 .ORG 0			;Vektoradresse for Reset.
+000000 c037                      RJMP main      ;Springer til setup. 
+                                 .ORG ADCCaddr	;Dette er den for en ADC er færdig 
+000020 940c 003a                 JMP ADCDone
                                  
                                  	;Opsætning af stack
-000000 e008                      	LDI Temp1, HIGH(RAMEND)			;Loader højeste hukommelsesadresse (D8 til D15)(The last on-chip RAM address)
-000001 bf0e                      	OUT SPH,Temp1					;Gemmer i stack pointer 
-000002 e50f                      	LDI Temp1, LOW(RAMEND)			;Loader højeste hukommelsesadresse (D0 til D7)(The last on-chip RAM address)
-000003 bf0d                      	OUT SPL,Temp1					;Gemmer i stack pointer 
+000022 e008                      	LDI Temp1, HIGH(RAMEND)			;Loader højeste hukommelsesadresse (D8 til D15)(The last on-chip RAM address)
+000023 bf0e                      	OUT SPH,Temp1					;Gemmer i stack pointer 
+000024 e50f                      	LDI Temp1, LOW(RAMEND)			;Loader højeste hukommelsesadresse (D0 til D7)(The last on-chip RAM address)
+000025 bf0d                      	OUT SPL,Temp1					;Gemmer i stack pointer 
                                  
-                                 	;Opsætning af ADC
-000004 e000                      	LDI R16,0
-000005 bb0a                      	OUT DDRA, R16	;Sætter PortA 0 til indput
-000006 e80f                      	LDI R16,0x8F	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
-000007 b906                      	OUT ADCSRA, R16
-000008 e600                      	LDI R16,0x60	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
-000009 b907                      	OUT ADMUX, R16
+                                 ;Opsætning af ADC
+000026 e000                      	LDI Temp1,0
+000027 bb0a                      	OUT DDRA, Temp1	;Sætter PortA 0 til indput
+000028 e80f                      	LDI Temp1,(1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
+000029 b906                      	OUT ADCSRA, Temp1
+00002a e600                      	LDI Temp1,(1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
+00002b b907                      	OUT ADMUX, Temp1
                                  
+                                 ;Opsætning af RGB LED
+00002c 9ad1                      	SBI DDRA, 1
+00002d 9ad2                      	SBI DDRA, 2
+00002e 9ad3                      	SBI DDRA, 3
+00002f 9ad4                      	SBI DDRA, 4
+000030 9ad5                      	SBI DDRA, 5
+000031 9ad6                      	SBI DDRA, 6
+                                 
+                                 
+                                 
+000032 e70e                      	LDI Temp1,0b01111110
+000033 b31b                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+000034 7811                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+000035 2b10                      	OR Temp2, Temp1			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
+000036 bb1b                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
+                                 
+                                 
+                                 
+000037 9a36                      SBI ADCSRA, ADSC	;Starter conversion igen 
                                  main:
-00000a b104                      	IN	Temp1, ADCL		;Indlæser den lave del af ADC
-00000b b105                      	IN  Temp1, ADCH		;Indlæser den høje del af ADC
-00000c 9a36                      	SBI ADCSRA, ADSC		;Starter conversion igen 
-00000d 9506                      	LSR Temp1
-00000e 9506                      	LSR Temp1
-00000f b31b                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-000010 7811                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-000011 2b10                      	OR Temp2, Temp1			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
-000012 bb1b                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
-000013 940c 000a                 	JMP main
+000038 940c 0038                 JMP main
                                  
                                  
-                                 SetLED:
-000015 fd63                      	SBRC SREG2, LEDTimeOn
-000016 c009                      	RJMP EndOfSetLED
-000017 3450                      	CPI Arg,64
-000018 f438                      	BRSH ERROREndOfSetLED	;Så hvis værdigen i LEDVerdi ikke svare til en værdig til LED'eren er der en fejl
-000019 940e 0021                 	CALL ClearLED
-00001b 0f55                      	LSL Arg				;Rykker LED infoen en til venstre for at der kommer til at passe med hvor de er sat på 
-00001c b31b                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-00001d 7811                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-00001e 2b15                      	OR Temp2, Arg			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
-00001f bb1b                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
-                                 	ERROREndOfSetLED:
-                                 	EndOfSetLED:
-000020 9508                      RET
-                                 
-                                 ClearLED:
-000021 b31b                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
-000022 7811                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
-000023 bb1b                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA som slukker alle LED'er
+                                 ADCDone:				
+                                 	;Når en ADC er færdig hopper den hertil
+00003a b175                      	IN  AccData, ADCH		;Indlæser den høje del af ADC
+00003b 9a36                      	SBI ADCSRA, ADSC	;Starter conversion igen 
+00003c 7871                      	ANDI AccData, 0b10000001
+00003d b31b                      	IN Temp2, PORTA			;Loader PORTA ind for at undgå kompliktation med ADC
+00003e 7811                      	ANDI Temp2, 0b10000001	;Udmasker alt andet end bit 0 og 7 for ikke at ændre værdiger for ADC og ubrugt pin 7 
+00003f 2b10                      	OR Temp2, Temp1			;or'er den værdi som skal være på LED'eren sammen med det der allerede var på PORTA
+000040 bb1b                      	OUT	PORTA, Temp2		;Sender den nye værdig ud på PORTA
+000041 9468                      	SET
 
 
 RESOURCE USE INFORMATION
@@ -900,37 +907,37 @@ counted separately from r26..r31 here.
 "ATmega32A" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  15 r17:  11 r18:   0 r19:   0 r20:   0 
-r21:   3 r22:   1 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  13 r17:   8 r18:   0 r19:   0 r20:   0 
+r21:   0 r22:   0 r23:   2 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 4 out of 35 (11.4%)
+Registers used: 3 out of 35 (8.6%)
 
 "ATmega32A" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   3 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   1 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   1 cbi   :   0 cbr   :   0 
+brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   1 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   5 inc   :   0 jmp   :   1 
-ld    :   0 ldd   :   0 ldi   :   5 lds   :   0 lpm   :   0 lsl   :   1 
-lsr   :   2 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   2 ori   :   0 out   :   8 pop   :   0 
-push  :   0 rcall :   0 ret   :   2 reti  :   0 rjmp  :   1 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   1 sbic  :   0 sbis  :   0 
-sbiw  :   0 sbr   :   0 sbrc  :   1 sbrs  :   0 sec   :   0 seh   :   0 
-sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
+cpi   :   0 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :   0 jmp   :   2 
+ld    :   0 ldd   :   0 ldi   :   6 lds   :   0 lpm   :   0 lsl   :   0 
+lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :   0 or    :   2 ori   :   0 out   :   7 pop   :   0 
+push  :   0 rcall :   0 ret   :   0 reti  :   1 rjmp  :   1 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   8 sbic  :   0 sbis  :   0 
+sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
+sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   1 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 15 out of 113 (13.3%)
+Instructions used: 10 out of 113 (8.8%)
 
 "ATmega32A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00004a     74      0     74   32768   0.2%
+[.cseg] 0x000000 0x000086     72      0     72   32768   0.2%
 [.dseg] 0x000060 0x000060      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

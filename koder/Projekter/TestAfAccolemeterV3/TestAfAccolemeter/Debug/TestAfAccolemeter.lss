@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\TestAfAccolemeterV3\TestAfAccolemeter\main.asm Fri May 12 11:08:05 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\TestAfAccolemeterV3\TestAfAccolemeter\main.asm Fri May 19 10:45:23 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
 C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\TestAfAccolemeterV3\TestAfAccolemeter\main.asm(25): warning: Register r28 already defined by the .DEF directive

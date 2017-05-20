@@ -4,6 +4,8 @@
 
 .ORG 0			;Vektoradresse for Reset.
 
+.ORG INT0addr
+JMP InteDist
 .ORG INT1addr
 JMP InteDist
 
@@ -14,19 +16,22 @@ OUT SPH,Temp1
 LDI Temp1, LOW(RAMEND)
 OUT SPL,Temp1
 
-LDI Temp1, (1<<INT0)		;Tænder for INT1
-OUT GICR, Temp1
-LDI Temp1, (1<<ISC01)	;Sætter INT1 til at trigge på faldende signal 
-OUT MCUCR, Temp1
-SBI PORTD, 3 ;pull-up activated INT1	
+;Opsætning af hardware inteerupt 
+	LDI Temp1, (1<<INT1)|(1<<INT0)		;Tænder for INT0 og INT1
+	OUT GICR, Temp1
+	LDI Temp1, (1<<ISC11)|(1<<ISC01)	;Sætter INT0 og INT1 til at trigge på faldende signal 
+	OUT MCUCR, Temp1
+	SBI PORTD, 2 ;pull-up activated INT0
+	SBI PORTD, 3 ;pull-up activated INT1
 
 ;Opsætning af kommunikation
-LDI R16, (1<<TXEN)|(1<<RXEN);|(1<<RXCIE)	;Opsætter værdien til modtagelse og afsendelse af seriel data.
-OUT UCSRB, R16								;Sender værdien til opsætningsregisteret, UCSRB (s. 212).
-LDI R16, (1<<UCSZ1)|(1<<UCSZ0)|(1<<URSEL)	;Her indstilles mikrokontrolleren til 8 bit data, ingen parity bit og kun 1 stop bit.
-OUT UCSRC, R16								;Værdien sendes til registeret UCSRC (s. 214).
-LDI R16, 0x67								;Her indstilles baud rate til 9600 (ved 16 MHz).
-OUT UBRRL, R16								;Værdien for baud rate sendes til registeret UBRRL (s. 216).
+	LDI Temp1, (1<<TXEN)|(1<<RXEN)				;Opsætter værdien til modtagelse og afsendelse af seriel data.
+	OUT UCSRB, Temp1							;Sender værdien til opsætningsregisteret, UCSRB (s. 212).
+	LDI Temp1, (1<<UCSZ1)|(1<<UCSZ0)|(1<<URSEL)	;Her indstilles mikrokontrolleren til 8 bit data, ingen parity bit og kun 1 stop bit.
+	OUT UCSRC, Temp1							;Værdien sendes til registeret UCSRC (s. 214).
+	LDI Temp1, 103								;Her indstilles baud rate til 9600 (ved 16 MHz).
+	OUT UBRRL, Temp1							;Værdien for baud rate sendes til registeret UBRRL (s. 216).
+
 
 SEI
 
