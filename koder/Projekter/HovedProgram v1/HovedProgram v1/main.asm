@@ -148,14 +148,14 @@ MOV AccRefN, Ret1
 ;Opsætning af PWM
 	SBI DDRD,7		;PordtD Bit7 sættes og bliver output.
 	LDI Temp1, (1<<WGM00)|(1<<COM01)|(1<<CS00)	
-	OUT TCCR2,Temp1	;Opsætter PWM, sætter prescaleren til 1/32 (ca. 1 kHz), fasekorrekt, ikke-inverteret (s. 153).
+	OUT TCCR2,Temp1	;Opsætter PWM, sætter prescaleren til 1, fasekorrekt, ikke-inverteret (s. 153).
 	LDI Temp1,0		;
 	OUT OCR2,Temp1	;Sætter PWM til 0, via. registeret OCR2 (OCR2 = PWM * 2.55)
 
 ;Opsætning af ADC
 	LDI Temp1,0
 	OUT DDRA, Temp1	;Sætter PortA 0 til indput
-	LDI Temp1,(1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 0x8F(0b10001111)   0x89(10001001)=ck/2
+	LDI Temp1,(1<<ADEN)|(1<<ADIE)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)	;Tænder ADC, interrupt på og ck/128 for max præcision 
 	OUT ADCSRA, Temp1
 	LDI Temp1,(1<<REFS0)|(1<<ADLAR)	;AVCC pin som Vref og det er højre justified 0x40(0b?01000000?) 0xC0for2.45 vref
 	OUT ADMUX, Temp1
@@ -284,30 +284,6 @@ JMP AutoEnd
 AutoEnd:
 
 JMP Auto
-
-AvgAcc:	
-	CLT
-	ADD AccSumL, AccData
-	LDI Temp1,0
-	ADC AccSumH, Temp1
-
-	;Hvis tælleren er nået 255, altså 256 additioner, skal programmet gå til den sidste del af udregningen.
-	CPI DivCounter, 255
-	BREQ AvgAccRet 
-
-	INC DivCounter
-	JMP AvgAccEnd
-
-	AvgAccRet:
-		;Flytter resultatet, AccSumH, til returregisteret.
-		MOV Ret1, AccSumH
-
-		;Nulstiller tæller og variabler.
-		LDI DivCounter, 0
-		LDI AccSumH, 0
-		LDI AccSumL, 0
-AvgAccEnd:
-RET 
 
 DrivingInit:
 	LDI Temp1,0
@@ -869,6 +845,32 @@ SendTrack:
 		BRLO ZTjek2B
 		SEI
 RET
+
+
+AvgAcc:	
+	CLT
+	ADD AccSumL, AccData
+	LDI Temp1,0
+	ADC AccSumH, Temp1
+
+	;Hvis tælleren er nået 255, altså 256 additioner, skal programmet gå til den sidste del af udregningen.
+	CPI DivCounter, 255
+	BREQ AvgAccRet 
+
+	INC DivCounter
+	JMP AvgAccEnd
+
+	AvgAccRet:
+		;Flytter resultatet, AccSumH, til returregisteret.
+		MOV Ret1, AccSumH
+
+		;Nulstiller tæller og variabler.
+		LDI DivCounter, 0
+		LDI AccSumH, 0
+		LDI AccSumL, 0
+AvgAccEnd:
+RET 
+
 ;Intarups -----------------------------------------------------------------
 
 ADCDone:				
