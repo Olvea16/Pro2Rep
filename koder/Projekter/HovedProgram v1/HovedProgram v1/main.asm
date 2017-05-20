@@ -418,6 +418,8 @@ CalcOffset: ;Udregner evt. offset af distancen
 	ADD DistL,Temp2
 	LDI Temp2,0
 	ADC DistH,Temp2
+	LDS Temp1,DataSpace_StoredDistH
+	LDS Temp2,DataSpace_StoredDistL
 
 CalcOffset_Return:
 RET
