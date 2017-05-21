@@ -39,12 +39,9 @@ InType_DataSpace
 .EQU ZStart = 512			;Random data i starten af dataspace
 
 ;SREG2 Navngivning
-.EQU StateCount0 = 0 
-.EQU StateCount1 = 1
-.EQU StateCount2 = 2
-.EQU LEDTimeON = 3
-.EQU LastState0 = 4 
-.EQU LastState1 = 5 
+.EQU LapFlag00 = 0 
+.EQU LapFlag01 = 1
+.EQU LEDTimeON = 3 
 .EQU State0 = 6
 .EQU State1 = 7
 ;---------------------------
