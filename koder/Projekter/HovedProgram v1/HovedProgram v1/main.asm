@@ -209,10 +209,6 @@ JMP LoopPreLine
 
 AutoInit:
 
-/*;De her skal SLETTES!!!!
-LDI AccRefN, 150
-LDI AccRefP, 100
-;--------------------*/
 ;Sætter Z til hvor det første bane stykke skal være 
 LDI ZH, HIGH(ZStart)	
 LDI ZL, LOW(ZStart)
@@ -570,6 +566,7 @@ JMP UAuto	;Hopper til starten af main
 
 ;Subroutines---------------------------------------
 StopCar:
+	;Stopper bilen 
 	LDI Temp1,0			;
 	OUT OCR2,Temp1		;Sætter bilens hastighed til 0%
 	LDI Arg,LED_InCmd_Stop
@@ -583,10 +580,13 @@ Send:
 	RET					;Subroutinen er færdig, returnerer til adressen efter subroutinen blev kaldet fra. 
 
 SendSpeed:
-	LDI Arg, Proto_REPLY	;
-	CALL Send			;Sender Replytypen (0xBB)
+	;Sender Replytypen (0xBB)
+	LDI Arg, Proto_REPLY	
+	CALL Send			
+	;Sender kommando værdien Start
 	LDI Arg,Proto_Start
 	CALL Send
+	;Sender værdien i OCR2 
 	IN Arg,OCR2		;
 	CALL Send			;Sender den nuværende hastighed 
 	RET
@@ -600,26 +600,33 @@ SetSpeed:
 	RET
 
 	SetSpeed_MaxSpeed:
-		LDI Temp1,0xFF	;Sætter hastigheden til maks 
+		;Sætter hastigheden til 100% 
+		LDI Temp1,0xFF	
 		OUT OCR2,Temp1
 		RET
 
 SendPrescaler:
+	;Indhenter prescaler der bliver brugt 
 	IN Temp1,TCCR2
 	ANDI Temp1,0b00000111
+	;Starter med at sende værdien for reply 
 	LDI Arg, Proto_REPLY
 	CALL Send
+	;Sende værdien for kommandoen PWMPRe 
 	LDI Arg,Proto_PWMPRe
 	CALL Send
+	;Sender prescaleren 
 	MOV Arg,Temp1
 	CALL Send
 	RET
 
 SetPrescaler:
+	;Starter med at tjekke om værdien er inde for det godkændt område hvilket er fra 1 til og med 7
 	CPI InBesked,8
 	BRSH SetPrescaler_Return
 	CPI InBesked,0
 	BREQ SetPrescaler_Return
+	;Sætter den nye prescaler så denne bliver brugt
 	IN Temp1,TCCR2
 	ANDI Temp1,0b11111000
 	OR Temp1,InBesked
@@ -629,14 +636,18 @@ SetPrescaler:
 
 
 SetAccRef:
+	;Tjekker om bit 0 er 1 eller 0 for at se om det er AccRefP eller AccRefN der skal sættes 
 	SBRC InBesked,0
 	JMP SetAccRefN
 	;AccRefP
+		;Addere 127 til den sendte værdi
 		LSR InBesked
 		LDI Temp1,127
 		ADD InBesked,Temp1
+		;Ligger den ind i AccRefP
 		MOV AccRefP, InBesked
 		MOV Arg, AccRefP
+		;Gemmer den nye AccRefN i EEPROM_AccRefP
 		LDI Temp1, HIGH(EEPROM_AccRefP)
 		LDI Temp2, LOW(EEPROM_AccRefP)
 		CALL SaveInEEPROM
@@ -645,11 +656,14 @@ SetAccRef:
 	RET
 
 	SetAccRefN:
+		;Trakker 127 fra den sendte værdi 
 		LSR InBesked
 		LDI Temp1,127
 		SUB Temp1,InBesked
+		;Ligger den ind i AccRefN
 		MOV AccRefN, Temp1
 		MOV Arg, AccRefN
+		;Gemmer den nye AccRefN i EEPROM_AccRefN
 		LDI Temp1, HIGH(EEPROM_AccRefN)
 		LDI Temp2, LOW(EEPROM_AccRefN)
 		CALL SaveInEEPROM
@@ -660,24 +674,30 @@ SetAccRef:
 SendAccRef:
 	CPI InBesked,1
 	BREQ SendAccRefN
+	;Sender først reply
 	LDI Arg, Proto_REPLY
 	CALL Send
+	;Sender værdien for en AccRef kommando 
 	LDI Arg,Proto_AccRef
 	CALL Send
+	;Sender værdien i AccRefP
 	MOV Arg, AccRefP
 	CALL Send
 	RET
 
 	SendAccRefN:
+	;Sender først reply
 	LDI Arg, Proto_REPLY
 	CALL Send
+	;Sender værdien for en AccRef kommando 
 	LDI Arg,Proto_AccRef
 	CALL Send
+	;Sender værdien i AccRefN
 	MOV Arg, AccRefN
 	CALL Send
 	RET
 
-IsType:
+IsType: ;Tjekker for om værdien i InBesked passer over ens med en type 
 	CPI InBesked, Proto_SET
 	BREQ wasType
 	CPI InBesked, Proto_GET
@@ -690,10 +710,11 @@ IsType:
 	RET
 
 	wasType:
+		;Hvis den gør der bliver InBesked gemt i DataSpace på DataSpace_InType
 		STS DataSpace_InType, InBesked
 		RET
 
-IsCmd:
+IsCmd:	;Tjekker for om værdien i InBesked passer over ens med en kommando 
 	CPI InBesked, Proto_Start		;0x10
 	BREQ wasCommand
 	CPI InBesked, Proto_Stop		;0x11
@@ -714,6 +735,7 @@ IsCmd:
 	RET
 
 	wasCommand:
+		;Hvis den gør der bliver InBesked gemt i DataSpace på DataSpace_InCmd
 		STS DataSpace_InCmd, InBesked
 		RET
 
@@ -741,7 +763,7 @@ CalcOCR2:
 	ROL R1						;Resutat er nu på format Q7.5
 	LSL R0
 	ROL R1						;Resutat er nu på format Q8.6
-	MOV Ret1, R1
+	MOV Ret1, R1				;Nu ligger resutaet på Q8 format i Ret1
 RET
 
 SaveInEEPROM:
@@ -820,7 +842,7 @@ ChangeState:
 	LSL Temp1
 	ANDI SREG2, 0b00111111
 	OR SREG2, Temp1
-	;Midertidigt
+	;Ændre LEDeren så de passer til hvilket state bilen er i 
 	CALL StateLED
 	;
 RET
@@ -833,15 +855,16 @@ StateLED:
 	BREQ Turn1StateLED
 	CPI Temp1, (Turn2<<State0)
 	BREQ Turn2StateLED
-	StraightStateLED:
+
+	StraightStateLED:;Tænder for lige lys 
 	LDI Arg, LED_Straight
 	CALL SetLED
 	RET
-	Turn1StateLED:
+	Turn1StateLED:	;Tænder for sving lys 1
 	LDI Arg, LED_Turn1
 	CALL SetLED
 	RET
-	Turn2StateLED:
+	Turn2StateLED:  ;Tænder for sving lys 2
 	LDI Arg, LED_Turn2
 	CALL SetLED
 	RET
@@ -859,10 +882,11 @@ RET
 
 SendTrack:
 	;Sender den opmålte bane 
-	CALL StopCar
-	LDI Arg, Proto_REPLY
+	CALL StopCar			;Stopper bilen 
+	;Sender Reply
+	LDI Arg, Proto_REPLY	
 	CALL Send
-	CLI
+	CLI		;Stopper for intarrups for at sikre der ikke adderes mere til banen 
 	MOV Temp1, ZH
 	MOV Temp2, ZL
 	LDI ZH, HIGH(ZStart)
@@ -883,15 +907,16 @@ RET
 
 
 AvgAcc:	
-	CLT
-	ADD AccSumL, AccData
+	CLT	;Sætter T flaget til 0 for at vise den nuværnde værdi i AccData er brugt 
+	;Addere til summen af AccData 
+	ADD AccSumL, AccData	
 	LDI Temp1,0
 	ADC AccSumH, Temp1
 
 	;Hvis tælleren er nået 255, altså 256 additioner, skal programmet gå til den sidste del af udregningen.
 	CPI DivCounter, 255
 	BREQ AvgAccRet 
-
+	;Tælder op i hvor mange gange der er blevet sumeret 
 	INC DivCounter
 	JMP AvgAccEnd
 
