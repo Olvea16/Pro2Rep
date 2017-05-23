@@ -1,11 +1,11 @@
 
-AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm Fri May 19 14:07:58 2017
+AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm Tue May 23 20:54:41 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
-C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(12): warning: Register r26 already defined by the .DEF directive
-C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(13): warning: Register r27 already defined by the .DEF directive
-C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(14): warning: Register r28 already defined by the .DEF directive
-C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(15): warning: Register r29 already defined by the .DEF directive
+C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(12): warning: Register r26 already defined by the .DEF directive
+C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(13): warning: Register r27 already defined by the .DEF directive
+C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(14): warning: Register r28 already defined by the .DEF directive
+C:\Users\Oliver\Documents\GitRep\koder\Projekter\SimpleAlgorithm\SimpleAlgorithm\main.asm(15): warning: Register r29 already defined by the .DEF directive
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc'
                                  
                                  ;Register
@@ -1041,8 +1041,8 @@ C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\
 000090 3030                      CALL AccSumSub
 000091 f3e1                      CPI Ret1,0
                                  BREQ Turn1
-000092 3834                      
-000093 f7d0                      CPI Ret1, (AccRefP_Konst-7)
+000092 3836                      
+000093 f7d0                      CPI Ret1, (AccRefP_Konst-5)
 000094 c000                      BRSH Turn1
                                  RJMP StraightTick1
                                  
