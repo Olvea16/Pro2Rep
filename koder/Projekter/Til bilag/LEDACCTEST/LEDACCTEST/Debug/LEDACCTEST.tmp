@@ -1,0 +1,28 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\LEDACCTEST\LEDACCTEST\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\LEDACCTEST\LEDACCTEST\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\LEDACCTEST\LEDACCTEST\Debug\LEDACCTEST.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>LEDACCTEST.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>LEDACCTEST.map</FILE>
+  <FILE>LEDACCTEST.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <main><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\LEDACCTEST\LEDACCTEST\main.asm</FILE><LINE>56</LINE></main>
+  <ADCDone><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\LEDACCTEST\LEDACCTEST\main.asm</FILE><LINE>60</LINE></ADCDone>
+ </LABELS>
+</ASSEMBLER_INFO>
