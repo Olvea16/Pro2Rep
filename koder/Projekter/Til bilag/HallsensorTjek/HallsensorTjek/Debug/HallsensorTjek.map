@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Oliver\Documents\GitRep\koder\Projekter\LEDACCTEST\LEDACCTEST\main.asm Tue May 23 20:54:01 2017
+AVRASM ver. 2.2.6  C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\main.asm Fri May 19 12:27:45 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -568,13 +568,9 @@ EQU  ACIaddr      00000024
 EQU  TWIaddr      00000026
 EQU  SPMRaddr     00000028
 EQU  INT_VECTORS_SIZE 0000002a
-EQU  LEDTimeOn    00000003
 DEF  Temp1        r16
 DEF  Temp2        r17
-DEF  Arg          r21
-DEF  SREG2        r22
-CSEG main         0000000a
-CSEG SetLED       00000015
-CSEG EndOfSetLED  00000020
-CSEG ERROREndOfSetLED 00000020
-CSEG ClearLED     00000021
+DEF  Arg          r24
+CSEG InteDist     00000143
+CSEG Main         0000013d
+CSEG Send         0000013f

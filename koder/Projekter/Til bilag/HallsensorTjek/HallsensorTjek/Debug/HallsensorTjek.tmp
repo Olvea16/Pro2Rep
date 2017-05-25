@@ -1,0 +1,29 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.6</VERSION>
+ <DEVICE>"ATmega32A"</DEVICE>
+ <WORKING_DIR>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\avrasm\inc\m32adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\Debug\HallsensorTjek.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>HallsensorTjek.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>HallsensorTjek.map</FILE>
+  <FILE>HallsensorTjek.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <InteDist><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\main.asm</FILE><LINE>47</LINE></InteDist>
+  <Main><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\main.asm</FILE><LINE>38</LINE></Main>
+  <Send><FILE>C:\Users\simon\OneDrive - student.sdu.dk\Studie\2 semester\Pro2\koder\Projekter\HallsensorTjek\HallsensorTjek\main.asm</FILE><LINE>41</LINE></Send>
+ </LABELS>
+</ASSEMBLER_INFO>
